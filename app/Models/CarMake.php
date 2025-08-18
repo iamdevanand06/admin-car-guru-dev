@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarMake extends Model
 {
-    protected $table = [
+    protected $table = 'car_makes';
+    protected $fillable = [
         'id',
         'brand_id',
         'brand_country',
@@ -21,7 +22,5 @@ class CarMake extends Model
         'exterior_color',
         'interior_color',
         'consumption',
-        'created_at',
-        'updated_at'
     ];
 }

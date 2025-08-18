@@ -25,6 +25,21 @@
                             class="me-2"></i>Back</a>
                 </div>
             </div>
+            @session('success')
+                <div class="alert alert-success" role="alert">
+                    {{ $value }}
+                </div>
+            @endsession
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form method="POST" action="{{ route('users.store') }}" class="add-product-form">
                 @csrf
                 <div class="add-product">

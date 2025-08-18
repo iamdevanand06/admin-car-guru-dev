@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarBrake extends Model
 {
+    protected $table = 'car_brakes';
     protected $fillable = [
         'id',
         'brake_front',

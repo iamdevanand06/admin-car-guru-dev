@@ -39,7 +39,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Back<span class="text-danger ms-1">*</span></label>
-                    <select id="suspension_back" name="suspension_Back" class="form-control">
+                    <select id="suspension_back" name="suspension_back" class="form-control">
                         <option>Select Front</option>
                         <option value="MLS">MLS</option>
                     </select>
@@ -54,7 +54,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Steering<span class="text-danger ms-1">*</span></label>
-                    <select id="Steering" name="Steering" class="form-control">
+                    <select id="steering" name="steering" class="form-control">
                         <option>Select Front</option>
                         <option value="Back & Pinion Power">Back & Pinion Power</option>
                     </select>

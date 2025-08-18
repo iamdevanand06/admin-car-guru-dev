@@ -130,8 +130,8 @@
                                                                                                         </li>
 
 
-                                                                                                        <li class="{{ Request::is('car-details') ? 'active' : '' }}"><a
-                                                                                                                                        href="{{url('car-details')}}"><i
+                                                                                                        <li class="{{ Request::is('car-details/createt') ? 'active' : '' }}"><a
+                                                                                                                                        href="{{url('car-details/create')}}"><i
                                                                                                                                                         class="ti ti-jump-rope fs-16 me-2"></i><span>Car
                                                                                                                                                         Details</span></a>
                                                                                                         </li>

@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarEngine extends Model
 {
-    protected $filable = [
+    protected $table = 'car_engines';
+    protected $fillable = [
         'id',
         'engine_cc',
         'engine_type',

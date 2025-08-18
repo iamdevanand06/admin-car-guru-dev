@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarDiamension extends Model
 {
-    protected $filable = [
+    protected $table = 'car_diamensions';
+    protected $fillable = [
         'id',
         'length_mm',
         'weight_mm',

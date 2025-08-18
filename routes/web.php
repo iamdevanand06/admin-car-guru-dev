@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\CarMakeController;
 use App\Http\Controllers\MakeController;
 use App\Http\Controllers\ModelController;
@@ -39,5 +40,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Feature Dropdown
     Route::get('/list-feature/search', [CarMakeController::class, 'getFeature'])->name('feature.search');
     Route::post('/add-feature', [CarMakeController::class, 'postFeature'])->name('feature.add');
+
+    Route::resource('car-details', CarDetailController::class);
 
 });

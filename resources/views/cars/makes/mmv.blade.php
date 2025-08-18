@@ -40,7 +40,7 @@
                     <small>Drag & drop file here (PNG/JPG)</small>
                 </div>
             </label>
-            <input type="file" id="brand_logo" name="brand_logo" accept="image/png, image/jpeg" hidden>
+            <input type="file" id="brand_logo" name="brand_emblem" accept="image/png, image/jpeg" hidden>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
@@ -112,7 +112,7 @@
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Consumption<span class="text-danger ms-1">*</span></label>
-            <select id="drive_train" name="drive_train" class="form-control" style="width: 100%">
+            <select id="consumption" name="consumption" class="form-control" style="width: 100%">
                 <option>Select Consumption</option>
                 <option value="front wheel drive">City Driving</option>
                 <option value="rear wheel drive">Rear Wheel Drive</option>

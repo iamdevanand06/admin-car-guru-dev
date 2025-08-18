@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarWarranty extends Model
 {
+    protected $table = 'car_warranties';
     protected $fillable = [
         'id',
         'manufacturers_warranty',
