@@ -12,9 +12,12 @@ return new class extends Migration {
     {
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
-            $table->string('key');
+            $table->string('iso2', 2)->unique();
+            $table->string('iso3', 3)->unique();
             $table->string('country_name');
-            $table->boolean('status')->default('0');
+            $table->string('phone_code', 10)->nullable();
+            $table->string('continent')->nullable();
+            $table->boolean('status')->default(1); // 1 = Active, 0 = Inactive
             $table->timestamps();
         });
     }
