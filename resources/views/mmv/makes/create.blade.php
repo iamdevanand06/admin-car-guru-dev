@@ -65,6 +65,17 @@
                                         </div>
                                         <div class="col-sm-6 col-12">
                                             <div class="mb-3">
+                                                <label class="form-label">Brand Name<span
+                                                        class="text-danger ms-1">*</span></label>
+                                                <select id="country_id" name="country_id" class="form-control">
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-12">
+                                            <div class="mb-3">
                                                 <label class="form-label">Status<span
                                                         class="text-danger ms-1">*</span></label>
                                                 <select class="select" name="status" id="status">

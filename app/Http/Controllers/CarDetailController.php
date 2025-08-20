@@ -9,6 +9,7 @@ use App\Models\CarAccident;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 use Exception;
+use App\Models\CarMake;
 
 class CarDetailController extends Controller
 {
@@ -25,9 +26,10 @@ class CarDetailController extends Controller
      */
     public function create()
     {
-        try{
-return view('cars.details.create');
-        }catch(Exception $e){
+        try {
+            $carIds = CarMake::all(['id']);
+            return view('cars.details.create', compact('carIds'));
+        } catch (Exception $e) {
             Log::error('Error::CREATE_CAR_DETAIL_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
     }
@@ -38,38 +40,38 @@ return view('cars.details.create');
     public function store(Request $request)
     {
         $this->validate($request, [
-        'car_id' => 'required',
-        'car_info_category' => 'required',
-        'car_info_price' => 'required',
-        'car_info_location' => 'required',
-        'car_info_registration_type' => 'required',
-        'car_info_registration_number' => 'required',
-        'car_info_registration_date' => 'required',
-        'car_info_car_make_year' => 'required',
-        'car_info_exterior_color' => 'required',
-        'interior_color' => 'required',
-        'number_of_keys' => 'required',
-        'engine_number' => 'required',
-        'chassis_number' => 'required', 
-        'owner' => 'required',
-        'usage' => 'required',
-        'car_accident' => 'required',
-        'flood_car' => 'required',
-        'manufacturers_warranty' => 'required',
-        'cargurus_warranty' => 'required',
-        'road_tax_amount' => 'required',
-        'road_tax_year' => 'required',
-        'inspector_feedback_comment',
-        'carguru_spotlight_header_copy',
-        'carguru_spotlight_body_copy',
-        'voc_document' => 'required',
-        'roadtax_document' => 'required',
-        'picture_of_keys' => 'required',
-        'others' => 'required',
+            'car_id' => 'required',
+            'car_info_category' => 'required',
+            'car_info_price' => 'required',
+            'car_info_location' => 'required',
+            'car_info_registration_type' => 'required',
+            'car_info_registration_number' => 'required',
+            'car_info_registration_date' => 'required',
+            'car_info_car_make_year' => 'required',
+            'car_info_exterior_color' => 'required',
+            'interior_color' => 'required',
+            'number_of_keys' => 'required',
+            'engine_number' => 'required',
+            'chassis_number' => 'required',
+            'owner' => 'required',
+            'usage' => 'required',
+            'car_accident' => 'required',
+            'flood_car' => 'required',
+            'manufacturers_warranty' => 'required',
+            'cargurus_warranty' => 'required',
+            'road_tax_amount' => 'required',
+            'road_tax_year' => 'required',
+            'inspector_feedback_comment',
+            'carguru_spotlight_header_copy',
+            'carguru_spotlight_body_copy',
+            'voc_document' => 'required',
+            'roadtax_document' => 'required',
+            'picture_of_keys' => 'required',
+            'others' => 'required',
         ]);
 
-DB::beginTransaction();
-        try{
+        DB::beginTransaction();
+        try {
             $carInfo = $request->only([
                 'car_id',
                 'car_info_category',
@@ -88,7 +90,7 @@ DB::beginTransaction();
             $info = CarInfo::create($carInfo);
 
             $carAccident = $request->only([
-                 'owner',
+                'owner',
                 'usage',
                 'car_accident',
                 'flood_car',
@@ -106,18 +108,18 @@ DB::beginTransaction();
             ]);
             $carAccident['voc_document'] = $request->file('voc_document')->store('images', 'public');
             $carAccident['roadtax_document'] = $request->file('roadtax_document')->store('images', 'public');
-            $carAccident['picture_of_keys']= $request->file('picture_of_keys')->store('images', 'public');
-            $carAccident['others']= $request->file('others')->store('images', 'public');
+            $carAccident['picture_of_keys'] = $request->file('picture_of_keys')->store('images', 'public');
+            $carAccident['others'] = $request->file('others')->store('images', 'public');
             $carAccident['car_info_id'] = $info->id;
 
-            
+
             CarAccident::create($carAccident);
-DB::commit();
+            DB::commit();
             return redirect()->route('car-details.create')->with('success', 'Car Details Created Successfully');
 
-        }catch(Exception $e){
+        } catch (Exception $e) {
             DB::rollback();
-Log::error('ERROR::CAR_DETAILS_STORE '.$e->getMessage(). 'Line No: '.$e->getLine());
+            Log::error('ERROR::CAR_DETAILS_STORE ' . $e->getMessage() . 'Line No: ' . $e->getLine());
         }
     }
 

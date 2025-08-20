@@ -200,10 +200,10 @@ class CarMakeController extends Controller
     {
         try {
             $search = $request->q;
-            $features = Feature::where('feature_name', 'like', "%{$search}%")
+            $features = Feature::where('feature_name', 'like', "%{$search}%")->orderBy('feature_name', 'asc')
                 ->get(['id', 'feature_name']);
 
-            // IMPORTANT: match Select2 expected format [{id:..., text:...}]
+
             return $features->map(function ($item) {
                 return [
                     'id' => $item->id,

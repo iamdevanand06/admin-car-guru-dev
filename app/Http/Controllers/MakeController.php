@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Make;
 use Illuminate\Support\Facades\Log;
 use Exception;
-use App\Models\Feature;
+use App\Models\Country;
 
 class MakeController extends Controller
 {
@@ -30,16 +30,13 @@ class MakeController extends Controller
     {
         try {
             $search = $request->input('user-search') ?? '';
-            $query = Make::query();
             if (isset($search)) {
-                $data = $query->where(function ($query) use ($search) {
+                $data = Make::with('country')->where(function ($query) use ($search) {
                     $query->where('brand_name', 'like', "%{$search}%")
                         ->orWhere('status', 'like', "%{$search}%");
-                })->paginate(20);
-
-            } else {
-                $data = $query->paginate(20);
+                });
             }
+            $data = Make::with('country')->paginate(20);
 
             return view('mmv.makes.index', compact('data'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -54,7 +51,8 @@ class MakeController extends Controller
     public function create()
     {
         try {
-            return view('mmv.makes.create');
+            $countries = Country::all();
+            return view('mmv.makes.create', compact('countries'));
         } catch (Exception $e) {
             Log::error('Error::MAKE_CREATE_PAGE, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -69,6 +67,7 @@ class MakeController extends Controller
             $this->validate($request, [
                 'brand_name' => 'required',
                 'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|',
+                'country_id' => 'required',
                 'status' => 'required',
             ]);
 
@@ -79,6 +78,7 @@ class MakeController extends Controller
             Make::create([
                 'brand_name' => $request->brand_name,
                 'logo' => $imagePath,
+                'country_id' => $request->country_id,
                 'status' => $request->status
             ]);
 
@@ -104,7 +104,8 @@ class MakeController extends Controller
     {
         try {
             $make = Make::find($id);
-            return view('mmv.makes.edit', compact('make'));
+            $countries = Country::all();
+            return view('mmv.makes.edit', compact('make', 'countries'));
         } catch (Exception $e) {
             Log::error('Error::MAKE_EDIT_PAGE, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -118,7 +119,8 @@ class MakeController extends Controller
         try {
             $this->validate($request, [
                 'brand_name' => 'required',
-                'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|',
+                // 'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048|',
+                'country_id' => 'required',
                 'status' => 'required',
             ]);
             $input = $request->all();
@@ -155,7 +157,7 @@ class MakeController extends Controller
     {
         try {
             $search = $request->q;
-            $brands = Make::where('brand_name', 'like', "%$search%")->get(['id', 'brand_name']);
+            $brands = Make::where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
             return response()->json($brands);
         } catch (Exception $e) {
             Log::error('Error::MAKE_SEARCH_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());

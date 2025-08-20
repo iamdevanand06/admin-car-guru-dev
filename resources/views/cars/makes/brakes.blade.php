@@ -6,18 +6,18 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Front<span class="text-danger ms-1">*</span></label>
-                    <select id="brake_front" name="brake_front" class="form-control">
-                        <option>Select Front</option>
-                        <option value="dv">DV</option>
+                    <select id="brake_front" name="brake_front" class="form-control select2-ajax"
+                        data-placeholder="Select or Add Brake Front" data-search-url="{{ route('brake.search') }}"
+                        data-add-url="{{ route('brake.add') }}">
                     </select>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Rear<span class="text-danger ms-1">*</span></label>
-                    <select id="brake_rear" name="brake_rear" class="form-control">
-                        <option>Select Front</option>
-                        <option value="dc">DC</option>
+                    <select id="brake_rear" name="brake_rear" class="form-control select2-ajax"
+                        data-placeholder="Select or Add Brake Front" data-search-url="{{ route('brake.search') }}"
+                        data-add-url="{{ route('brake.add') }}">
                     </select>
                 </div>
             </div>
@@ -30,18 +30,18 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Front<span class="text-danger ms-1">*</span></label>
-                    <select id="suspension_front" name="suspension_front" class="form-control">
-                        <option>Select Front</option>
-                        <option value="MCST">MCST</option>
+                    <select id="suspension_front" name="suspension_front" class="form-control select2-ajax"
+                        data-placeholder="Select or Add a Suspension Front"
+                        data-search-url="{{ route('suspension.search') }}" data-add-url="{{ route('suspension.add') }}">
                     </select>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Back<span class="text-danger ms-1">*</span></label>
-                    <select id="suspension_back" name="suspension_back" class="form-control">
-                        <option>Select Front</option>
-                        <option value="MLS">MLS</option>
+                    <select id="suspension_back" name="suspension_back" class="form-control select2-ajax"
+                        data-placeholder="Select or Add Suspension Front"
+                        data-search-url="{{ route('suspension.search') }}" data-add-url="{{ route('suspension.add') }}">
                     </select>
                 </div>
             </div>
@@ -54,9 +54,9 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Steering<span class="text-danger ms-1">*</span></label>
-                    <select id="steering" name="steering" class="form-control">
-                        <option>Select Front</option>
-                        <option value="Back & Pinion Power">Back & Pinion Power</option>
+                    <select id="steering" name="steering" class="form-control select2-ajax"
+                        data-placeholder="Select or Add Steering" data-search-url="{{ route('steering.search') }}"
+                        data-add-url="{{ route('steering.add') }}">
                     </select>
                 </div>
             </div>

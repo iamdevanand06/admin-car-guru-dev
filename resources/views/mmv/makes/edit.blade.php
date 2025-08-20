@@ -48,8 +48,27 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Logo<span
                                                         class="text-danger ms-1">*</span></label>
+                                                <input type="hidden" name="logo" accept="image/*" value="{{ $make->logo }}">
                                                 <input type="file" name="logo" accept="image/*"
-                                                    value="{{ asset('storage/app/public/' . $make->logo) }}">
+                                                    value="{{ asset('storage/' . $make->logo) }}">
+                                                @if(!empty($make->logo) && Storage::disk('public')->exists($make->logo))
+                                                    <img src="{{ asset('storage/' . $make->logo) }}" alt="Logo" width="50px"
+                                                        height="50px">
+                                                @else
+                                                    <img src="{{ asset('storage/' . '/images/no-image.webp') }}"
+                                                        alt="default logo" width="50px" height="50px">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Brand Name<span
+                                                        class="text-danger ms-1">*</span></label>
+                                                <select id="country_id" name="country_id" class="form-control">
+                                                    @foreach($countries as $country)
+                                                        <option value="{{ $country->id }}" {{ $country->id == $make->country_id ? 'selected' : '' }}>{{ $country->country_name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-12">

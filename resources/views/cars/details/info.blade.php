@@ -7,9 +7,9 @@
         <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
                 <label class="form-label ">Car Category</label>
-                <select id="car_info_category" name="car_info_category" class="form-control ">
-                    <option>CARGURU Certified</option>
-                    <option value="Basic 2-Year Warranty">Basic 2-Year Warranty</option>
+                <select id="car_info_category" name="car_info_category" class="form-control select2-ajax"
+                    data-placeholder="Select or Add Category" data-search-url="{{ route('category.search') }}"
+                    data-add-url="{{ route('category.add') }} ">
                 </select>
             </div>
         </div>
@@ -19,8 +19,9 @@
             <div class="mb-3">
                 <label class="form-label ">CAR ID</label>
                 <select id="car_id" name="car_id" class="form-control">
-                    <option>C0000001</option>
-                    <option value="Basic 2-Year Warranty">Basic 2-Year Warranty</option>
+                    @foreach ($carIds as $carId)
+                        <option value="{{ $carId->id }}">{{ $carId->id }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -29,7 +30,8 @@
         <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
                 <label class="form-label">Car Price</label>
-                <input type="text" id="car_info_price" name="car_info_price" class="form-control" placeholder="RM 40,550">
+                <input type="text" id="car_info_price" name="car_info_price" class="form-control"
+                    placeholder="RM 40,550">
             </div>
         </div>
 
@@ -43,38 +45,40 @@
                 </select>
             </div>
         </div>
-         <!-- Location -->
+        <!-- Location -->
         <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
-              
+
             </div>
         </div>
-          <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
-              
+
             </div>
         </div>
     </div>
-    
+
 
     <div class="row">
         <!-- Registration Type -->
-       <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
                 <label class="form-label">Registration Type</label>
-                <select id="car_info_registration_type" name="car_info_registration_type" class="form-control">
-                    <option>Private</option>
-                    <option value="Kuala Lumpur">Public</option>
+                <select id="car_registration_type" name="car_info_registration_type" class="form-control select2-ajax"
+                    data-placeholder="Select or Add Registration Type"
+                    data-search-url="{{ route('registrationType.search') }}"
+                    data-add-url="{{ route('registrationType.add') }}">
                 </select>
             </div>
         </div>
-    
+
 
         <!-- Registration Number -->
         <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
                 <label class="form-label">Registration Number</label>
-                <input type="text" id="car_info_registration_number" name="car_info_registration_number" class="form-control" placeholder="JDV5817">
+                <input type="text" id="car_info_registration_number" name="car_info_registration_number"
+                    class="form-control" placeholder="JDV5817">
             </div>
         </div>
 
@@ -82,7 +86,8 @@
         <div class="col-lg-2 col-md-6 col-sm-12">
             <div class="mb-3">
                 <label class="form-label">Registration Date</label>
-                <input type="date" id="car_info_registration_date" name="car_info_registration_date" class="form-control">
+                <input type="date" id="car_info_registration_date" name="car_info_registration_date"
+                    class="form-control">
             </div>
         </div>
 
@@ -95,36 +100,35 @@
         </div>
     </div>
 </div>
-    <div class="row ms-0">
-        <!-- Exterior Color -->
-        <div class="col-lg-2 col-md-6 col-sm-12">
-            <div class="mb-3 ">
-                <label class="form-label">Exterior Color</label>
-                <select id="car_info_exterior_color" name="car_info_exterior_color" class="form-control">
-                    <option style="background-color: silver; color: black;">Silver</option>
-                    <option style="background-color: white; color: black;">White</option>
-                    <option style="background-color: black; color: white;">Black</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Interior Color -->
-        <div class="col-lg-2 col-md-6 col-sm-12">
-            <div class="mb-3">
-                <label class="form-label">Interior Color</label>
-                <select id="interior_color" name="interior_color" class="form-control">
-                    <option style="background-color: black; color: white;">Black</option>
-                    <option style="background-color: beige; color: black;">Beige</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Number of Keys -->
-        <div class="col-lg-2 col-md-6 col-sm-12">
-            <div class="mb-3">
-                <label class="form-label">Number of Keys</label>
-                <input type="number" id="number_of_keys" name="number_of_keys" class="form-control" placeholder="2" min="0">
-            </div>
+<div class="row ms-0">
+    <!-- Exterior Color -->
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3 ">
+            <label class="form-label">Exterior Color</label>
+            <select id="car_info_exterior_color" name="car_info_exterior_color" class="form-control select2-ajax"
+                data-placeholder="Select or Add Exterior Color" data-search-url="{{ route('exteriorColor.search') }}"
+                data-add-url="{{ route('exteriorColor.add') }}">
+            </select>
         </div>
     </div>
+
+    <!-- Interior Color -->
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3">
+            <label class="form-label">Interior Color</label>
+            <select id="interior_color" name="interior_color" class="form-control select2-ajax"
+                data-placeholder="Select or Add Exterior Color" data-search-url="{{ route('interiorColor.search') }}"
+                data-add-url="{{ route('interiorColor.add') }}">
+            </select>
+        </div>
+    </div>
+
+    <!-- Number of Keys -->
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3">
+            <label class="form-label">Number of Keys</label>
+            <input type="number" id="number_of_keys" name="number_of_keys" class="form-control" placeholder="2" min="0">
+        </div>
+    </div>
+</div>
 </div>

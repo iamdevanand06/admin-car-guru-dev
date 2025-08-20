@@ -156,7 +156,7 @@ class VariantController extends Controller
 
         $variants = Variant::where('brand_id', $brandId)
             ->where('model_id', $modelId)
-            ->where('variant_name', 'like', "%$search%")
+            ->where('variant_name', 'like', "%$search%")->orderBy('variant_name', 'asc')
             ->get(['id', 'variant_name']);
 
         return response()->json($variants);

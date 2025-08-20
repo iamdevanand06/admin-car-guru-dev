@@ -4,21 +4,17 @@
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Engine (CC)<span class="text-danger ms-1">*</span></label>
-            <select id="engine_cc" name="engine_cc" class="form-control">
-                <option value="">Select Engine CC</option>
-                @for ($year = date('Y'); $year >= 1980; $year--)
-                    <option value="{{ $year }}">{{ $year }}</option>
-                @endfor
-            </select>
+            <select id="engine_cc" name="engine_cc" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Year" data-search-url="{{ route('madeYear.search') }}"
+                data-add-url="{{ route('madeYear.add') }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Engine Type<span class="text-danger ms-1">*</span></label>
-            <select id="engine_type" name="engine_type" class="form-control">
-                <option>Select Engine Type</option>
-                <option value="turbo intercooler">Turbo Intercooler</option>
-            </select>
+            <select id="engine_type" name="engine_type" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Engine Type" data-search-url="{{ route('engineType.search') }}"
+                data-add-url="{{ route('engineType.add') }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">

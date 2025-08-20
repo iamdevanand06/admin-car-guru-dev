@@ -101,7 +101,7 @@
                                                                                                         @can('make-list')
                                                                                                                                                                                                                         <li class="{{ Request::is('makes') ? 'active' : '' }}"><a
                                                                                                                                                                                                                                                                                         href="{{url('makes')}}"><i
-                                                                                                                                                                                                                                                                                                                        class="ti ti-shield-up fs-16 me-2"></i><span>Makes</span></a>
+                                                                                                                                                                                                                                                                                                                        class="ti ti-shield-up fs-16 me-2"></i><span>Brands</span></a>
                                                                                                                                                                                                                         </li>
                                                                                                                                                                                                         @endcan
                                                                                                         @can('model-list')
@@ -137,8 +137,8 @@
                                                                                                         </li>
 
 
-                                                                                                        <li class="{{ Request::is('variants') ? 'active' : '' }}"><a
-                                                                                                                                        href="{{url('variants')}}"><i
+                                                                                                        <li class="{{ Request::is('car-marketing/index') ? 'active' : '' }}"><a
+                                                                                                                                        href="{{url('car-marketing/index')}}"><i
                                                                                                                                                         class="ti ti-shield-up fs-16 me-2"></i><span>Car
                                                                                                                                                         Marketing</span></a>
                                                                                                         </li>

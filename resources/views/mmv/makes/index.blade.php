@@ -41,6 +41,7 @@
                                 <tr>
                                     <th>Logo</th>
                                     <th>Make Name</th>
+                                    <th>Country</th>
                                     <th>Status</th>
                                     <th class="no-sort"></th>
                                 </tr>
@@ -59,12 +60,10 @@
                                         </td>
                                         <td>
                                             <div class=" d-flex align-items-center">
-                                                <!-- <a href="javascript:void(0);" class="avatar avatar-md me-2">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <img src="{{URL::asset('build/img/users/user-47.png')}}" alt="product">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </a> -->
                                                 <a href="javascript:void(0);">{{ $make->brand_name }}</a>
                                             </div>
                                         </td>
+                                        <td>{{ $make->country->country_name ?? 'N/A' }}</td>
                                         <td><span
                                                 class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white {{ $make->status == 1 ? 'bg-success' : 'bg-danger'}} fs-10"><i
                                                     class="ti ti-point-filled me-1 fs-11"></i>{{ $make->status == 1 ? 'Active' : 'In-Active'}}</span>

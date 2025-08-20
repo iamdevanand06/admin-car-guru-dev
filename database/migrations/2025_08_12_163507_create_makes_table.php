@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('makes', function (Blueprint $table) {
             $table->id();
+            $table->integer('country_id');
             $table->string('brand_name');
             $table->string('logo')->nullable();
             $table->boolean('status')->default('1');

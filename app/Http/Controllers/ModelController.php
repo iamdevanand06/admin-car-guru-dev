@@ -151,7 +151,7 @@ class ModelController extends Controller
             $brandId = $request->brand_id;
 
             $models = Models::where('brand_id', $brandId)
-                ->where('model_name', 'like', "%$search%")
+                ->where('model_name', 'like', "%$search%")->orderBy('model_name', 'asc')
                 ->get(['id', 'model_name']);
 
             return response()->json($models);

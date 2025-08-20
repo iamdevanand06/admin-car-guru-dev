@@ -6,18 +6,20 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">Manufacturer’s Warranty<span class="text-danger ms-1">*</span></label>
-                    <select id="manufacturers_warranty" name="manufacturers_warranty" class="form-control">
-                        <option>Select Front</option>
-                        <option value="Basic 2-Year Warranty">Basic 2-Year Warranty</option>
+                    <select id="manufacturers_warranty" name="manufacturers_warranty" class="form-control select2-ajax"
+                        data-placeholder="Select or Add Manufacturers Warranty"
+                        data-search-url="{{ route('manufacturersWarranty.search') }}"
+                        data-add-url="{{ route('manufacturersWarranty.add') }}">
                     </select>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="mb-3">
                     <label class="form-label">CARGURU’s Warranty<span class="text-danger ms-1">*</span></label>
-                    <select id="cargurus_warranty" name="cargurus_warranty" class="form-control">
-                        <option>Select Front</option>
-                        <option value="Warranty Smart">Warranty Smart</option>
+                    <select id="cargurus_warranty" name="cargurus_warranty" class="form-control select2-ajax"
+                        data-placeholder="Select or Add Cargurus Warranty"
+                        data-search-url="{{ route('cargurusWarranty.search') }}"
+                        data-add-url="{{ route('cargurusWarranty.add') }}">
                     </select>
                 </div>
             </div>

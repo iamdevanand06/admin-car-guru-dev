@@ -3,12 +3,6 @@
 <div class="row">
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
-            <label class="form-label">Brand<span class="text-danger ms-1">*</span></label>
-            <select id="brand_id" name="brand_id" class="form-control" style="width: 100%"></select>
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-6 col-sm-12">
-        <div class="mb-3">
             <label class="form-label">Country of Make<span class="text-danger ms-1">*</span></label>
             <select id="brand_country" name="brand_country" class="form-control" placeholder="Select Country">
                 <option>Select Country</option>
@@ -16,6 +10,12 @@
                     <option value="{{ $country->id }}">{{ $country->country_name }}</option>
                 @endforeach
             </select>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3">
+            <label class="form-label">Brand<span class="text-danger ms-1">*</span></label>
+            <select id="brand_id" name="brand_id" class="form-control" style="width: 100%"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
@@ -46,41 +46,32 @@
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Transmission<span class="text-danger ms-1">*</span></label>
-            <select id="transmission" name="transmission" class="form-control" style="width: 100%">
-                <option>Select Transmission</option>
-                <option value="automatic">Automatic</option>
-                <option value="manual">Manual</option>
-            </select>
+            <select id="transmission" name="transmission" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Transmission" data-search-url="{{ route('transmissions.search') }}"
+                data-add-url="{{ route('transmissions.add') }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Fuel Type<span class="text-danger ms-1">*</span></label>
-            <select id="fuel_type" name="fuel_type" class="form-control" style="width: 100%">
-                <option>Select Fuel Type</option>
-                <option value="petrol">Petrol</option>
-                <option value="diesel">Diesel</option>
-            </select>
+            <select id="fuel_type" name="fuel_type" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Fuel Type" data-search-url="{{ route('fuelType.search') }}"
+                data-add-url="{{ route('fuelType.add') }}"></select></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Drive Train<span class="text-danger ms-1">*</span></label>
-            <select id="drive_train" name="drive_train" class="form-control" style="width: 100%">
-                <option>Select Drive Train</option>
-                <option value="front wheel drive">Front Wheel Drive</option>
-                <option value="rear wheel drive">Rear Wheel Drive</option>
-            </select>
+            <select id="drive_train" name="drive_train" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Drive Train" data-search-url="{{ route('driveTrains.search') }}"
+                data-add-url="{{ route('driveTrains.add') }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Year<span class="text-danger ms-1">*</span></label>
-            <select id="year" name="year" class="form-control">
-                <option value="">Select Year</option>
-                @for ($year = date('Y'); $year >= 1980; $year--)
-                    <option value="{{ $year }}">{{ $year }}</option>
-                @endfor
+            <select id="year" class="form-control select2-ajax" data-placeholder="Select or Add a Year"
+                data-search-url="{{ route('madeYear.search') }}" data-add-url="{{ route('madeYear.add') }}">
             </select>
         </div>
     </div>
@@ -88,35 +79,35 @@
     <div class="col-lg-2 col-md-6 col-sm-12"></div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
-            <label class="form-label">Seat<span class="text-danger ms-1">*</span></label>
-            <select id="seat" name="seat" class="form-control" style="width: 100%">
-                <option>Select Seat</option>
-                @for($seat = 1; $seat <= 5; $seat++)
-                    <option value="{{ $seat }}">{{ $seat }} Person</option>
-                @endfor
+            <label class="form-label">Seat (person)<span class="text-danger ms-1">*</span></label>
+            <select id="seat" class="form-control select2-ajax" data-placeholder="Select or Add a Seat"
+                data-search-url="{{ route('seat.search') }}" data-add-url="{{ route('seat.add') }}">
             </select>
+
         </div>
     </div>
-    <div class="col-lg-2 col-md-6 col-sm-12">
+    <div class=" col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Exterior Color<span class="text-danger ms-1">*</span></label>
-            <input type="color" id="exterior_color" name="exterior_color" class="form-control">
+            <select id="exterior_color" name="exterior_color" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Exterior Color" data-search-url="{{ route('exteriorColor.search') }}"
+                data-add-url="{{ route('exteriorColor.add') }}"></select>
         </div>
     </div>
-    <div class="col-lg-2 col-md-6 col-sm-12">
+    <div class=" col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Interior Color<span class="text-danger ms-1">*</span></label>
-            <input type="color" id="interior_color" name="interior_color" class="form-control">
+            <select id="interior_color" name="interior_color" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Interior Color" data-search-url="{{ route('interiorColor.search') }}"
+                data-add-url="{{ route('interiorColor.add') }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Consumption<span class="text-danger ms-1">*</span></label>
-            <select id="consumption" name="consumption" class="form-control" style="width: 100%">
-                <option>Select Consumption</option>
-                <option value="front wheel drive">City Driving</option>
-                <option value="rear wheel drive">Rear Wheel Drive</option>
-            </select>
+            <select id="consumption" name="consumption" class="form-control select2-ajax"
+                data-placeholder="Select or Add a Consumption" data-search-url="{{ route('consumption.search') }}"
+                data-add-url="{{ route('consumption.add') }}"></></select>
         </div>
     </div>
 </div>
@@ -125,7 +116,7 @@
         // Start Brand
         $('#brand_id').select2({
             placeholder: 'Select or Add a Brand',
-            minimumInputLength: 1,
+            minimumInputLength: 0,
             ajax: {
                 url: '{{ route("brands.search") }}',
                 dataType: 'json',
@@ -175,7 +166,7 @@
         // Start Model
         $('#model_id').select2({
             placeholder: 'Select or Add a Model',
-            minimumInputLength: 1,
+            minimumInputLength: 0,
             ajax: {
                 url: '{{ route("models.search") }}',
                 dataType: 'json',
@@ -227,7 +218,7 @@
     $(document).ready(function () {
         $('#variant_id').select2({
             placeholder: 'Select or Add a Variant',
-            minimumInputLength: 1,
+            minimumInputLength: 0,
             ajax: {
                 url: '{{ route("variants.search") }}',
                 dataType: 'json',
