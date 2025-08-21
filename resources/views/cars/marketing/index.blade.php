@@ -60,13 +60,13 @@
                                 @forelse ($data as $market)
                                     <tr>
                                         <td>{{ $market->car_id }}</td>
-                                        <td>{{ $market->getCarInfo->getCarDetailCategory->name }}</td>
+                                        <td>{{ $market->getCarInfo->getCarDetailCategory->name ?? '-' }}</td>
                                         <td>{{ $market->getVariant->model->brand->brand_name }}</td>
                                         <td>{{ $market->getVariant->model->model_name }}</td>
                                         <td>C000001</td>
                                         <td>{{ $market->getTransmission->name }}</td>
-                                        <td>{{ $market->getCarInfo->car_info_location }}</td>
-                                        <td>{{ $market->getCarInfo->car_info_price }}</td>
+                                        <td>{{ $market->getCarInfo->car_info_location ?? '-' }}</td>
+                                        <td>{{ $market->getCarInfo->car_info_price ?? '-' }}</td>
                                         <td>C000001</td>
                                         <td>C000001</td>
                                         <td>C000001</td>
@@ -85,10 +85,7 @@
             </div>
             <!-- /product list -->
         </div>
-        <div class="footer d-sm-flex align-items-center justify-content-between border-top bg-white p-3">
-            <p class="mb-0 text-gray-9">2014 - 2025 &copy; DreamsPOS. All Right Reserved</p>
-            <p>Designed &amp; Developed by <a href="javascript:void(0);" class="text-primary">Dreams</a></p>
-        </div>
+        @include('layouts.partials.footer-moden')
     </div>
 @endsection
 

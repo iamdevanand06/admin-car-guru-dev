@@ -60,6 +60,7 @@
                     </div>
                 </div>
             </form>
+            @include('layouts.partials.footer-moden')
         </div>
     </div>
 @endsection

@@ -70,9 +70,10 @@
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
-            <label class="form-label">Year<span class="text-danger ms-1">*</span></label>
-            <select id="year" name="year" class="form-control select2-ajax" data-placeholder="Select or Add a Year"
-                data-search-url="{{ route('madeYear.search') }}" data-add-url="{{ route('madeYear.add') }}">
+            <label class="form-label">Start Year<span class="text-danger ms-1">*</span></label>
+            <select id="start_year" name="start_year" class="form-control select2-ajax"
+                data-placeholder="Select or Add Start Year" data-search-url="{{ route('madeYear.search') }}"
+                data-add-url="{{ route('madeYear.add') }}">
             </select>
         </div>
     </div>
@@ -80,11 +81,19 @@
     <div class="col-lg-2 col-md-6 col-sm-12"></div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
+            <label class="form-label">End Year<span class="text-danger ms-1">*</span></label>
+            <select id="end_year" name="end_year" class="form-control select2-ajax"
+                data-placeholder="Select or Add End Year" data-search-url="{{ route('madeYear.search') }}"
+                data-add-url="{{ route('madeYear.add') }}">
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3">
             <label class="form-label">Seat (person)<span class="text-danger ms-1">*</span></label>
             <select id="seat" name="seat" class="form-control select2-ajax" data-placeholder="Select or Add a Seat"
                 data-search-url="{{ route('seat.search') }}" data-add-url="{{ route('seat.add') }}">
             </select>
-
         </div>
     </div>
     <div class=" col-lg-2 col-md-6 col-sm-12">
@@ -103,6 +112,8 @@
                 data-add-url="{{ route('interiorColor.add') }}"></select>
         </div>
     </div>
+    <div class="col-lg-2 col-md-6 col-sm-12"></div>
+    <div class="col-lg-2 col-md-6 col-sm-12"></div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Consumption<span class="text-danger ms-1">*</span></label>

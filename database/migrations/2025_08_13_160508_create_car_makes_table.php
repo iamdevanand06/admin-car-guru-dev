@@ -21,7 +21,8 @@ return new class extends Migration {
             $table->string('transmission');
             $table->string('fuel_type');
             $table->string('drive_train');
-            $table->string('year');
+            $table->string('start_year');
+            $table->string('end_year');
             $table->string('seat');
             $table->string('exterior_color');
             $table->string('interior_color');
