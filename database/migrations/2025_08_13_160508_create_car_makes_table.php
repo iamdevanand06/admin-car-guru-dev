@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('car_makes', function (Blueprint $table) {
             $table->id();
+            $table->string('car_id');
             $table->string('brand_id');
             $table->string('brand_country');
             $table->string('model_id');

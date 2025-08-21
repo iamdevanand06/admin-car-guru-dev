@@ -53,19 +53,18 @@ class CarMakeController extends Controller
             'brand_country' => 'required|integer',
             'model_id' => 'required|numeric',
             'variant_id' => 'required|numeric',
-            'brand_emblem' => 'required',
-            'transmission' => 'required|string|max:50',
-            'fuel_type' => 'required|string|max:50',
-            'drive_train' => 'required|alpha',
-            'year' => 'required|digits:4|integer',
-            'seat' => 'required|integer',
-            'exterior_color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-            'interior_color' => ['required', 'regex:/^#[0-9A-Fa-f]{6}$/'],
-            'consumption' => 'required|string|max:50',
-            'status' => 'required|integer|in:0,1',
+            // 'brand_emblem' => 'required',
+            'transmission' => 'required|numeric|max:50',
+            'fuel_type' => 'required|numeric|max:50',
+            'drive_train' => 'required|numeric',
+            'year' => 'required|numeric',
+            'seat' => 'required|numeric',
+            'exterior_color' => ['required', 'numeric'],
+            'interior_color' => ['required', 'numeric'],
+            'consumption' => 'required|numeric',
 
             'engine_cc' => 'required|numeric',
-            'engine_type' => 'required|alpha',
+            'engine_type' => 'required|numeric',
             'compression_ratio' => 'required|numeric',
             'peak_power_kw' => 'required|numeric',
             'peak_torque_nm' => 'required|numeric',
@@ -77,19 +76,19 @@ class CarMakeController extends Controller
             'kerb_weight_kg' => 'required|numeric',
             'fuel_tank_ltr' => 'required|numeric',
 
-            'brake_front' => 'required|alpha',
-            'brake_rear' => 'required|alpha',
-            'suspension_front' => 'required|alpha',
-            'suspension_back' => 'required|alpha',
-            'steering' => 'required|alpha',
-            'wheel_type_front' => 'required|alpha',
-            'wheel_type_rear' => 'required|alpha',
-            'wheel_type_front_rims' => 'required|alpha',
-            'wheel_type_rear_rims' => 'required|alpha',
+            'brake_front' => 'required|numeric',
+            'brake_rear' => 'required|numeric',
+            'suspension_front' => 'required|numeric',
+            'suspension_back' => 'required|numeric',
+            'steering' => 'required|numeric',
+            'wheel_type_front' => 'required',
+            'wheel_type_rear' => 'required',
+            'wheel_type_front_rims' => 'required',
+            'wheel_type_rear_rims' => 'required',
             'features_equipments' => 'required|array',
 
-            'manufacturers_warranty' => 'required|alpha',
-            'cargurus_warranty' => 'required|alpha',
+            'manufacturers_warranty' => 'required|numeric',
+            'cargurus_warranty' => 'required|numeric',
             'road_tax_amount_rm' => 'required|numeric',
             'road_tax_year' => 'required|numeric'
         ]);
@@ -112,6 +111,7 @@ class CarMakeController extends Controller
                 'consumption',
             ]);
             $makeData['brand_emblem'] = $request->file('brand_emblem')->store('images', 'public');
+            $makeData['car_id'] = 'C' . rand(000000, 999999);
             $carMake = CarMake::create($makeData);
             $engine = $request->only([
                 'engine_cc',
@@ -160,7 +160,7 @@ class CarMakeController extends Controller
             return redirect()->route('carmakes.create')->with('success', 'Car Make Created Successfully');
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('Error::STORE_CAR_MAKE_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            Log::error('Error::STORE_CAR_MAKE_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
     }
 

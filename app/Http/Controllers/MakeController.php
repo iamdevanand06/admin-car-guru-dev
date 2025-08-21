@@ -7,6 +7,8 @@ use App\Models\Make;
 use Illuminate\Support\Facades\Log;
 use Exception;
 use App\Models\Country;
+use Illuminate\Validation\Rule;
+
 
 class MakeController extends Controller
 {
@@ -39,7 +41,7 @@ class MakeController extends Controller
             $data = Make::with('country')->paginate(20);
 
             return view('mmv.makes.index', compact('data'))
-                ->with('i', ($request->input('page', 1) - 1) * 5);
+                ->with('i', ($request->input('page', 1) - 1) * 20);
         } catch (Exception $e) {
             Log::error('Error::MAKE_GET_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -124,11 +126,15 @@ class MakeController extends Controller
                 'status' => 'required',
             ]);
             $input = $request->all();
-            // Store image in storage/app/public/images
-            $imagePath = $request->file('logo')->store('images', 'public');
 
             // Save to database
             $make = Make::find($id);
+            // Store image in storage/app/public/images
+            if ($request->hasFile('logo')) {
+                $imagePath = $request->file('logo')->store('images', 'public');
+            } else {
+                $imagePath = $make->logo;
+            }
             $input['logo'] = $imagePath;
             $make->update($input);
 
@@ -157,7 +163,11 @@ class MakeController extends Controller
     {
         try {
             $search = $request->q;
-            $brands = Make::where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
+            if (!empty($search) || !empty($request->country_id)) {
+                $brands = Make::where('country_id', $request->country_id)->where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
+            } else {
+                $brands = Make::where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
+            }
             return response()->json($brands);
         } catch (Exception $e) {
             Log::error('Error::MAKE_SEARCH_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
@@ -167,8 +177,16 @@ class MakeController extends Controller
     public function postBrands(Request $request)
     {
         try {
-            $request->validate(['brand_name' => 'required|string|max:255|unique:makes,brand_name']);
-            $brand = Make::create(['brand_name' => $request->brand_name, 'status' => '1']);
+            // $request->validate(['brand_name' => 'required|string|max:255|unique:makes,brand_name']);
+            $request->validate([
+                'brand_name' => [
+                    'required',
+                    Rule::unique('makes')
+                        ->where(fn($query) => $query->where('country_id', $request->country_id)),
+                ],
+                'country_id' => 'required|integer|exists:countries,id',
+            ]);
+            $brand = Make::create(['country_id' => $request->country_id, 'brand_name' => $request->brand_name, 'status' => '1']);
             return response()->json($brand);
         } catch (Exception $e) {
             Log::error('Error::MAKE_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());

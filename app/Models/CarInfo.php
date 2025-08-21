@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\CarDetailCategory;
+
 class CarInfo extends Model
 {
     protected $fillable = [
@@ -22,4 +24,9 @@ class CarInfo extends Model
         'engine_number',
         'chassis_number',
     ];
+
+    public function getCarDetailCategory()
+    {
+        return $this->hasOne(CarDetailCategory::class, 'id', 'car_info_category');
+    }
 }

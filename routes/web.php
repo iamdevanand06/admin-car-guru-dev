@@ -19,6 +19,7 @@ use App\Http\Controllers\CarMakeInteriorColorController;
 use App\Http\Controllers\CarMakeMadeYearController;
 use App\Http\Controllers\CarMakeSeatController;
 use App\Http\Controllers\CarMakeTransmissionController;
+use App\Http\Controllers\CarMarketingController;
 use App\Http\Controllers\MakeController;
 use App\Http\Controllers\ModelController;
 use Illuminate\Support\Facades\Route;
@@ -99,6 +100,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Car Make Mamufacturer Warranty Dropdown
     Route::get('/list-cargurusWarranty/search', [CarMakeCarGurusWarrantyController::class, 'getCargurusWarranty'])->name('cargurusWarranty.search');
     Route::post('/add-cargurusWarranty', [CarMakeCarGurusWarrantyController::class, 'postCargurusWarranty'])->name('cargurusWarranty.add');
+
+    Route::resource('car-details', CarDetailController::class);
     // Car Detail Category Dropdown
     Route::get('/list-carcategory/search', [CarDetailCategoryController::class, 'getCarCategory'])->name('category.search');
     Route::post('/add-carcategory', [CarDetailCategoryController::class, 'postCarCategory'])->name('category.add');
@@ -109,8 +112,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/list-Usage/search', [CarDetailUsageController::class, 'getUsage'])->name('usage.search');
     Route::post('/add-Usage', [CarDetailUsageController::class, 'postUsage'])->name('usage.add');
 
-    Route::resource('car-details', CarDetailController::class);
-    Route::get('/car-marketing/index', function () {
-        return view('cars.marketing.index');
-    });
+    Route::resource('car-marketing', CarMarketingController::class);
 });

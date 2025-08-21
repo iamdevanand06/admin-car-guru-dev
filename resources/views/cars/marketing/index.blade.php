@@ -56,20 +56,28 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>12345</td>
-                                    <td>C000001</td>
-                                    <td></td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                </tr>
+
+                                @forelse ($data as $market)
+                                    <tr>
+                                        <td>{{ $market->car_id }}</td>
+                                        <td>{{ $market->getCarInfo->getCarDetailCategory->name }}</td>
+                                        <td>{{ $market->getVariant->model->brand->brand_name }}</td>
+                                        <td>{{ $market->getVariant->model->model_name }}</td>
+                                        <td>C000001</td>
+                                        <td>{{ $market->getTransmission->name }}</td>
+                                        <td>{{ $market->getCarInfo->car_info_location }}</td>
+                                        <td>{{ $market->getCarInfo->car_info_price }}</td>
+                                        <td>C000001</td>
+                                        <td>C000001</td>
+                                        <td>C000001</td>
+                                        <td>C000001</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4">There are no data.</td>
+                                    </tr>
+                                @endforelse
+
                             </tbody>
                         </table>
                     </div>

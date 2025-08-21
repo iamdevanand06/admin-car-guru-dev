@@ -42,6 +42,7 @@
             </label>
             <input type="file" id="brand_logo" name="brand_emblem" accept="image/png, image/jpeg" hidden>
         </div>
+        <img id="" src="" width="" height="" />
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
@@ -70,7 +71,7 @@
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Year<span class="text-danger ms-1">*</span></label>
-            <select id="year" class="form-control select2-ajax" data-placeholder="Select or Add a Year"
+            <select id="year" name="year" class="form-control select2-ajax" data-placeholder="Select or Add a Year"
                 data-search-url="{{ route('madeYear.search') }}" data-add-url="{{ route('madeYear.add') }}">
             </select>
         </div>
@@ -80,7 +81,7 @@
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Seat (person)<span class="text-danger ms-1">*</span></label>
-            <select id="seat" class="form-control select2-ajax" data-placeholder="Select or Add a Seat"
+            <select id="seat" name="seat" class="form-control select2-ajax" data-placeholder="Select or Add a Seat"
                 data-search-url="{{ route('seat.search') }}" data-add-url="{{ route('seat.add') }}">
             </select>
 
@@ -122,7 +123,10 @@
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
-                    return { q: params.term };
+                    return {
+                        q: params.term,
+                        country_id: $('#brand_country').val()
+                    };
                 },
                 processResults: function (data, params) {
                     let results = data.map(item => ({
@@ -151,7 +155,8 @@
             if (data.is_new) {
                 $.post('{{ route("brands.add") }}', {
                     _token: '{{ csrf_token() }}',
-                    brand_name: data.text.replace('➕ Add "', '').replace('"', '')
+                    brand_name: data.text.replace('➕ Add "', '').replace('"', ''),
+                    country_id: $('#brand_country').val(),
                 }, function (response) {
                     // Set the newly created brand in dropdown
                     let newOption = new Option(response.brand_name, response.id, true, true);

@@ -137,8 +137,8 @@
                                                                                                         </li>
 
 
-                                                                                                        <li class="{{ Request::is('car-marketing/index') ? 'active' : '' }}"><a
-                                                                                                                                        href="{{url('car-marketing/index')}}"><i
+                                                                                                        <li class="{{ Request::is('car-marketing') ? 'active' : '' }}"><a
+                                                                                                                                        href="{{url('car-marketing')}}"><i
                                                                                                                                                         class="ti ti-shield-up fs-16 me-2"></i><span>Car
                                                                                                                                                         Marketing</span></a>
                                                                                                         </li>

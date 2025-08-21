@@ -20,7 +20,7 @@
                 <label class="form-label ">CAR ID</label>
                 <select id="car_id" name="car_id" class="form-control">
                     @foreach ($carIds as $carId)
-                        <option value="{{ $carId->id }}">{{ $carId->id }}</option>
+                        <option value="{{ $carId->car_id }}">{{ $carId->car_id }}</option>
                     @endforeach
                 </select>
             </div>

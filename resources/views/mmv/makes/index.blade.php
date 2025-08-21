@@ -39,16 +39,19 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
+                                    <th>No</th>
                                     <th>Logo</th>
                                     <th>Make Name</th>
                                     <th>Country</th>
                                     <th>Status</th>
-                                    <th class="no-sort"></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
-                            @foreach ($data as $key => $make)
-                                <tbody>
+
+                            <tbody>
+                                @forelse ($data as $key => $make)
                                     <tr>
+                                        <td>{{ ++$i }}</td>
                                         <td>
                                             @if(!empty($make->logo) && Storage::disk('public')->exists($make->logo))
                                                 <img src="{{ asset('storage/' . $make->logo) }}" alt="Logo" width="50px"
@@ -90,8 +93,12 @@
                                             </div>
                                         </td>
                                     </tr>
-                                </tbody>
-                            @endforeach
+                                @empty
+                                    <tr>
+                                        No More Data
+                                    </tr>
+                                @endforelse
+                            </tbody>
                         </table>
                         {!! $data->links('pagination::bootstrap-5') !!}
                     </div>

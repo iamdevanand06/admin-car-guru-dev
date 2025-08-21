@@ -27,7 +27,7 @@ class CarDetailController extends Controller
     public function create()
     {
         try {
-            $carIds = CarMake::all(['id']);
+            $carIds = CarMake::all(['car_id']);
             return view('cars.details.create', compact('carIds'));
         } catch (Exception $e) {
             Log::error('Error::CREATE_CAR_DETAIL_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
@@ -59,15 +59,9 @@ class CarDetailController extends Controller
             'flood_car' => 'required',
             'manufacturers_warranty' => 'required',
             'cargurus_warranty' => 'required',
-            'road_tax_amount' => 'required',
-            'road_tax_year' => 'required',
             'inspector_feedback_comment',
             'carguru_spotlight_header_copy',
             'carguru_spotlight_body_copy',
-            'voc_document' => 'required',
-            'roadtax_document' => 'required',
-            'picture_of_keys' => 'required',
-            'others' => 'required',
         ]);
 
         DB::beginTransaction();
@@ -106,10 +100,12 @@ class CarDetailController extends Controller
                 'picture_of_keys',
                 'others'
             ]);
-            $carAccident['voc_document'] = $request->file('voc_document')->store('images', 'public');
-            $carAccident['roadtax_document'] = $request->file('roadtax_document')->store('images', 'public');
-            $carAccident['picture_of_keys'] = $request->file('picture_of_keys')->store('images', 'public');
-            $carAccident['others'] = $request->file('others')->store('images', 'public');
+            $carAccident['voc_document'] = 'null';//$request->file('voc_document')->store('images', 'public');
+            $carAccident['roadtax_document'] = 'null'; //$request->file('roadtax_document')->store('images', 'public');
+            $carAccident['picture_of_keys'] = 'null'; //$request->file('picture_of_keys')->store('images', 'public');
+            $carAccident['others'] = 'null'; //$request->file('others')->store('images', 'public');
+            $carAccident['road_tax_amount'] = '0';
+            $carAccident['road_tax_year'] = '0';
             $carAccident['car_info_id'] = $info->id;
 
 
@@ -126,7 +122,7 @@ class CarDetailController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CarDetail $carDetail)
+    public function show(Request $request)
     {
         //
     }
@@ -134,7 +130,7 @@ class CarDetailController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CarDetail $carDetail)
+    public function edit(Request $request)
     {
         //
     }
@@ -142,7 +138,7 @@ class CarDetailController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CarDetail $carDetail)
+    public function update(Request $request)
     {
         //
     }
@@ -150,7 +146,7 @@ class CarDetailController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CarDetail $carDetail)
+    public function destroy(Request $request)
     {
         //
     }
