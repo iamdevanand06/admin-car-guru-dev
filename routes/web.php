@@ -113,4 +113,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/add-Usage', [CarDetailUsageController::class, 'postUsage'])->name('usage.add');
 
     Route::resource('car-marketing', CarMarketingController::class);
+    Route::resource('dynamic/dropdown/transmission', CarMakeTransmissionController::class);
 });

@@ -14,9 +14,16 @@ class CarMakeTransmissionController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+            $data = CarMakeTransmission::paginate(20);
+            return view('dynamic.dropdown.transmission.index', compact('data'))
+                ->with('i', ($request->input('page', 1) - 1) * 20);
+
+        } catch (Exception $e) {
+            Log::error('ERROR::INDEX_CAR_MAKE_TRANSMISSION ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -24,7 +31,11 @@ class CarMakeTransmissionController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            return view('dynamic.dropdown.transmission.create');
+        } catch (Exception $e) {
+            Log::error('ERROR::CREATE_CAR_MAKE_TRANSMISSION ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -32,7 +43,19 @@ class CarMakeTransmissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            CarMakeTransmission::create($input);
+            return redirect()->route('transmission.index')
+                ->with('success', 'Transmission created successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::STORE_CAR_MAKE_TRANSMISSION ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -48,7 +71,12 @@ class CarMakeTransmissionController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $transmission = CarMakeTransmission::findOrFail($id);
+            return view('dynamic.dropdown.transmission.edit', compact('transmission'));
+        } catch (Exception $e) {
+            Log::error('ERROR::EDIT_CAR_MAKE_TRANSMISSION ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -56,7 +84,20 @@ class CarMakeTransmissionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            $transmission = CarMakeTransmission::find($id);
+            $transmission->update($input);
+
+            return redirect()->route('transmission.index')->with('success', 'Transmission Updated successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::UPDATE_CAR_MAKE_TRANSMISSION ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -64,7 +105,13 @@ class CarMakeTransmissionController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            CarMakeTransmission::find($id)->delete();
+            return redirect()->route('transmission.index')
+                ->with('success', 'Transmission deleted successfully');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_TRANSMISSION_DELETE, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     public function getTransmissions(Request $request)
