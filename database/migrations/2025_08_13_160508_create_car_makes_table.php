@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->string('start_year');
             $table->string('end_year');
             $table->string('seat');
+            $table->string('no_of_door');
             $table->string('exterior_color');
             $table->string('interior_color');
             $table->string('consumption');

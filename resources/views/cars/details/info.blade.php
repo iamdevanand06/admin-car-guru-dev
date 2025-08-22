@@ -130,5 +130,12 @@
             <input type="number" id="number_of_keys" name="number_of_keys" class="form-control" placeholder="2" min="0">
         </div>
     </div>
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3">
+            <label class="form-label">Mileage</label>
+            <input type="number" id="mileage" name="mileage" class="form-control" placeholder="2" min="0">
+        </div>
+    </div>
+
 </div>
 </div>

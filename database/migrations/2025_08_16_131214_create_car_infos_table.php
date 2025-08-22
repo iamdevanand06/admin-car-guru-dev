@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('car_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('car_id');
+            $table->string('car_id')->unique();
             $table->string('car_info_category');
             $table->integer('car_info_price');
             $table->string('car_info_location');
@@ -23,6 +23,7 @@ return new class extends Migration {
             $table->string('car_info_exterior_color');
             $table->string('interior_color');
             $table->integer('number_of_keys');
+            $table->string('mileage');
             $table->string('engine_number');
             $table->string('chassis_number');
             $table->timestamps();

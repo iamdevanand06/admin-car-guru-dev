@@ -26,6 +26,7 @@ class CarMake extends Model
         'exterior_color',
         'interior_color',
         'consumption',
+        'no_of_door',
     ];
 
     public function getEngine()

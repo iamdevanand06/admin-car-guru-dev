@@ -23,6 +23,7 @@ class CarInfo extends Model
         'number_of_keys',
         'engine_number',
         'chassis_number',
+        'mileage',
     ];
 
     public function getCarDetailCategory()

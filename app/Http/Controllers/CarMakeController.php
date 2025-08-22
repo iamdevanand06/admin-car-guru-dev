@@ -63,6 +63,7 @@ class CarMakeController extends Controller
             'exterior_color' => ['required', 'numeric'],
             'interior_color' => ['required', 'numeric'],
             'consumption' => 'required|numeric',
+            'no_of_door' => 'required',
 
             'engine_cc' => 'required|numeric',
             'engine_type' => 'required|numeric',
@@ -111,6 +112,7 @@ class CarMakeController extends Controller
                 'exterior_color',
                 'interior_color',
                 'consumption',
+                'no_of_door'
             ]);
             $makeData['brand_emblem'] = $request->file('brand_emblem')->store('images', 'public');
             $makeData['car_id'] = 'C' . rand(000000, 999999);

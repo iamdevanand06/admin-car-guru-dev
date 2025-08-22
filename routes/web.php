@@ -114,4 +114,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('car-marketing', CarMarketingController::class);
     Route::resource('dynamic/dropdown/transmission', CarMakeTransmissionController::class);
+
+    Route::get('/promotion', function () {
+        return view('marketing.promotion.index');
+    });
+    Route::get('/promotion/create', function () {
+        return view('marketing.promotion.create');
+    });
 });

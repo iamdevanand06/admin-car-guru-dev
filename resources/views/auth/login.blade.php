@@ -1,4 +1,3 @@
-<?php $page = 'signin-3'; ?>
 @extends('layouts.app', ['activePage' => 'login', 'title' => 'Admin Login - CarGuru - Admin Portal'])
 @section('content')
     <div class="account-content">
@@ -61,8 +60,12 @@
                                                     </label>
                                                 </div>
                                                 <div class="text-end">
-                                                    <a class="text-orange fs-16 fw-medium"
-                                                        href="{{url('forgot-password')}}">Forgot Password?</a>
+                                                    @if (Route::has('password.request'))
+                                                        <a class="text-orange fs-16 fw-medium"
+                                                            href="{{ route('password.request') }}">
+                                                            {{ __('Forgot Your Password?') }}
+                                                        </a>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +78,7 @@
                         </form>
                     </div>
                     <div class="my-4 d-flex justify-content-center align-items-center copyright-text">
-                        <p>Copyright &copy; 2025 DreamsPOS</p>
+                        <p>Copyright &copy; 2025 Macromend Technologies</p>
                     </div>
                 </div>
             </div>

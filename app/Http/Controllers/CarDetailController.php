@@ -51,6 +51,7 @@ class CarDetailController extends Controller
             'car_info_exterior_color' => 'required',
             'interior_color' => 'required',
             'number_of_keys' => 'required',
+            'mileage' => 'required',
             'engine_number' => 'required',
             'chassis_number' => 'required',
             'owner' => 'required',
@@ -80,6 +81,7 @@ class CarDetailController extends Controller
                 'number_of_keys',
                 'engine_number',
                 'chassis_number',
+                'mileage',
             ]);
             $info = CarInfo::create($carInfo);
 

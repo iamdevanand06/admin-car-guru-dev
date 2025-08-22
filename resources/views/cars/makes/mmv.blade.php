@@ -122,6 +122,17 @@
                 data-add-url="{{ route('consumption.add') }}"></></select>
         </div>
     </div>
+    <div class="col-lg-2 col-md-6 col-sm-12">
+        <div class="mb-3">
+            <label class="form-label">Doors<span class="text-danger ms-1">*</span></label>
+            <select id="no_of_door" name="no_of_door" class="form-control">
+                <option value="">Select Number of Doors</option>
+                @for($i = 1; $i <= 6; ++$i)
+                    <option value="{{ $i }}">{{ $i }}</option>
+                @endfor
+            </select>
+        </div>
+    </div>
 </div>
 <script>
     $(document).ready(function () {
