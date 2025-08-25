@@ -16,7 +16,7 @@
                             <div class="card">
                                 <div class="card-body p-5">
                                     <div class="login-userheading">
-                                        <h3 class="text-center">Admin CarGuru</h3>
+                                        <h3 class="text-center">Admin CarGuru-Reset Password</h3>
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Email <span class="text-danger"> *</span></label>
@@ -71,7 +71,7 @@
                                         </div>
                                     </div>
                                     <div class="form-login">
-                                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                                        <button type="submit" class="btn btn-primary w-100 " >Sumbit</button>
                                     </div>
                                 </div>
                             </div>

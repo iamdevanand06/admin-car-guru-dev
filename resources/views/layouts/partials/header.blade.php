@@ -351,7 +351,7 @@
                             <div>
                                 <h6 class="fw-medium">{{ Auth::user()->name }}</h6>
                                 @php $role = Auth::user()->getRoleNames(); @endphp
-                                <p>{{ $role[0] }} (Role)</p>
+                                <p>{{ $role }} (Role)</p>
                             </div>
                         </div>
                         <!-- <a class="dropdown-item" href="{{url('profile')}}"><i
