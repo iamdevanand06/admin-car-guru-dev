@@ -6,7 +6,7 @@ use App\Traits\commonTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
-use App\Models\CarMakeDriveTrains;
+use App\Models\CarMakeDriveTrain;
 
 class CarMakeDriveTrainController extends Controller
 {
@@ -16,7 +16,14 @@ class CarMakeDriveTrainController extends Controller
      */
     public function index()
     {
-        //
+        // Fetch all drive trains with pagination
+    $data = CarMakeDriveTrain::paginate(20);
+
+    // Return the index view with data
+    return view('dynamic.dropdown.driveTrain.index', compact('data'));
+
+
+
     }
 
     /**
@@ -24,7 +31,7 @@ class CarMakeDriveTrainController extends Controller
      */
     public function create()
     {
-        //
+        return view('dynamic.dropdown.driveTrain.create');
     }
 
     /**
@@ -32,7 +39,19 @@ class CarMakeDriveTrainController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            CarMakeDriveTrain::create($input);
+            return redirect()->route('drive_train.index')
+                ->with('success', 'Fuel Type created successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::STORE_CAR_MAKE_DRIVE_TRAIN ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -48,7 +67,8 @@ class CarMakeDriveTrainController extends Controller
      */
     public function edit(string $id)
     {
-        //
+       $driveTrain = CarMakeDriveTrain::findOrFail($id);
+    return view('dynamic.dropdown.driveTrain.edit', compact('driveTrain'));
     }
 
     /**
@@ -67,7 +87,7 @@ class CarMakeDriveTrainController extends Controller
         //
     }
 
-    public function getDriveTrains(Request $request)
+    public function getDriveTrain(Request $request)
     {
         try {
             return $this->getDropdownOptions($request->field_id, $request->q);

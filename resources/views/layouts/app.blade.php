@@ -150,9 +150,9 @@
                                                             @if (Auth::check())
                                                                 @if (!Route::is(['under-maintenance', 'coming-soon', 'error-404', 'error-500', 'two-step-verification-3', 'two-step-verification-2', 'two-step-verification', 'email-verification-3', 'email-verification-2', 'email-verification', 'reset-password-3', 'reset-password-2', 'reset-password', 'forgot-password-3', 'forgot-password-2', 'forgot-password', 'register-3', 'register-2', 'register', 'signin-3', 'signin-2', 'signin', 'success', 'success-2', 'success-3', 'lock-screen']))
                                                                     @include('layouts.partials.header')
+                                                                    @include('layouts.partials.sidebar')
                                                                 @endif
                                                                 @if (!Route::is(['under-maintenance', 'coming-soon', 'error-404', 'error-500', 'two-step-verification-3', 'two-step-verification-2', 'two-step-verification', 'email-verification-3', 'email-verification-2', 'email-verification', 'reset-password-3', 'reset-password-2', 'reset-password', 'forgot-password-3', 'forgot-password-2', 'forgot-password', 'register-3', 'register-2', 'register', 'signin-3', 'signin-2', 'signin', 'success', 'success-2', 'success-3', 'lock-screen']))
-                                                                    @include('layouts.partials.sidebar')
                                                                     @include('layouts.partials.collapsed-sidebar')
                                                                     @include('layouts.partials.horizontal-sidebar')
                                                                 @endif
