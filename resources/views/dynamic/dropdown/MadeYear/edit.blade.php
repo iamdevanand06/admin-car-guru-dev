@@ -25,7 +25,7 @@
                             class="me-2"></i>Back</a>
                 </div>
             </div>
-            <form method="POST" action="{{ route('made_year.update', $made_year->id) }}">
+            <form method="POST" action="{{ route('made_year.update', $madeyear->id) }}">
     @csrf
     @method('PUT')
 
@@ -40,15 +40,15 @@
                                 <div class="mb-3">
                                     <label class="form-label">Name<span class="text-danger ms-1">*</span></label>
                                     <input type="text" name="name" id="name" class="form-control"
-                                           value="{{ $made_year->name }}">
+                                           value="{{ $madeyear->name }}">
                                 </div>
                             </div>
                             <div class="col-sm-6 col-12">
                                 <div class="mb-3">
                                     <label class="form-label">Status<span class="text-danger ms-1">*</span></label>
                                     <select class="select" name="status" id="status">
-                                        <option value="1" {{ $made_year->status == 1 ? 'selected' : '' }}>Active</option>
-                                        <option value="0" {{ $made_year->status == 0 ? 'selected' : '' }}>In-Active</option>
+                                        <option value="1" {{ $madeyear->status == 1 ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ $madeyear->status == 0 ? 'selected' : '' }}>In-Active</option>
                                     </select>
                                 </div>
                             </div>
