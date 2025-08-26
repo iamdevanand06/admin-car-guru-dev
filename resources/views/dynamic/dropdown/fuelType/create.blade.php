@@ -1,5 +1,5 @@
 <?php $page = 'edit-role'; ?>
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'CreateTransmission - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'CreateFuelType - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
     <div class="page-wrapper">
         <div class="content">
