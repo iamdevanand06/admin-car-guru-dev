@@ -56,9 +56,10 @@ class CarMakeFuelTypeController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
+{
+    //
+}
+
 
     /**
      * Show the form for editing the specified resource.
@@ -80,7 +81,20 @@ class CarMakeFuelTypeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            $transmission = CarMakeTransmission::find($id);
+            $transmission->update($input);
+
+            return redirect()->route('fuel_type.index')->with('success', 'fuel Type Updated successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::UPDATE_CAR_MAKE_TRANSMISSION ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
