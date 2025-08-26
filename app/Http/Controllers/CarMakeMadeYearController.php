@@ -11,12 +11,19 @@ use Exception;
 class CarMakeMadeYearController extends Controller
 {
     use commonTrait;
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+            $data = CarMakeMadeYear::paginate(10);
+            return view('dynamic.dropdown.MadeYear.index', compact('data'));
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_INDEX, Message: ' . $e->getMessage());
+            return back()->with('error', 'Unable to fetch Made Years.');
+        }
     }
 
     /**
@@ -24,7 +31,12 @@ class CarMakeMadeYearController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            return view('dynamic.dropdown.MadeYear.create');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_CREATE, Message: ' . $e->getMessage());
+            return back()->with('error', 'Unable to open create form.');
+        }
     }
 
     /**
@@ -32,7 +44,19 @@ class CarMakeMadeYearController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:4|unique:car_make_made_years,name',
+        ]);
+
+        try {
+            CarMakeMadeYear::create($request->all());
+            return redirect()->route('made_year.index')
+                             ->with('success', 'Made Year created successfully.');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_STORE, Message: ' . $e->getMessage());
+            return redirect()->route('made_year.index')
+                             ->with('error', 'Something went wrong while saving.');
+        }
     }
 
     /**
@@ -40,7 +64,14 @@ class CarMakeMadeYearController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $madeyear = CarMakeMadeYear::findOrFail($id);
+            return view('dynamic.dropdown.MadeYear.show', compact('madeyear'));
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_SHOW, Message: ' . $e->getMessage());
+            return redirect()->route('made_year.index')
+                             ->with('error', 'Made Year not found.');
+        }
     }
 
     /**
@@ -48,7 +79,14 @@ class CarMakeMadeYearController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $madeyear = CarMakeMadeYear::findOrFail($id);
+            return view('dynamic.dropdown.MadeYear.edit', compact('madeyear'));
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_EDIT, Message: ' . $e->getMessage());
+            return redirect()->route('made_year.index')
+                             ->with('error', 'Unable to open edit form.');
+        }
     }
 
     /**
@@ -56,7 +94,22 @@ class CarMakeMadeYearController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:4|unique:car_make_made_years,name,' . $id,
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $madeyear = CarMakeMadeYear::findOrFail($id);
+            $madeyear->update($request->all());
+
+            return redirect()->route('made_year.index')
+                             ->with('success', 'Made Year updated successfully.');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_UPDATE, Message: ' . $e->getMessage());
+            return redirect()->route('made_year.index')
+                             ->with('error', 'Something went wrong while updating.');
+        }
     }
 
     /**
@@ -64,7 +117,17 @@ class CarMakeMadeYearController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $madeyear = CarMakeMadeYear::findOrFail($id);
+            $madeyear->delete();
+
+            return redirect()->route('made_year.index')
+                             ->with('success', 'Made Year deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_MADE_YEAR_DESTROY, Message: ' . $e->getMessage());
+            return redirect()->route('made_year.index')
+                             ->with('error', 'Something went wrong while deleting.');
+        }
     }
 
     public function getMadeYear(Request $request)
@@ -72,17 +135,21 @@ class CarMakeMadeYearController extends Controller
         try {
             return $this->getDropdownOptions($request->field_id, $request->q);
         } catch (Exception $e) {
-            Log::error('Error::CAR_MAKE_MADE_YEAR_SEARCH_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            Log::error('Error::CAR_MAKE_MADE_YEAR_SEARCH_DATA, Message: ' . $e->getMessage());
+            return response()->json(['error' => 'Unable to fetch Made Year data.'], 500);
         }
     }
 
     public function postMadeYear(Request $request)
     {
         try {
-            $request->validate(['name' => 'required|string|max:255|unique:car_make_transmissions,name']);
+            $request->validate([
+                'name' => 'required|string|max:255|unique:car_make_made_years,name',
+            ]);
             return $this->postDropdownOptions($request->field_id, $request->name);
         } catch (Exception $e) {
-            Log::error('Error::CAR_MAKE_MADE_YEAR_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            Log::error('Error::CAR_MAKE_MADE_YEAR_SEARCH_ADD_DATA, Message: ' . $e->getMessage());
+            return response()->json(['error' => 'Unable to add Made Year.'], 500);
         }
     }
 }
