@@ -36,39 +36,51 @@ class commonConstant
 
     const SIDE_MENU_HEAD = [
         [
-            'title' => 'REFERENCE DATA MANAGEMENT', 'model' =>'', 'url' => '#', 'icon' => '',
-            'submenu' =>[
-                ['title' => 'Country', 'model' =>'', 'url' => 'country', 'icon' => ''],
-                ['title' => 'Currency', 'model' =>'', 'url' => 'currency', 'icon' => ''],
-                ['title' => 'LANGUAGE', 'model' =>'', 'url' => '#', 'icon' => ''],
-                ['title' => 'TIME ZONE', 'model' =>'', 'url' => '#', 'icon' => ''],
-                ['title' => 'UNIT MEASUREMENTS', 'model' =>'', 'url' => '#', 'icon' => ''],
-                ['title' => 'ADDRESS AND GEO', 'model' =>'', 'url' => '#', 'icon' => '',
+            'title' => 'REFERENCE DATA MANAGEMENT',
+            'model' => '',
+            'url' => '#',
+            'icon' => '',
+            'submenu' => [
+                ['title' => 'Country', 'model' => '', 'url' => 'country', 'icon' => ''],
+                ['title' => 'Currency', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                ['title' => 'LANGUAGE', 'model' => '', 'url' => '#', 'icon' => ''],
+                ['title' => 'TIME ZONE', 'model' => '', 'url' => '#', 'icon' => ''],
+                ['title' => 'UNIT MEASUREMENTS', 'model' => '', 'url' => '#', 'icon' => ''],
+                [
+                    'title' => 'ADDRESS AND GEO',
+                    'model' => '',
+                    'url' => '#',
+                    'icon' => '',
                     'submenu' => [
-                        ['title' => 'ADDRESS REFERENCE', 'model' =>'', 'url' => 'country', 'icon' => ''],
-                        ['title' => 'ADDRESS TYPE', 'model' =>'', 'url' => 'currency', 'icon' => ''],
-                        ['title' => 'REGION/STATE', 'model' =>'', 'url' => 'country', 'icon' => ''],
-                        ['title' => 'CITIES', 'model' =>'', 'url' => 'currency', 'icon' => ''],
-                        ['title' => 'SERVICE AREA', 'model' =>'', 'url' => 'currency', 'icon' => ''],
+                        ['title' => 'ADDRESS REFERENCE', 'model' => '', 'url' => 'country', 'icon' => ''],
+                        ['title' => 'ADDRESS TYPE', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                        ['title' => 'REGION/STATE', 'model' => '', 'url' => 'country', 'icon' => ''],
+                        ['title' => 'CITIES', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                        ['title' => 'SERVICE AREA', 'model' => '', 'url' => 'currency', 'icon' => ''],
                     ],
                 ],
             ],
         ],
-        ['title' => 'CAR MASTER DATA', 'model' =>'', 'url' => '#', 'icon' => '' , 'submenu' => []
-             'submenu'=> [
-                        ['title' => 'ADDRESS REFERENCE', 'model' =>'', 'url' => 'country', 'icon' => ''],
-                        ['title' => 'ADDRESS TYPE', 'model' =>'', 'url' => 'currency', 'icon' => ''],
-                        ['title' => 'REGION/STATE', 'model' =>'', 'url' => 'country', 'icon' => ''],
-                        ['title' => 'CITIES', 'model' =>'', 'url' => 'currency', 'icon' => ''],
-                        ['title' => 'SERVICE AREA', 'model' =>'', 'url' => 'currency', 'icon' => ''],
-        ]
-    ],
-        ['title' => 'MARKETING', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' => []],
-        ['title' => 'HUMAN CAPITAL', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' => [] ],
-        ['title' => 'FINANCE', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' => [] ],
-        ['title' => 'OPERATIONS', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' => [] ],
-        ['title' => 'SALES', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' => [] ],
-        ['title' => 'DEALER MANAGAMENT', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' =>[] ],
-        ['title' => 'USER MANAGAMENT', 'model' =>'', 'url' => '#', 'icon' => '', 'submenu' => [] ],
-        ];
+        [
+            'title' => 'CAR MASTER DATA',
+            'model' => '',
+            'url' => '#',
+            'icon' => '',
+            'submenu' => [
+                ['title' => 'ADDRESS REFERENCE', 'model' => '', 'url' => 'country', 'icon' => ''],
+                ['title' => 'ADDRESS TYPE', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                ['title' => 'REGION/STATE', 'model' => '', 'url' => 'country', 'icon' => ''],
+                ['title' => 'CITIES', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                ['title' => 'SERVICE AREA', 'model' => '', 'url' => 'currency', 'icon' => ''],
+            ],
+        ],
+
+        ['title' => 'MARKETING', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        ['title' => 'HUMAN CAPITAL', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        ['title' => 'FINANCE', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        ['title' => 'OPERATIONS', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        ['title' => 'SALES', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        ['title' => 'DEALER MANAGAMENT', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        ['title' => 'USER MANAGAMENT', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+    ];
 }
