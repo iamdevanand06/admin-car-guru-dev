@@ -6,6 +6,7 @@ use App\Models\CarMakeBrake;
 use App\Traits\commonTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+
 use Exception;
 
 class CarMakeBrakeController extends Controller
@@ -14,17 +15,28 @@ class CarMakeBrakeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+          try {
+            $data = CarMakeBrake::paginate(20);
+            return view('dynamic.dropdown.brake.index', compact('data'))
+                ->with('i', ($request->input('page', 1) - 1) * 20);
+
+        } catch (Exception $e) {
+            Log::error('ERROR::INDEX_CAR_MAKE_BRAKE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       try {
+            return view('dynamic.dropdown.brake.create');
+        } catch (Exception $e) {
+            Log::error('ERROR::CREATE_CAR_MAKE_BRAKE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -32,7 +44,19 @@ class CarMakeBrakeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+          $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            CarMakeBrake::create($input);
+            return redirect()->route('brake.index')
+                ->with('success', 'Brake created successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::STORE_CAR_MAKE_BRAKE' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -46,25 +70,50 @@ class CarMakeBrakeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CarMakeBrake $carMakeBrake)
+    public function edit(string $id)
     {
-        //
+       
+          try {
+             $brake = CarMakeBrake::findOrFail($id);
+             return view('dynamic.dropdown.brake.edit', compact('brake'));
+        } catch (Exception $e) {
+            Log::error('ERROR::EDIT_CAR_MAKE_BRAKE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CarMakeBrake $carMakeBrake)
+    public function update(Request $request, string $id)
     {
-        //
+           $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            $brake = CarMakeBrake::find($id);
+            $brake->update($input);
+
+            return redirect()->route('brake.index')->with('success', 'Brake Updated successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::ENGINE_STYLE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CarMakeBrake $carMakeBrake)
+    public function destroy(string $id)
     {
-        //
+       try {
+            CarMakeBrake::find($id)->delete();
+            return redirect()->route('brake.index')
+                ->with('success', 'Brake deleted successfully');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_BRAKE_DELETE, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     public function getBrakes(Request $request)
