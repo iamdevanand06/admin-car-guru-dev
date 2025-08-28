@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Dynamic Drop Down - Make Consumption - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'Dynamic Drop Down - Make Consumption- Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
     <div class="page-wrapper">
         <div class="content">
@@ -47,46 +47,54 @@
                             </thead>
 
                             <tbody>
-    @forelse ($data as $key => $make_consumption)
-        <tr>
-            <td>{{ ++$i }}</td>
-            <td>{{ $make_consumption->id }}</td>
-            <td>
-                <div class="d-flex align-items-center">
-                    <a href="javascript:void(0);">{{ $make_consumption->name }}</a>
-                </div>
-            </td>
-            <td>
-                <span class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white {{ $make_consumption->status == 1 ? 'bg-success' : 'bg-danger'}} fs-10">
-                    <i class="ti ti-point-filled me-1 fs-11"></i>
-                    {{ $make_consumption->status == 1 ? 'Active' : 'In-Active'}}
-                </span>
-            </td>
-            <td class="action-table-data">
-                <div class="edit-delete-action">
-                    <a class="me-2 p-2 mb-0"
-                       href="{{ route('make_consumption.edit', $make_consumption->id) }}">
-                        <i data-feather="edit" class="feather-edit"></i>
-                    </a>
+                                @forelse ($data as $key => $make_consumption)
+                                    <tr>
+                                        <td>{{ ++$i }}</td>
+                                        <td>{{ $make_consumption->id }}</td>
+                                        <td>
+                                            <div class=" d-flex align-items-center">
+                                                <a href="javascript:void(0);">{{ $make_consumption->name }}</a>
+                                            </div>
+                                        </td>
 
-                    <form method="POST"
-                          action="{{ route('make_consumption.destroy', $make_consumption->id) }}"
-                          style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm ml-1"
-                                onclick="return confirm('Are you sure to delete?')">
-                            <i data-feather="trash-2" class="feather-trash-2"></i>
-                        </button>
-                    </form>
+                                        <td><span
+                                                class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white {{ $make_consumption->status == 1 ? 'bg-success' : 'bg-danger'}} fs-10"><i
+                                                    class="ti ti-point-filled me-1 fs-11"></i>{{ $make_consumption->status == 1 ? 'Active' : 'In-Active'}}</span>
+                                        </td>
+                                        <td class="action-table-data">
+                                            <div class="edit-delete-action">
+                                                <a class="me-2 p-2 mb-0"
+                                                    href="{{ route('make_consumption.edit', $make_consumption->id) }}">
+                                                    <i data-feather="edit" class="feather-edit"></i>
+                                                </a>
+
+                                                <form method="POST"
+                                                    action="{{ route('make_consumption.destroy', $make_consumption->id) }}"
+                                                    style="display:inline">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" class="btn btn-sm ml-1"><i data-feather="trash-2"
+                                                            class="feather-trash-2"
+                                                            onclick="return confirm('Are you sure to delete?')"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+<td >
+                                        No More Data</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                        {!! $data->links('pagination::bootstrap-5') !!}
+                    </div>
                 </div>
-            </td>
-        </tr>
-    @empty
-        <tr>
-            <td colspan="5" class="text-center">No More Data</td>
-        </tr>
-    @endforelse
-</tbody>
-</table>
-{!! $data->links('pagination::bootstrap-5') !!}
+            </div>
+            <!-- /product list -->
+        </div>
+        @include('layouts.partials.footer-moden')
+    </div>
+@endsection
