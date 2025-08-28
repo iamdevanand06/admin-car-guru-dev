@@ -42,7 +42,7 @@
             </label>
             <input type="file" id="brand_logo" name="brand_emblem" accept="image/png, image/jpeg" hidden>
         </div>
-        <img id="" src="" width="" height="" />
+        <div id="logoPreview"></div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
@@ -160,7 +160,6 @@
                             is_new: true
                         });
                     }
-
                     return { results: results };
                 },
                 cache: true
@@ -179,11 +178,40 @@
                     // Set the newly created brand in dropdown
                     let newOption = new Option(response.brand_name, response.id, true, true);
                     $('#brand_id').append(newOption).trigger('change');
+                    $('.upload-box').show();
+                    $('#logoPreview').hide();
                 });
             }
         });
+
+        // Fetch Brand Emblem
+        $('#brand_id').on('change', function () {
+            let brand_id = $(this).val();
+            $.ajax({
+                url: '{{ route("brand.logo") }}',
+                type: 'GET',
+                data: { id: brand_id },
+                success: function (response) {
+
+                    if (response.logo != null) {
+                        $('.upload-box').hide();
+                        $('#logoPreview').show();
+                        $('#logoPreview').html(
+                            `<img src="/storage/${response.logo}" width="100" height="100" alt="Brand Logo">`
+                        );
+                    } else {
+                        $('.upload-box').hide();
+                        $('#logoPreview').show();
+                        $('#logoPreview').html(
+                            `<img src="/storage/images/no-image.webp" width="100" height="100" alt="Brand Logo">`
+                        );
+                    }
+                }
+            });
+        });
         // End Brand
     });
+
     // Start Models
     $(document).ready(function () {
         // Start Model

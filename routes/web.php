@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Make Dropdown
     Route::get('/list-brand/search', [MakeController::class, 'getBrands'])->name('brands.search');
     Route::post('/add-brand', [MakeController::class, 'postBrands'])->name('brands.add');
+    // Brand Emblem
+    Route::get('get-brand-logo', [MakeController::class, 'getBrandLogo'])->name('brand.logo');
     // Model Dropdown
     Route::get('/lis-model/search', [ModelController::class, 'getModels'])->name('models.search');
     Route::post('/add-model', [ModelController::class, 'postModels'])->name('models.add');
