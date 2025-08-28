@@ -99,17 +99,13 @@
     <div class=" col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Exterior Color<span class="text-danger ms-1">*</span></label>
-            <select id="exterior_color" name="exterior_color" class="form-control select2-ajax"
-                data-placeholder="Select or Add a Exterior Color" data-search-url="{{ route('exteriorColor.search') }}"
-                data-add-url="{{ route('exteriorColor.add') }}"></select>
+            <input type="color" id="exterior_color" name="exterior_color" class="form-control">
         </div>
     </div>
     <div class=" col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Interior Color<span class="text-danger ms-1">*</span></label>
-            <select id="interior_color" name="interior_color" class="form-control select2-ajax"
-                data-placeholder="Select or Add a Interior Color" data-search-url="{{ route('interiorColor.search') }}"
-                data-add-url="{{ route('interiorColor.add') }}"></select>
+            <input type="color" id="interior_color" name="interior_color" class="form-control">
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12"></div>
