@@ -1,13 +1,13 @@
 <?php $page = 'edit-role'; ?>
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Update Make Suspension - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'Update ManufacturersWarranty - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">Update Make Suspension</h4>
-                        <h6>Update Make Suspension</h6>
+                        <h4 class="fw-bold">Update ManufacturersWarranty</h4>
+                        <h6>Update ManufacturersWarranty</h6>
                     </div>
                 </div>
                 <ul class="table-top-head">
@@ -21,11 +21,11 @@
                     </li>
                 </ul>
                 <div class="page-btn mt-0">
-                    <a href="{{route('make_suspension.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
+                    <a href="{{route('manufacturers_warranty.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
                             class="me-2"></i>Back</a>
                 </div>
             </div>
-            <form method="POST" action="{{ route('make_suspension.update', $suspension->id) }}"
+            <form method="POST" action="{{ route('manufacturers_warranty.update', $manufacturers_warranty->id) }}"
                 class="edit-transmission-form">
                 @csrf
                 @method('PUT')
@@ -41,7 +41,7 @@
                                                 <label class="form-label">Name<span
                                                         class="text-danger ms-1">*</span></label>
                                                 <input type="text" name="name" id="name" class="form-control"
-                                                    value="{{ $suspension->name }}">
+                                                    value="{{ $manufacturers_warranty->name }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-12">
@@ -49,10 +49,10 @@
                                                 <label class="form-label">Status<span
                                                         class="text-danger ms-1">*</span></label>
                                                 <select class="select" name="status" id="status">
-                                                    <option value="1" {{ $suspension->status == 1 ? 'selected' : '' }}>
+                                                    <option value="1" {{ $manufacturers_warranty->status == 1 ? 'selected' : '' }}>
                                                         Active
                                                     </option>
-                                                    <option value="0" {{ $suspension->status == 0 ? 'selected' : '' }}>
+                                                    <option value="0" {{ $manufacturers_warranty->status == 0 ? 'selected' : '' }}>
                                                         In-Active
                                                     </option>
                                                 </select>

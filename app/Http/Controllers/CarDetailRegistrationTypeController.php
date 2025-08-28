@@ -16,7 +16,13 @@ class CarDetailRegistrationTypeController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $data = CarMakeRegistrationType::paginate(20);
+            return view('dynami', compact('data'));
+        } catch (Exception $e) {
+            Log::error('ERROR::INDEX_CAR_MAKE_MANUFACTUREWRS_WARRANTY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            return back()->with('error', 'Unable to fetch Manufacturers_warrenty.');
+        }
     }
 
     /**

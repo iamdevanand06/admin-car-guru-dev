@@ -14,9 +14,15 @@ class CarDetailCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(Request $request)
+    {try {
+            $data = CarDetailCategory::orderBy('id', 'DESC')->paginate(10);
+            return view('dynamic.dropdown.DetailCategory.index', compact('data'))
+                ->with('i', (request()->input('page', 1) - 1) * 10);
+        } catch (Exception $e) {
+            Log::error('Error::CAR_DETAIL_CATEGORY_INDEX, Message: ' . $e->getMessage());
+            return back()->with('error', 'Something went wrong while fetchingDetailCategory.');
+        }
     }
 
     /**
@@ -24,7 +30,11 @@ class CarDetailCategoryController extends Controller
      */
     public function create()
     {
-        //
+        try {
+            return view('dynamic.dropdown.DetailCategory.create');
+        } catch (Exception $e) {
+            Log::error('ERROR::CREATE_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -32,7 +42,19 @@ class CarDetailCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            CarDetailCategory::create($input);
+            return redirect()->route('detail_category.index')
+                ->with('success', 'Detail_Category created successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::STORE_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -46,25 +68,54 @@ class CarDetailCategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CarDetailCategory $carDetailCategory)
+    public function edit(string $id)
     {
-        //
+        try {
+        $detail_category = CarDetailCategory::findOrFail($id);
+
+        return view('dynamic.dropdown.DetailCategory.create', compact('detail_category'));
+    } catch (Exception $e) {
+        Log::error('ERROR::EDIT_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        return redirect()->route('detail_category.index')->with('error', 'detail Category not found.');
+    }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CarDetailCategory $carDetailCategory)
+    public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            $transmission = CarMakeTransmission::find($id);
+            $transmission->update($input);
+
+            return redirect()->route('detail_category.index')->with('success', 'DetailCategory Updated successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::UPDATE_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CarDetailCategory $carDetailCategory)
+    public function destroy(string $id)
     {
-        //
+        try {
+        CarDetailCategory::find($id)->delete();
+
+        return redirect()->route('detail_category.index')
+            ->with('success', 'Fuel Type deleted successfully.');
+    } catch (Exception $e) {
+        Log::error('ERROR::DELETE_CAR_DETAIL_CATEGORY' . $e->getMessage() . ' Line No: ' . $e->getLine());
+
+        return redirect()->route('detail_category.index')->with('error', 'Failed to delete Detail Category.');
+    }
     }
 
     public function getCarCategory(Request $request)
