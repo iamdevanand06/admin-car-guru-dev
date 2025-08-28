@@ -45,18 +45,18 @@ class CarMakeDriveTrainController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'   => 'required|string|max:255|unique:car_make_drive_trains,name',
+            'name' => 'required|string|max:255|unique:car_make_drive_trains,name',
             'status' => 'required|boolean',
         ]);
 
         try {
             CarMakeDriveTrain::create($request->all());
             return redirect()->route('drive_train.index')
-                             ->with('success', 'Drive Train created successfully.');
+                ->with('success', 'Drive Train created successfully.');
         } catch (Exception $e) {
             Log::error('ERROR::STORE_CAR_MAKE_DRIVE_TRAIN ' . $e->getMessage() . ' Line No: ' . $e->getLine());
             return redirect()->route('drive_train.index')
-                             ->with('error', 'Something went wrong while saving.');
+                ->with('error', 'Something went wrong while saving.');
         }
     }
 
@@ -71,7 +71,7 @@ class CarMakeDriveTrainController extends Controller
         } catch (Exception $e) {
             Log::error('ERROR::SHOW_CAR_MAKE_DRIVE_TRAIN ' . $e->getMessage() . ' Line No: ' . $e->getLine());
             return redirect()->route('drive_train.index')
-                             ->with('error', 'Drive Train not found.');
+                ->with('error', 'Drive Train not found.');
         }
     }
 
@@ -86,7 +86,7 @@ class CarMakeDriveTrainController extends Controller
         } catch (Exception $e) {
             Log::error('ERROR::EDIT_CAR_MAKE_DRIVE_TRAIN ' . $e->getMessage() . ' Line No: ' . $e->getLine());
             return redirect()->route('drive_train.index')
-                             ->with('error', 'Unable to open edit form.');
+                ->with('error', 'Unable to open edit form.');
         }
     }
 
@@ -96,7 +96,7 @@ class CarMakeDriveTrainController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name'   => 'required|string|max:255|unique:car_make_drive_trains,name,' . $id,
+            'name' => 'required|string|max:255|unique:car_make_drive_trains,name,' . $id,
             'status' => 'required|boolean',
         ]);
 
@@ -105,11 +105,11 @@ class CarMakeDriveTrainController extends Controller
             $driveTrain->update($request->all());
 
             return redirect()->route('drive_train.index')
-                             ->with('success', 'Drive Train updated successfully.');
+                ->with('success', 'Drive Train updated successfully.');
         } catch (Exception $e) {
             Log::error('ERROR::UPDATE_CAR_MAKE_DRIVE_TRAIN ' . $e->getMessage() . ' Line No: ' . $e->getLine());
             return redirect()->route('drive_train.index')
-                             ->with('error', 'Something went wrong while updating.');
+                ->with('error', 'Something went wrong while updating.');
         }
     }
 
@@ -123,18 +123,18 @@ class CarMakeDriveTrainController extends Controller
             $driveTrain->delete();
 
             return redirect()->route('drive_train.index')
-                             ->with('success', 'Drive Train deleted successfully.');
+                ->with('success', 'Drive Train deleted successfully.');
         } catch (Exception $e) {
             Log::error('ERROR::DESTROY_CAR_MAKE_DRIVE_TRAIN ' . $e->getMessage() . ' Line No: ' . $e->getLine());
             return redirect()->route('drive_train.index')
-                             ->with('error', 'Something went wrong while deleting.');
+                ->with('error', 'Something went wrong while deleting.');
         }
     }
 
     /**
      * Get dropdown options for Drive Train (AJAX).
      */
-    public function getDriveTrain(Request $request)
+    public function getDriveTrains(Request $request)
     {
         try {
             return $this->getDropdownOptions($request->field_id, $request->q);
