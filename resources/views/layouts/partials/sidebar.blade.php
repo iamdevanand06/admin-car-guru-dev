@@ -81,14 +81,14 @@
                         <h6 class="submenu-hdr">User Management</h6>
                         <ul>
                             @can('user-list')
-                                <li class="{{ Request::is('users') ? 'active' : '' }}"><a href="{{ url('users') }}"><i
-                                            class="ti ti-shield-up fs-16 me-2"></i><span>Users</span></a>
-                                </li>
+                            <li class="{{ Request::is('users') ? 'active' : '' }}"><a href="{{ url('users') }}"><i
+                                        class="ti ti-shield-up fs-16 me-2"></i><span>Users</span></a>
+                            </li>
                             @endcan
                             @can('role-list')
-                                <li class="{{ Request::is('roles') ? 'active' : '' }}"><a href="{{ url('roles') }}"><i
-                                            class="ti ti-jump-rope fs-16 me-2"></i><span>Roles
-                                            & Permissions</span></a></li>
+                            <li class="{{ Request::is('roles') ? 'active' : '' }}"><a href="{{ url('roles') }}"><i
+                                        class="ti ti-jump-rope fs-16 me-2"></i><span>Roles
+                                        & Permissions</span></a></li>
                             @endcan
                         </ul>
                     </li>
@@ -96,32 +96,30 @@
                         <h6 class="submenu-hdr">Brand Management</h6>
                         <ul>
                             @can('make-list')
-                                <li class="{{ Request::is('makes') ? 'active' : '' }}"><a href="{{ url('makes') }}"><i
-                                            class="ti ti-shield-up fs-16 me-2"></i><span>Brands</span></a>
-                                </li>
+                            <li class="{{ Request::is('makes') ? 'active' : '' }}"><a href="{{ url('makes') }}"><i
+                                        class="ti ti-shield-up fs-16 me-2"></i><span>Brands</span></a>
+                            </li>
                             @endcan
                             @can('model-list')
-                                <li class="{{ Request::is('models') ? 'active' : '' }}"><a href="{{ url('models') }}"><i
-                                            class="ti ti-jump-rope fs-16 me-2"></i><span>Models</span></a>
-                                </li>
+                            <li class="{{ Request::is('models') ? 'active' : '' }}"><a href="{{ url('models') }}"><i
+                                        class="ti ti-jump-rope fs-16 me-2"></i><span>Models</span></a>
+                            </li>
                             @endcan
                             @can('variant-list')
-                                <li class="{{ Request::is('variants') ? 'active' : '' }}"><a
-                                        href="{{ url('variants') }}"><i
-                                            class="ti ti-shield-up fs-16 me-2"></i><span>Variants</span></a>
-                                </li>
+                            <li class="{{ Request::is('variants') ? 'active' : '' }}"><a href="{{ url('variants') }}"><i
+                                        class="ti ti-shield-up fs-16 me-2"></i><span>Variants</span></a>
+                            </li>
                             @endcan
 
                         </ul>
                     </li>
 
-                                        <li class="submenu-open">
+                    <li class="submenu-open">
                         <h6 class="submenu-hdr">Car Management</h6>
                         <ul>
 
                             <li class="{{ Request::is('carmakes/create') ? 'active' : '' }}"><a
-                                    href="{{ url('carmakes/create') }}"><i
-                                        class="ti ti-shield-up fs-16 me-2"></i><span>Car
+                                    href="{{ url('carmakes/create') }}"><i class="ti ti-shield-up fs-16 me-2"></i><span>Car
                                         Makes</span></a>
                             </li>
 
@@ -134,8 +132,7 @@
 
 
                             <li class="{{ Request::is('car-marketing') ? 'active' : '' }}"><a
-                                    href="{{ url('car-marketing') }}"><i
-                                        class="ti ti-shield-up fs-16 me-2"></i><span>Car
+                                    href="{{ url('car-marketing') }}"><i class="ti ti-shield-up fs-16 me-2"></i><span>Car
                                         Marketing</span></a>
                             </li>
 
@@ -144,32 +141,32 @@
                     </li> --}}
 
                     @if (isset(\App\Constants\commonConstant::SIDE_MENU_HEAD[0]))
-    @foreach (\App\Constants\commonConstant::SIDE_MENU_HEAD as $side_menu_head)
-        <li class="submenu">
-            <a href="javascript:void(0);"
-               class="{{ Request::is('', 'sales-dashboard', 'admin-dashboard') ? 'active subdrop' : '' }}">
-                <i class="ti ti-layout-grid fs-16 me-2"></i>
-                <span class="menu-font-size">
-                    <strong>{{ $side_menu_head['title'] }}</strong>
-                </span>
-                <span class="menu-arrow"></span>
-            </a>
+                        @foreach (\App\Constants\commonConstant::SIDE_MENU_HEAD as $side_menu_head)
+                            <li class="submenu">
+                                <a href="javascript:void(0);"
+                                    class="{{ Request::is('', 'sales-dashboard', 'admin-dashboard') ? 'active subdrop' : '' }}">
+                                    <i class="ti ti-layout-grid fs-16 me-2"></i>
+                                    <span class="menu-font-size">
+                                        <strong>{{ $side_menu_head['title'] }}</strong>
+                                    </span>
+                                    <span class="menu-arrow"></span>
+                                </a>
 
-            @if (isset($side_menu_head['submenu']) && is_array($side_menu_head['submenu']))
-                <ul>
-                    @foreach ($side_menu_head['submenu'] as $sub_menu)
-                        <li>
-                            <a href="{{ url($sub_menu['url']) }}"
-                               class="{{ Request::is(trim($sub_menu['url'], '/')) ? 'active' : '' }}">
-                                {{ $sub_menu['title'] }}
-                            </a>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-        </li>
-    @endforeach
-@endif
+                                @if (isset($side_menu_head['submenu']) && is_array($side_menu_head['submenu']))
+                                    <ul>
+                                        @foreach ($side_menu_head['submenu'] as $sub_menu)
+                                            <li>
+                                                <a href="{{ url($sub_menu['url']) }}"
+                                                    class="{{ Request::is(trim($sub_menu['url'], '/')) ? 'active' : '' }}">
+                                                    {{ $sub_menu['title'] }}
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </li>
+                        @endforeach
+                    @endif
 
                 </ul>
             </div>
@@ -180,7 +177,7 @@
 
 
 <style>
-    .menu-font-size{
+    .menu-font-size {
         font-size: 12px !important;
     }
 </style>
