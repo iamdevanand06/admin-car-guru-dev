@@ -64,14 +64,7 @@ class CarMakeMadeYearController extends Controller
      */
     public function show(string $id)
     {
-        try {
-            $madeyear = CarMakeMadeYear::findOrFail($id);
-            return view('dynamic.dropdown.MadeYear.show', compact('madeyear'));
-        } catch (Exception $e) {
-            Log::error('Error::CAR_MAKE_MADE_YEAR_SHOW, Message: ' . $e->getMessage());
-            return redirect()->route('made_year.index')
-                             ->with('error', 'Made Year not found.');
-        }
+        
     }
 
     /**
