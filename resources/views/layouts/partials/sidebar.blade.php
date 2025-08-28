@@ -157,9 +157,31 @@
                                         @foreach ($side_menu_head['submenu'] as $sub_menu)
                                             <li>
                                                 <a href="{{ url($sub_menu['url']) }}"
-                                                    class="{{ Request::is(trim($sub_menu['url'], '/')) ? 'active' : '' }}">
-                                                    {{ $sub_menu['title'] }}
+                                                    class="{{ Request::is(trim($sub_menu['url'], '/')) ? 'active subdrop' : '' }}">
+                                                    <span class="menu-font-size">
+                                                        <strong>{{ $sub_menu['title'] }}</strong>
+                                                    </span>
+                                                    @if(array_key_exists("submenu", $sub_menu))
+                                                        <span class="menu-arrow"></span>
+                                                    @endif
                                                 </a>
+                                                @if (isset($sub_menu['submenu']) && is_array($sub_menu['submenu']))
+                                                    <ul>
+                                                        @foreach ($sub_menu['submenu'] as $sub_menu2)
+                                                            <li>
+                                                                <a href="{{ url($sub_menu2['url']) }}"
+                                                                    class="{{ Request::is(trim($sub_menu2['url'], '/')) ? 'active subdrop' : '' }}">
+                                                                    <span class="menu-font-size">
+                                                                        <strong>{{ $sub_menu2['title'] }}</strong>
+                                                                    </span>
+                                                                    @if(array_key_exists("submenu", $sub_menu2))
+                                                                        <span class="menu-arrow"></span>
+                                                                    @endif
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
                                             </li>
                                         @endforeach
                                     </ul>
