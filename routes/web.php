@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertismentController;
 use App\Http\Controllers\CarDetailCategoryController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\CarDetailRegistrationTypeController;
@@ -123,6 +124,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dynamic/dropdown/make_seat', CarMakeSeatController::class);
     Route::resource('dynamic/dropdown/make_consumption', CarMakeConsumptionController::class);
     Route::resource('dynamic/dropdown/make_suspension', CarMakeSuspensionController::class);
+
+
+    Route::resource('advertisment', AdvertismentController::class);
 
     Route::get('/promotion', function () {
         return view('marketing.promotion.index');
