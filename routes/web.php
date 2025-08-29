@@ -123,6 +123,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dynamic/dropdown/engine_type', CarMakeEngineTypeController::class);
     Route::resource('dynamic/dropdown/brake', CarMakeBrakeController::class);
     Route::resource('dynamic/dropdown/steering', CarMakeSteeringController::class);
+    Route::resource('dynamic/dropdown/cargurus_warranty', CarMakeCarGurusWarrantyController::class); 
+    Route::resource('dynamic/dropdown/usage', CarDetailUsageController::class);
+    Route::resource('dynamic/dropdown/registration_type', CarDetailRegistrationTypeController::class);
     Route::resource('dynamic/dropdown/make_seat', CarMakeSeatController::class);
     Route::resource('dynamic/dropdown/make_consumption', CarMakeConsumptionController::class);
     Route::resource('dynamic/dropdown/make_suspension', CarMakeSuspensionController::class);

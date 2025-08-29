@@ -1,13 +1,13 @@
 <?php $page = 'edit-role'; ?>
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Update Steering - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'Update Usage - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">Update Steering</h4>
-                        <h6>Update Steering</h6>
+                        <h4 class="fw-bold">Update usage</h4>
+                        <h6>Update usage</h6>
                     </div>
                 </div>
                 <ul class="table-top-head">
@@ -21,11 +21,11 @@
                     </li>
                 </ul>
                 <div class="page-btn mt-0">
-                    <a href="{{route('steering.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
+                    <a href="{{route('usage.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
                             class="me-2"></i>Back</a>
                 </div>
             </div>
-           <form method="POST" action="{{ route('steering.update', $steering->id) }}">
+           <form method="POST" action="{{ route('usage.update', $usage->id) }}">
              
                 @csrf
                 @method('PUT')
@@ -41,7 +41,7 @@
                                                 <label class="form-label">Name<span
                                                         class="text-danger ms-1">*</span></label>
                                                 <input type="text" name="name" id="name" class="form-control"
-                                                    value="{{ $steering->name }}">
+                                                    value="{{ $usage->name }}">
                                             </div>
                                         </div>
                                         <div class="col-sm-6 col-12">
@@ -49,10 +49,10 @@
                                                 <label class="form-label">Status<span
                                                         class="text-danger ms-1">*</span></label>
                                                 <select class="select" name="status" id="status">
-                                                    <option value="1" {{ $steering->status == 1 ? 'selected' : '' }}>
+                                                    <option value="1" {{ $usage->status == 1 ? 'selected' : '' }}>
                                                         Active
                                                     </option>
-                                                    <option value="0" {{ $steering->status == 0 ? 'selected' : '' }}>
+                                                    <option value="0" {{ $usage->status == 0 ? 'selected' : '' }}>
                                                         In-Active
                                                     </option>
                                                 </select>

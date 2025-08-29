@@ -14,23 +14,31 @@ class CarDetailRegistrationTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        try {
-            $data = CarMakeRegistrationType::paginate(20);
-            return view('dynami', compact('data'));
+  
+    public function index(Request $request)
+   
+{
+      try {
+            $data = CarDetailRegistrationType::paginate(20);
+           
+            return view('dynamic.dropdown.registrationType.index', compact('data'))
+                ->with('i', ($request->input('page', 1) - 1) * 20);
+
         } catch (Exception $e) {
-            Log::error('ERROR::INDEX_CAR_MAKE_MANUFACTUREWRS_WARRANTY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
-            return back()->with('error', 'Unable to fetch Manufacturers_warrenty.');
+            Log::error('ERROR::INDEX_CAR_MAKE_REGISTRATION_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
-    }
+}
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        try {
+            return view('dynamic.dropdown.registrationType.create');
+        } catch (Exception $e) {
+            Log::error('ERROR::CREATE_CAR_MAKE_REGISTRATION_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        } 
     }
 
     /**
@@ -38,7 +46,19 @@ class CarDetailRegistrationTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            CarDetailRegistrationType::create($input);
+            return redirect()->route('registration_type.index')
+                ->with('success', 'Registration Type created successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::STORE_CAR_MAKE_REGISTRATION_TYPE' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -52,26 +72,52 @@ class CarDetailRegistrationTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CarDetailRegistrationType $carDetailRegistrationType)
+    public function edit(string $id)
     {
-        //
+       try {
+    $registration_type = CarDetailRegistrationType::findOrFail($id);
+    return view('dynamic.dropdown.registrationType.edit', compact('registration_type'));
+} catch (Exception $e) {
+    Log::error('ERROR::EDIT_CAR_MAKE_REGISTRATION_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+}
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CarDetailRegistrationType $carDetailRegistrationType)
+    public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'status' => 'required|boolean',
+        ]);
+
+        try {
+            $input = $request->all();
+            $usage = CarDetailRegistrationType::find($id);
+            $usage->update($input);
+
+            return redirect()->route('registration_type.index')->with('success', 'Registration Type Updated successfully');
+        } catch (Exception $e) {
+            Log::error('ERROR::ENGINE_STYLE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CarDetailRegistrationType $carDetailRegistrationType)
+    public function destroy(string $id)
     {
-        //
+        try {
+            CarDetailRegistrationType::find($id)->delete();
+            return redirect()->route('registration_type.index')
+                ->with('success', 'Registration Type deleted successfully');
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_REGISTRATION_TYPE_DELETE, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
+    
 
     public function getRegistrationType(Request $request)
     {
