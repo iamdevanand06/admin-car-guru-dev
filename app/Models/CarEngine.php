@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CarDiamension;
 
 class CarEngine extends Model
 {
@@ -18,4 +19,9 @@ class CarEngine extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function getDiamension()
+    {
+        return $this->hasOne(CarDiamension::class, 'car_make_id', 'car_makes_id');
+    }
 }

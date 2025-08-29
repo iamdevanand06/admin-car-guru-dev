@@ -24,7 +24,8 @@ class CarMakeController extends Controller
     public function index()
     {
         try {
-            $data = CarMake::paginate(20);
+            $data = CarMake::with('getEngine.getDiamension.getBrake.getWarranty', 'getVariant.model.brand')->paginate(20);
+            dd($data);
         } catch (Exception $e) {
             Log::error('Error::GET_CAR_MAKE_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -129,7 +130,7 @@ class CarMakeController extends Controller
                 'peak_power_kw',
                 'peak_torque_nm',
             ]);
-            $engine['car_makes_id'] = $carMake->id;
+            $engine['car_makes_id'] = $makeData['car_id'];
             $carEngine = CarEngine::create($engine);
             $dimension = $request->only([
                 'length_mm',
@@ -139,7 +140,7 @@ class CarMakeController extends Controller
                 'kerb_weight_kg',
                 'fuel_tank_ltr',
             ]);
-            $dimension['car_engine_id'] = $carEngine->id;
+            $dimension['car_make_id'] = $makeData['car_id'];
             $carDimension = CarDiamension::create($dimension);
             $brake = $request->only([
                 'brake_front',
@@ -152,7 +153,7 @@ class CarMakeController extends Controller
                 'wheel_type_front_rims',
                 'wheel_type_rear_rims',
             ]);
-            $brake['car_diamension_id'] = $carDimension->id;
+            $brake['car_make_id'] = $makeData['car_id'];
             $brake['features_equipments'] = json_encode($request->features_equipments);
 
             $carBrake = CarBrake::create($brake);
@@ -162,7 +163,7 @@ class CarMakeController extends Controller
                 'road_tax_amount_rm',
                 'road_tax_year',
             ]);
-            $warranty['car_brake_id'] = $carBrake->id;
+            $warranty['car_make_id'] = $makeData['car_id'];
             $carWarranty = CarWarranty::create($warranty);
 
             DB::commit();

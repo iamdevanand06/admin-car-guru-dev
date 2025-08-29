@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('compression_ratio');
             $table->string('peak_power_kw');
             $table->string('peak_torque_nm');
-            $table->string('car_makes_id');
+            $table->string('car_make_id');
             $table->timestamps();
         });
     }
