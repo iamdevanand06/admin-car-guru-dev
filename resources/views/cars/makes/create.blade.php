@@ -6,7 +6,7 @@
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">Create Car Make</h4>
+                        <h4 class="fw-bold">CAR MASTER DATA / CAR MAKE</h4>
                         <h6>Create Make</h6>
                     </div>
                 </div>
