@@ -44,11 +44,11 @@
                             <div id="SpacingOne" class="accordion-collapse collapse show"
                                 aria-labelledby="headingSpacingOne">
                                 <div class="accordion-body border-top">
-                                    @include('cars.makes.mmv')
-                                    @include('cars.makes.enigne')
-                                    @include('cars.makes.dimension')
-                                    @include('cars.makes.brakes')
-                                    @include('cars.makes.warranty')
+                                    @include('cars.makes.create.mmv')
+                                    @include('cars.makes.create.enigne')
+                                    @include('cars.makes.create.dimension')
+                                    @include('cars.makes.create.brakes')
+                                    @include('cars.makes.create.warranty')
                                     <div class="col-lg-12">
                                         <div class="d-flex align-items-center justify-content-end mb-4">
                                             <button type="button" class="btn btn-secondary me-2"
