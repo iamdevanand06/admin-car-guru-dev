@@ -179,7 +179,12 @@ class CarMakeController extends Controller
      */
     public function show(string $id)
     {
-        //
+         try {
+            $data = CarMake::with('getEngine.getDiamension.getBrake.getWarranty', 'getVariant.model.brand')->findOrFail($id);
+            return view('cars.makes.show',);
+        } catch (Exception $e) {
+            Log::error('Error::SHOW_CAR_MAKE_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
