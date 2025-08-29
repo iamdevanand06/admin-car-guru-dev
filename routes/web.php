@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdvertismentController;
 use App\Http\Controllers\CarDetailCategoryController;
 use App\Http\Controllers\CarDetailController;
 use App\Http\Controllers\CarDetailRegistrationTypeController;
@@ -49,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     // Make Dropdown
     Route::get('/list-brand/search', [MakeController::class, 'getBrands'])->name('brands.search');
     Route::post('/add-brand', [MakeController::class, 'postBrands'])->name('brands.add');
+    // Brand Emblem
+    Route::get('get-brand-logo', [MakeController::class, 'getBrandLogo'])->name('brand.logo');
     // Model Dropdown
     Route::get('/lis-model/search', [ModelController::class, 'getModels'])->name('models.search');
     Route::post('/add-model', [ModelController::class, 'postModels'])->name('models.add');
@@ -120,12 +123,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dynamic/dropdown/engine_type', CarMakeEngineTypeController::class);
     Route::resource('dynamic/dropdown/brake', CarMakeBrakeController::class);
     Route::resource('dynamic/dropdown/steering', CarMakeSteeringController::class);
+    Route::resource('dynamic/dropdown/cargurus_warranty', CarMakeCarGurusWarrantyController::class); 
+    Route::resource('dynamic/dropdown/usage', CarDetailUsageController::class);
+    Route::resource('dynamic/dropdown/registration_type', CarDetailRegistrationTypeController::class);
     Route::resource('dynamic/dropdown/make_seat', CarMakeSeatController::class);
     Route::resource('dynamic/dropdown/make_consumption', CarMakeConsumptionController::class);
     Route::resource('dynamic/dropdown/make_suspension', CarMakeSuspensionController::class);
     Route::resource('dynamic/dropdown/manufacturers_warranty', CarMakeManufacturersWarrantyController::class);
     Route::resource('dynamic/dropdown/detail_category', CarDetailCategoryController::class);
 
+
+
+    Route::resource('advertisment', AdvertismentController::class);
 
     Route::get('/promotion', function () {
         return view('marketing.promotion.index');

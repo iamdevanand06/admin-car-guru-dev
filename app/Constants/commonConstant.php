@@ -47,16 +47,25 @@ class commonConstant
                 ['title' => 'TIME ZONE', 'model' => '', 'url' => '#', 'icon' => ''],
                 ['title' => 'UNIT MEASUREMENTS', 'model' => '', 'url' => '#', 'icon' => ''],
                 [
-                    'title' => 'ADDRESS AND GEO',
+                    'title' => 'Drop Down',
                     'model' => '',
                     'url' => '#',
                     'icon' => '',
                     'submenu' => [
-                        ['title' => 'ADDRESS REFERENCE', 'model' => '', 'url' => 'country', 'icon' => ''],
-                        ['title' => 'ADDRESS TYPE', 'model' => '', 'url' => 'currency', 'icon' => ''],
-                        ['title' => 'REGION/STATE', 'model' => '', 'url' => 'country', 'icon' => ''],
-                        ['title' => 'CITIES', 'model' => '', 'url' => 'currency', 'icon' => ''],
-                        ['title' => 'SERVICE AREA', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                        ['title' => 'Transmission', 'model' => '', 'url' => 'dynamic/dropdown/transmission', 'icon' => ''],
+                        ['title' => 'Fuel Type', 'model' => '', 'url' => 'dynamic/dropdown/fuel_type', 'icon' => ''],
+                        ['title' => 'Drive Train', 'model' => '', 'url' => 'dynamic/dropdown/drive_train', 'icon' => ''],
+                        ['title' => 'Made Year', 'model' => '', 'url' => 'dynamic/dropdown/made_year', 'icon' => ''],
+                        ['title' => 'Engine Type', 'model' => '', 'url' => 'dynamic/dropdown/engine_type', 'icon' => ''],
+                        ['title' => 'Brake', 'model' => '', 'url' => 'dynamic/dropdown/brake', 'icon' => ''],
+                        ['title' => 'Steering', 'model' => '', 'url' => 'dynamic/dropdown/steering', 'icon' => ''],
+                        ['title' => 'Seat', 'model' => '', 'url' => 'dynamic/dropdown/make_seat', 'icon' => ''],
+                        ['title' => 'Consumption', 'model' => '', 'url' => 'dynamic/dropdown/make_consumption', 'icon' => ''],
+                        ['title' => 'Suspension', 'model' => '', 'url' => 'dynamic/dropdown/make_suspension', 'icon' => ''],
+                        ['title' => 'Manufacturers Warranty', 'model' => '', 'url' => 'dynamic/dropdown/manufacturers_warranty', 'icon' => ''],
+                        ['title' => 'Category', 'model' => '', 'url' => 'dynamic/dropdown/detail_category', 'icon' => ''],
+                        ['title' => 'Cargurus Warranty', 'model' => '', 'url' => 'dynamic/dropdown/cargurus_warranty', 'icon' => ''],
+                        ['title' => 'Registration Type', 'model' => '', 'url' => 'dynamic/dropdown/registration_type', 'icon' => ''],
                     ],
                 ],
             ],
@@ -67,20 +76,41 @@ class commonConstant
             'url' => '#',
             'icon' => '',
             'submenu' => [
-                ['title' => 'ADDRESS REFERENCE', 'model' => '', 'url' => 'country', 'icon' => ''],
-                ['title' => 'ADDRESS TYPE', 'model' => '', 'url' => 'currency', 'icon' => ''],
-                ['title' => 'REGION/STATE', 'model' => '', 'url' => 'country', 'icon' => ''],
-                ['title' => 'CITIES', 'model' => '', 'url' => 'currency', 'icon' => ''],
-                ['title' => 'SERVICE AREA', 'model' => '', 'url' => 'currency', 'icon' => ''],
+                ['title' => 'Car Make', 'model' => '', 'url' => 'carmakes/create', 'icon' => ''],
             ],
         ],
 
-        ['title' => 'MARKETING', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        [
+            'title' => 'MARKETING',
+            'model' => '',
+            'url' => '#',
+            'icon' => '',
+            'submenu' => [
+                ['title' => 'Marketing', 'model' => '', 'url' => 'car-marketing/', 'icon' => ''],
+            ]
+        ],
         ['title' => 'HUMAN CAPITAL', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
         ['title' => 'FINANCE', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
-        ['title' => 'OPERATIONS', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        [
+            'title' => 'OPERATIONS',
+            'model' => '',
+            'url' => '#',
+            'icon' => '',
+            'submenu' => [
+                ['title' => 'Car Details', 'model' => '', 'url' => 'car-details/create', 'icon' => ''],
+            ]
+        ],
         ['title' => 'SALES', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
         ['title' => 'DEALER MANAGAMENT', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
-        ['title' => 'USER MANAGAMENT', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
+        [
+            'title' => 'USER MANAGAMENT',
+            'model' => '',
+            'url' => '#',
+            'icon' => '',
+            'submenu' => [
+                ['title' => 'Users', 'model' => '', 'url' => 'users', 'icon' => ''],
+                ['title' => 'Roles', 'model' => '', 'url' => 'roles', 'icon' => ''],
+            ]
+        ],
     ];
 }
