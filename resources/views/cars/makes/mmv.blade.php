@@ -32,7 +32,8 @@
     </div>
     <div class="col-lg-4 col-md-6 col-sm-12">
         <label class="form-label">Brand Emblem<span class="text-danger ms-1">*</span></label>
-        <div class="upload-box">
+        <div class="upload-box" id="uploadBox">
+            <div class="preview" id="preview"></div>
             <label for="brand_logo">
                 <div class="upload-content">
                     <i class="fa-solid fa-cloud-arrow-up"></i>
@@ -41,8 +42,9 @@
                 </div>
             </label>
             <input type="file" id="brand_logo" name="brand_emblem" accept="image/png, image/jpeg" hidden>
+
         </div>
-        <img id="" src="" width="" height="" />
+        <div id="logoView"></div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
@@ -99,17 +101,13 @@
     <div class=" col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Exterior Color<span class="text-danger ms-1">*</span></label>
-            <select id="exterior_color" name="exterior_color" class="form-control select2-ajax"
-                data-placeholder="Select or Add a Exterior Color" data-search-url="{{ route('exteriorColor.search') }}"
-                data-add-url="{{ route('exteriorColor.add') }}"></select>
+            <input type="color" id="exterior_color" name="exterior_color" class="form-control">
         </div>
     </div>
     <div class=" col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Interior Color<span class="text-danger ms-1">*</span></label>
-            <select id="interior_color" name="interior_color" class="form-control select2-ajax"
-                data-placeholder="Select or Add a Interior Color" data-search-url="{{ route('interiorColor.search') }}"
-                data-add-url="{{ route('interiorColor.add') }}"></select>
+            <input type="color" id="interior_color" name="interior_color" class="form-control">
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12"></div>
@@ -164,7 +162,6 @@
                             is_new: true
                         });
                     }
-
                     return { results: results };
                 },
                 cache: true
@@ -183,11 +180,37 @@
                     // Set the newly created brand in dropdown
                     let newOption = new Option(response.brand_name, response.id, true, true);
                     $('#brand_id').append(newOption).trigger('change');
+                    $('.upload-box').show();
+                    $('#logoView').hide();
                 });
             }
         });
+
+        // Fetch Brand Emblem
+        $('#brand_id').on('change', function () {
+            let brand_id = $(this).val();
+            $.ajax({
+                url: '{{ route("brand.logo") }}',
+                type: 'GET',
+                data: { id: brand_id },
+                success: function (response) {
+
+                    if (response.logo != null) {
+                        $('.upload-box').hide();
+                        $('#logoView').show();
+                        $('#logoView').html(
+                            `<img src="/storage/${response.logo}" width="100" height="100" alt="Brand Logo">`
+                        );
+                    } else {
+                        $('.upload-box').show();
+                        $('#logoView').hide();
+                    }
+                }
+            });
+        });
         // End Brand
     });
+
     // Start Models
     $(document).ready(function () {
         // Start Model
@@ -290,6 +313,33 @@
                     let newOption = new Option(response.variant_name, response.id, true, true);
                     $('#variant_id').append(newOption).trigger('change');
                 });
+            }
+        });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        const fileInput = document.getElementById("brand_logo");
+        const preview = document.getElementById("preview");
+
+        fileInput.addEventListener("change", () => {
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+
+                if (!file.type.startsWith("image/")) {
+                    alert("Please select a valid image file (PNG/JPG).");
+                    fileInput.value = "";
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                };
+                $('.upload-content').hide();
+                reader.readAsDataURL(file);
             }
         });
 

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\CarMake;
 use App\Models\Feature;
+use App\Models\Make;
 use Illuminate\Support\Facades\DB;
 
 
@@ -60,8 +61,8 @@ class CarMakeController extends Controller
             'start_year' => 'required|numeric',
             'end_year' => 'required|numeric',
             'seat' => 'required|numeric',
-            'exterior_color' => ['required', 'numeric'],
-            'interior_color' => ['required', 'numeric'],
+            'exterior_color' => ['required', 'string'],
+            'interior_color' => ['required', 'string'],
             'consumption' => 'required|numeric',
             'no_of_door' => 'required',
 
@@ -97,6 +98,10 @@ class CarMakeController extends Controller
 
         DB::beginTransaction();
         try {
+            $driveTrain = Make::findOrFail($request->brand_id);
+            $imagePath = $request->file('brand_emblem')->store('images', 'public');
+            $driveTrain->update(['logo' => $imagePath]);
+
             $makeData = $request->only([
                 'brand_id',
                 'brand_country',

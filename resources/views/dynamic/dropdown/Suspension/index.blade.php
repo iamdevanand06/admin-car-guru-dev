@@ -11,8 +11,7 @@
                 </div>
                 <div class="page-btn">
                         <a href="{{ route('make_suspension.create') }}" class="btn btn-primary"><i
-                                class="ti ti-circle-plus me-1"></i>Add
-                            Make Suspension</a>
+                                class="ti ti-circle-plus me-1"></i>Add Suspension</a>
                 </div>
             </div>
 

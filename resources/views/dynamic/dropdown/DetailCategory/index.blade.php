@@ -1,18 +1,18 @@
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Dynamic Drop Down - Make Consumption- Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'Dynamic Drop Down - Detail Category - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">Make Consumption</h4>
-                        <h6>Manage your Make Consumption</h6>
+                        <h4 class="fw-bold">Detail Category</h4>
+                        <h6>Manage your Detail Category</h6>
                     </div>
                 </div>
                 <div class="page-btn">
-                        <a href="{{ route('make_consumption.create') }}" class="btn btn-primary"><i
+                        <a href="{{ route('detail_category.create') }}" class="btn btn-primary"><i
                                 class="ti ti-circle-plus me-1"></i>Add
-                            Make Consumption</a>
+                            Detail Category</a>
                 </div>
             </div>
 
@@ -22,7 +22,7 @@
                 <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
                     <div class="search-set">
                         <div class="search-input">
-                            <form method="GET" action="{{ route('make_consumption.index') }}">
+                            <form method="GET" action="{{ route('detail_category.index') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col"><input type="text" id="user-search" name="user-search"
@@ -47,29 +47,29 @@
                             </thead>
 
                             <tbody>
-                                @forelse ($data as $key => $make_consumption)
+                                @forelse ($data as $key => $detail_category)
                                     <tr>
                                         <td>{{ ++$i }}</td>
-                                        <td>{{ $make_consumption->id }}</td>
+                                        <td>{{ $detail_category->id }}</td>
                                         <td>
                                             <div class=" d-flex align-items-center">
-                                                <a href="javascript:void(0);">{{ $make_consumption->name }}</a>
+                                                <a href="javascript:void(0);">{{ $detail_category->name }}</a>
                                             </div>
                                         </td>
 
                                         <td><span
-                                                class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white {{ $make_consumption->status == 1 ? 'bg-success' : 'bg-danger'}} fs-10"><i
-                                                    class="ti ti-point-filled me-1 fs-11"></i>{{ $make_consumption->status == 1 ? 'Active' : 'In-Active'}}</span>
+                                                class="d-inline-flex align-items-center p-1 pe-2 rounded-1 text-white {{ $detail_category->status == 1 ? 'bg-success' : 'bg-danger'}} fs-10"><i
+                                                    class="ti ti-point-filled me-1 fs-11"></i>{{ $detail_category->status == 1 ? 'Active' : 'In-Active'}}</span>
                                         </td>
                                         <td class="action-table-data">
                                             <div class="edit-delete-action">
                                                 <a class="me-2 p-2 mb-0"
-                                                    href="{{ route('make_consumption.edit', $make_consumption->id) }}">
+                                                    href="{{ route('detail_category.edit', $detail_category->id) }}">
                                                     <i data-feather="edit" class="feather-edit"></i>
                                                 </a>
 
                                                 <form method="POST"
-                                                    action="{{ route('make_consumption.destroy', $make_consumption->id) }}"
+                                                    action="{{ route('detail_category.destroy', $detail_category->id) }}"
                                                     style="display:inline">
                                                     @csrf
                                                     @method('DELETE')

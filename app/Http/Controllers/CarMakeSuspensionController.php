@@ -77,7 +77,7 @@ class CarMakeSuspensionController extends Controller
     {
         try {
             $suspension = CarMakeSuspension::findOrFail($id);
-            return view('dynamic.dropdown.driveTrain.edit', compact('suspension'));
+            return view('dynamic.dropdown.Suspension.edit', compact('suspension'));
         } catch (Exception $e) {
             Log::error('Error::CAR_MAKE_SUSPENSION_EDIT, Message: ' . $e->getMessage());
             return back()->with('error', 'Suspension not found.');

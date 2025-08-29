@@ -14,6 +14,7 @@ class CarDetailRegistrationTypeController extends Controller
     /**
      * Display a listing of the resource.
      */
+  
     public function index(Request $request)
    
 {
@@ -27,7 +28,6 @@ class CarDetailRegistrationTypeController extends Controller
             Log::error('ERROR::INDEX_CAR_MAKE_REGISTRATION_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
 }
-    
 
     /**
      * Show the form for creating a new resource.

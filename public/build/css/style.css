@@ -45973,6 +45973,7 @@ span.flatpickr-weekday {
     text-align: center;
     cursor: pointer;
     transition: border-color 0.3s;
+    background: #ffffff;
 }
 
 .upload-box:hover {
@@ -45983,40 +45984,39 @@ span.flatpickr-weekday {
     font-size: 30px;
     display: block;
     margin-bottom: 8px;
+    color: gray;
 }
 
 .upload-content p {
     font-weight: bold;
     margin: 0;
+    font-size: 14px;
+    color: gray;
 }
 
 .upload-content small {
     color: #666;
+    font-size: 12px;
 }
 
-.upload-content-sm i {
-    font-size: 30px;
-    display: block;
-    margin-bottom: 8px;
+.upload-box-sm {
+    width: 186px;
 }
 
 .upload-content-sm p {
-    font-weight: bold;
-    margin: 0;
     font-size: 12px;
 }
 
 .upload-content-sm small {
-    color: #666;
     font-size: 10px;
 }
 
-.upload-box-sm {
-    border: 2px dashed #ccc;
-    border-radius: 6px;
-    width: 186px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.3s;
+.preview img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 2px;
 }

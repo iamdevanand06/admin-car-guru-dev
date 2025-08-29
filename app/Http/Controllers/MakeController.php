@@ -166,7 +166,7 @@ class MakeController extends Controller
             if (!empty($search) || !empty($request->country_id)) {
                 $brands = Make::where('country_id', $request->country_id)->where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
             } else {
-                $brands = Make::where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
+                $brands = Make::where('country_id', $request->country_id)->where('brand_name', 'like', "%$search%")->orderBy('brand_name', 'asc')->get(['id', 'brand_name']);
             }
             return response()->json($brands);
         } catch (Exception $e) {
@@ -188,6 +188,16 @@ class MakeController extends Controller
             ]);
             $brand = Make::create(['country_id' => $request->country_id, 'brand_name' => $request->brand_name, 'status' => '1']);
             return response()->json($brand);
+        } catch (Exception $e) {
+            Log::error('Error::MAKE_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
+    }
+
+    public function getBrandLogo(Request $request)
+    {
+        try {
+            $logo = Make::select('logo')->where('id', $request->id)->first();
+            return $logo;
         } catch (Exception $e) {
             Log::error('Error::MAKE_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
