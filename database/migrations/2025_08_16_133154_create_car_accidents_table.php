@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('car_accidents', function (Blueprint $table) {
             $table->id();
-            $table->integer('car_info_id');
+            $table->integer('car_detail_id');
             $table->string('owner');
             $table->string('usage');
             $table->string('car_accident');

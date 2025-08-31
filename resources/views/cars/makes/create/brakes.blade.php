@@ -69,25 +69,29 @@
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Front<span class="text-danger ms-1">*</span></label>
-            <input type="text" id="wheel_type_front" name="wheel_type_front" class="form-control">
+            <input type="text" id="wheel_type_front" name="wheel_type_front" class="form-control"
+                placeholder="Wheel Type Front">
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Rear<span class="text-danger ms-1">*</span></label>
-            <input type="text" id="wheel_type_rear" name="wheel_type_rear" class="form-control">
+            <input type="text" id="wheel_type_rear" name="wheel_type_rear" class="form-control"
+                placeholder="WHeel Type Rear">
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Front Rims<span class="text-danger ms-1">*</span></label>
-            <input type="input" id="wheel_type_front_rims" name="wheel_type_front_rims" class="form-control">
+            <input type="input" id="wheel_type_front_rims" name="wheel_type_front_rims" class="form-control"
+                placeholder="Wheel Type Front">
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Rear Rims<span class="text-danger ms-1">*</span></label>
-            <input type="input" id="wheel_type_rear_rims" name="wheel_type_rear_rims" class="form-control">
+            <input type="input" id="wheel_type_rear_rims" name="wheel_type_rear_rims" class="form-control"
+                placeholder="Wheel Type Rear">
         </div>
     </div>
 </div>

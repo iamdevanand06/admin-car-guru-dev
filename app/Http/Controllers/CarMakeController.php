@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Constants\commonConstant;
 use App\Models\CarBrake;
 use App\Models\CarDiamension;
 use App\Models\CarEngine;
@@ -21,11 +22,11 @@ class CarMakeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $data = CarMake::with('getEngine.getDiamension.getBrake.getWarranty', 'getVariant.model.brand')->paginate(20);
-            dd($data);
+            $data = CarMake::with(commonConstant::CAR_MAKE_RELATIONSHIP_INDEX)->paginate(20);
+            return view('cars.makes.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 20);
         } catch (Exception $e) {
             Log::error('Error::GET_CAR_MAKE_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -49,6 +50,7 @@ class CarMakeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->validate($request, [
 
             'brand_id' => 'required|numeric',
@@ -62,10 +64,11 @@ class CarMakeController extends Controller
             'start_year' => 'required|numeric',
             'end_year' => 'required|numeric',
             'seat' => 'required|numeric',
-            'exterior_color' => ['required', 'string'],
-            'interior_color' => ['required', 'string'],
+            // 'exterior_color' => ['required', 'string'],
+            // 'interior_color' => ['required', 'string'],
             'consumption' => 'required|numeric',
             'no_of_door' => 'required',
+            'consumption_value_km_l' => 'required|numeric',
 
             'engine_cc' => 'required|numeric',
             'engine_type' => 'required|numeric',
@@ -94,14 +97,16 @@ class CarMakeController extends Controller
             'manufacturers_warranty' => 'required|numeric',
             'cargurus_warranty' => 'required|numeric',
             'road_tax_amount_rm' => 'required|numeric',
-            'road_tax_year' => 'required|numeric'
+            // 'road_tax_year' => 'required|numeric'
         ]);
 
         DB::beginTransaction();
         try {
-            $driveTrain = Make::findOrFail($request->brand_id);
-            $imagePath = $request->file('brand_emblem')->store('images', 'public');
-            $driveTrain->update(['logo' => $imagePath]);
+            if ($request->emblem_check) {
+                $driveTrain = Make::findOrFail($request->brand_id);
+                $imagePath = $request->file('brand_emblem')->store('images', 'public');
+                $driveTrain->update(['logo' => $imagePath]);
+            }
 
             $makeData = $request->only([
                 'brand_id',
@@ -115,13 +120,16 @@ class CarMakeController extends Controller
                 'start_year',
                 'end_year',
                 'seat',
-                'exterior_color',
-                'interior_color',
+                // 'exterior_color',
+                // 'interior_color',
                 'consumption',
-                'no_of_door'
+                'no_of_door',
+                'consumption_value_km_l',
             ]);
-            $makeData['brand_emblem'] = $request->file('brand_emblem')->store('images', 'public');
-            $makeData['car_id'] = 'C' . rand(000000, 999999);
+            $makeData['exterior_color'] = 'null';
+            $makeData['interior_color'] = 'null';
+            $makeData['brand_emblem'] = 'null'; //$request->file('brand_emblem')->store('images', 'public');
+            $makeData['car_id'] = CarMake::generateCode();
             $carMake = CarMake::create($makeData);
             $engine = $request->only([
                 'engine_cc',
@@ -161,13 +169,13 @@ class CarMakeController extends Controller
                 'manufacturers_warranty',
                 'cargurus_warranty',
                 'road_tax_amount_rm',
-                'road_tax_year',
             ]);
+            $warranty['road_tax_year'] = '0';
             $warranty['car_make_id'] = $makeData['car_id'];
             $carWarranty = CarWarranty::create($warranty);
 
             DB::commit();
-            return redirect()->route('carmakes.create')->with('success', 'Car Make Created Successfully');
+            return redirect()->route('carmakes.index')->with('success', 'Car Make Created Successfully');
         } catch (Exception $e) {
             DB::rollBack();
             Log::error('Error::STORE_CAR_MAKE_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
@@ -179,11 +187,11 @@ class CarMakeController extends Controller
      */
     public function show(string $id)
     {
-         try {
-            $data = CarMake::with('getEngine.getDiamension.getBrake.getWarranty', 'getVariant.model.brand')->findOrFail($id);
-            return view('cars.makes.show',);
+        try {
+            $data = CarMake::with(commonConstant::CAR_MAKE_RELATIONSHIP_SHOW)->findOrFail($id);
+            return view('cars.makes.show', compact('data'));
         } catch (Exception $e) {
-            Log::error('Error::SHOW_CAR_MAKE_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            Log::error('Error::SHOW_CAR_MAKE_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
     }
 
@@ -192,7 +200,15 @@ class CarMakeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        try {
+            $dropDown = [
+                'countries' => Country::where('status', '1')->get(),
+            ];
+            $carMake = CarMake::with(commonConstant::CAR_MAKE_RELATIONSHIP_SHOW)->findOrFail($id);
+            return view('cars.makes.edit', compact('carMake', 'dropDown'));
+        } catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_EDIT, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -200,7 +216,133 @@ class CarMakeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, [
+
+            'brand_id' => 'required|numeric',
+            'brand_country' => 'required|integer',
+            'model_id' => 'required|numeric',
+            'variant_id' => 'required|numeric',
+            // 'brand_emblem' => 'required',
+            'transmission' => 'required|numeric|max:50',
+            'fuel_type' => 'required|numeric|max:50',
+            'drive_train' => 'required|numeric',
+            'start_year' => 'required|numeric',
+            'end_year' => 'required|numeric',
+            'seat' => 'required|numeric',
+            // 'exterior_color' => ['required', 'string'],
+            // 'interior_color' => ['required', 'string'],
+            'consumption' => 'required|numeric',
+            'no_of_door' => 'required',
+            'consumption_value_km_l' => 'required|numeric',
+
+            'engine_cc' => 'required|numeric',
+            'engine_type' => 'required|numeric',
+            'compression_ratio' => 'required|numeric',
+            'peak_power_kw' => 'required|numeric',
+            'peak_torque_nm' => 'required|numeric',
+
+            'length_mm' => 'required|numeric',
+            'weight_mm' => 'required|numeric',
+            'height_mm' => 'required|numeric',
+            'wheel_base_mm' => 'required|numeric',
+            'kerb_weight_kg' => 'required|numeric',
+            'fuel_tank_ltr' => 'required|numeric',
+
+            'brake_front' => 'required|numeric',
+            'brake_rear' => 'required|numeric',
+            'suspension_front' => 'required|numeric',
+            'suspension_back' => 'required|numeric',
+            'steering' => 'required|numeric',
+            'wheel_type_front' => 'required',
+            'wheel_type_rear' => 'required',
+            'wheel_type_front_rims' => 'required',
+            'wheel_type_rear_rims' => 'required',
+            'features_equipments' => 'required|array',
+
+            'manufacturers_warranty' => 'required|numeric',
+            'cargurus_warranty' => 'required|numeric',
+            'road_tax_amount_rm' => 'required|numeric',
+            // 'road_tax_year' => 'required|numeric'
+        ]);
+
+        DB::beginTransaction();
+        try {
+            if ($request->emblem_check) {
+                $driveTrain = Make::findOrFail($request->brand_id);
+                $imagePath = $request->file('brand_emblem')->store('images', 'public');
+                $driveTrain->update(['logo' => $imagePath]);
+            }
+
+            $makeData = $request->only([
+                'brand_id',
+                'brand_country',
+                'model_id',
+                'variant_id',
+                'brand_emblem',
+                'transmission',
+                'fuel_type',
+                'drive_train',
+                'start_year',
+                'end_year',
+                'seat',
+                // 'exterior_color',
+                // 'interior_color',
+                'consumption',
+                'no_of_door',
+                'consumption_value_km_l',
+            ]);
+            $makeData['exterior_color'] = 'null';
+            $makeData['interior_color'] = 'null';
+            $makeData['brand_emblem'] = 'null'; //$request->file('brand_emblem')->store('images', 'public');
+            $makeModify = CarMake::findOrFail($id);
+            $makeModify->update($makeData);
+            $engine = $request->only([
+                'engine_cc',
+                'engine_type',
+                'compression_ratio',
+                'peak_power_kw',
+                'peak_torque_nm',
+            ]);
+            $carEngine = CarEngine::where('car_makes_id', $makeModify->car_id)->update($engine);
+            $dimension = $request->only([
+                'length_mm',
+                'weight_mm',
+                'height_mm',
+                'wheel_base_mm',
+                'kerb_weight_kg',
+                'fuel_tank_ltr',
+            ]);
+            $carDimension = CarDiamension::where('car_make_id', $makeModify->car_id)->update($dimension);
+            $brake = $request->only([
+                'brake_front',
+                'brake_rear',
+                'suspension_front',
+                'suspension_back',
+                'steering',
+                'wheel_type_front',
+                'wheel_type_rear',
+                'wheel_type_front_rims',
+                'wheel_type_rear_rims',
+            ]);
+
+            $brake['features_equipments'] = json_encode($request->features_equipments);
+
+            $carBrake = CarBrake::where('car_make_id', $makeModify->car_id)->update($brake);
+            $warranty = $request->only([
+                'manufacturers_warranty',
+                'cargurus_warranty',
+                'road_tax_amount_rm',
+            ]);
+            $warranty['road_tax_year'] = '0';
+
+            $carWarranty = CarWarranty::where('car_make_id', $makeModify->car_id)->update($warranty);
+
+            DB::commit();
+            return redirect()->route('carmakes.index')->with('success', 'Car Make Update Successfully');
+        } catch (Exception $e) {
+            DB::rollBack();
+            Log::error('Error::UPDATE_CAR_MAKE_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**

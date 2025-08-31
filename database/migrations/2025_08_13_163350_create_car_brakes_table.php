@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('wheel_type_front_rims');
             $table->string('wheel_type_rear_rims');
             $table->string('features_equipments');
-            $table->string('car_make_id');
+            $table->string('car_make_id')->unique();
             $table->timestamps();
         });
     }

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->float('wheel_base_mm');
             $table->float('kerb_weight_kg');
             $table->float('fuel_tank_ltr');
-            $table->string('car_make_id');
+            $table->string('car_make_id')->unique();
             $table->timestamps();
         });
     }

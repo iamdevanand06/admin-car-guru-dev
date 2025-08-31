@@ -8,6 +8,9 @@ use App\Models\CarBrake;
 class CarDiamension extends Model
 {
     protected $table = 'car_diamensions';
+    protected $primaryKey = 'car_make_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = [
         'id',
         'length_mm',
@@ -21,8 +24,4 @@ class CarDiamension extends Model
         'updated_at'
     ];
 
-    public function getBrake()
-    {
-        return $this->hasOne(CarBrake::class, 'car_make_id', 'car_make_id');
-    }
 }

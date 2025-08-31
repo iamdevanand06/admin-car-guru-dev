@@ -13,8 +13,10 @@
             <label class="form-label">Country of Make<span class="text-danger ms-1">*</span></label>
             <select id="brand_country" name="brand_country" class="form-control" placeholder="Select Country">
                 <option>Select Country</option>
-                @foreach ($countries as $country)
-                    <option value="{{ $country->id }}">{{ $country->country_name }}</option>
+                @foreach ($dropDown['countries'] as $country)
+                    <option value="{{ $country->id }}" {{ $country->id == $carMake->brand_country ? 'selected' : '' }}>
+                        {{ $country->country_name }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -58,7 +60,8 @@
             <label class="form-label">Start Year<span class="text-danger ms-1">*</span></label>
             <select id="start_year" name="start_year" class="form-control select2-ajax"
                 data-placeholder="Select or Add Start Year" data-search-url="{{ route('madeYear.search') }}"
-                data-add-url="{{ route('madeYear.add') }}">
+                data-selected-id="{{ $carMake->getStartYear->id ?? '' }}"
+                data-selected-text="{{ $carMake->getStartYear->name ?? '' }}">
             </select>
         </div>
     </div>
@@ -67,7 +70,8 @@
             <label class="form-label">Discontinue Year<span class="text-danger ms-1">*</span></label>
             <select id="end_year" name="end_year" class="form-control select2-ajax"
                 data-placeholder="Select or Add End Year" data-search-url="{{ route('madeYear.search') }}"
-                data-add-url="{{ route('madeYear.add') }}">
+                data-selected-id="{{ $carMake->getStartYear->id ?? '' }}"
+                data-selected-text="{{ $carMake->getStartYear->name ?? '' }}">
             </select>
         </div>
     </div>
@@ -82,7 +86,8 @@
             <label class="form-label">Transmission<span class="text-danger ms-1">*</span></label>
             <select id="transmission" name="transmission" class="form-control select2-ajax"
                 data-placeholder="Select or Add a Transmission" data-search-url="{{ route('transmissions.search') }}"
-                data-add-url="{{ route('transmissions.add') }}"></select>
+                data-selected-id="{{ $carMake->getTransmission->id ?? '' }}"
+                data-selected-text="{{ $carMake->getTransmission->name ?? '' }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12"></div>
@@ -92,7 +97,8 @@
             <label class="form-label">Drive Train<span class="text-danger ms-1">*</span></label>
             <select id="drive_train" name="drive_train" class="form-control select2-ajax"
                 data-placeholder="Select or Add a Drive Train" data-search-url="{{ route('driveTrains.search') }}"
-                data-add-url="{{ route('driveTrains.add') }}"></select>
+                data-selected-id="{{ $carMake->getDriveTrain->id ?? '' }}"
+                data-selected-text="{{ $carMake->getDriveTrain->name ?? '' }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
@@ -100,7 +106,8 @@
             <label class="form-label">Fuel Type<span class="text-danger ms-1">*</span></label>
             <select id="fuel_type" name="fuel_type" class="form-control select2-ajax"
                 data-placeholder="Select or Add a Fuel Type" data-search-url="{{ route('fuelType.search') }}"
-                data-add-url="{{ route('fuelType.add') }}"></select></select>
+                data-selected-id="{{ $carMake->getFuelType->id ?? '' }}"
+                data-selected-text="{{ $carMake->getFuelType->name ?? '' }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
@@ -109,7 +116,7 @@
             <select id="no_of_door" name="no_of_door" class="form-control">
                 <option value="">Select Number of Doors</option>
                 @for ($i = 1; $i <= 6; ++$i)
-                    <option value="{{ $i }}">{{ $i }}</option>
+                    <option value="{{ $i }}" {{ $carMake->no_of_door == $i ? 'selected' : '' }}>{{ $i }}</option>
                 @endfor
             </select>
         </div>
@@ -118,8 +125,8 @@
         <div class="mb-3">
             <label class="form-label">Seat (person)<span class="text-danger ms-1">*</span></label>
             <select id="seat" name="seat" class="form-control select2-ajax" data-placeholder="Select or Add a Seat"
-                data-search-url="{{ route('seat.search') }}" data-add-url="{{ route('seat.add') }}">
-            </select>
+                data-search-url="{{ route('seat.search') }}" data-selected-id="{{ $carMake->getSeat->id ?? '' }}"
+                data-selected-text="{{ $carMake->getSeat->name ?? '' }}"></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12"></div>
@@ -129,14 +136,15 @@
             <label class="form-label">Consumption<span class="text-danger ms-1">*</span></label>
             <select id="consumption" name="consumption" class="form-control select2-ajax"
                 data-placeholder="Select or Add a Consumption" data-search-url="{{ route('consumption.search') }}"
-                data-add-url="{{ route('consumption.add') }}"></></select>
+                data-selected-id="{{ $carMake->getConsumption->id ?? '' }}"
+                data-selected-text="{{ $carMake->getConsumption->name ?? '' }}"></></select>
         </div>
     </div>
     <div class="col-lg-2 col-md-6 col-sm-12">
         <div class="mb-3">
             <label class="form-label">Consumption Value (km/L)<span class="text-danger ms-1">*</span></label>
             <input type="number" id="consumption_value_km_l" name="consumption_value_km_l" class="form-control"
-                placeholder="Consumption">
+                placeholder="Consumption" value="{{ $carMake->consumption_value_km_l ?? '' }}">
         </div>
     </div>
 </div>
@@ -144,7 +152,7 @@
     $(document).ready(function () {
         // Start Brand
         $('#brand_id').select2({
-            placeholder: 'Select or Add a Brand',
+            placeholder: 'Select a Brand',
             minimumInputLength: 0,
             ajax: {
                 url: '{{ route('brands.search') }}',
@@ -156,61 +164,29 @@
                         country_id: $('#brand_country').val()
                     };
                 },
-                processResults: function (data, params) {
-                    let results = data.map(item => ({
-                        id: item.id,
-                        text: item.brand_name
-                    }));
-
-                    // If no results, show option to add
-                    if (results.length === 0 && params.term) {
-                        results.push({
-                            id: 'new_' + params.term,
-                            text: '➕ Add "' + params.term + '"',
-                            is_new: true
-                        });
-                    }
+                processResults: function (data) {
                     return {
-                        results: results
+                        results: data.map(item => ({
+                            id: item.id,
+                            text: item.brand_name
+                        }))
                     };
                 },
                 cache: true
             }
         });
 
-        // Handle "Add Brand" option
-        $('#brand_id').on('select2:select', function (e) {
-            let data = e.params.data;
-            if (data.is_new) {
-                $.post('{{ route('brands.add') }}', {
-                    _token: '{{ csrf_token() }}',
-                    brand_name: data.text.replace('➕ Add "', '').replace('"', ''),
-                    country_id: $('#brand_country').val(),
-                }, function (response) {
-                    // Set the newly created brand in dropdown
-                    let newOption = new Option(response.brand_name, response.id, true, true);
-                    $('#brand_id').append(newOption).trigger('change');
-                    $('.upload-box').show();
-                    $('#logoView').hide();
-                });
-            }
-        });
-
-        // Fetch Brand Emblem
+        // Fetch Brand Emblem on change
         $('#brand_id').on('change', function () {
             let brand_id = $(this).val();
             $.ajax({
                 url: '{{ route('brand.logo') }}',
                 type: 'GET',
-                data: {
-                    id: brand_id
-                },
+                data: { id: brand_id },
                 success: function (response) {
-
-                    if (response.logo != null) {
+                    if (response.logo) {
                         $('.upload-box').hide();
-                        $('#logoView').show();
-                        $('#logoView').html(
+                        $('#logoView').show().html(
                             `<img src="/storage/${response.logo}" width="100" height="100" alt="Brand Logo">`
                         );
                     } else {
@@ -220,14 +196,24 @@
                 }
             });
         });
+
+        // Prefill selected brand (edit mode)
+        @if(isset($carMake) && $carMake->getVariant->model->brand->id)
+            let brandId = '{{ $carMake->getVariant->model->brand->id ?? '' }}';
+            let brandName = '{{ $carMake->getVariant->model->brand->brand_name ?? '' }}';
+
+            let option = new Option(brandName, brandId, true, true);
+            $('#brand_id').append(option).trigger('change');
+        @endif
         // End Brand
     });
+
 
     // Start Models
     $(document).ready(function () {
         // Start Model
         $('#model_id').select2({
-            placeholder: 'Select or Add a Model',
+            placeholder: 'Select a Model',
             minimumInputLength: 0,
             ajax: {
                 url: '{{ route('models.search') }}',
@@ -236,52 +222,38 @@
                 data: function (params) {
                     return {
                         q: params.term,
-                        brand_id: $('#brand_id').val()
+                        brand_id: $('#brand_id').val() // filter by selected brand
                     };
                 },
-                processResults: function (data, params) {
-                    let results = data.map(item => ({
-                        id: item.id,
-                        text: item.model_name
-                    }));
-
-                    if (results.length === 0 && params.term) {
-                        results.push({
-                            id: 'new_' + params.term,
-                            text: '➕ Add "' + params.term + '"',
-                            is_new: true
-                        });
-                    }
-
+                processResults: function (data) {
                     return {
-                        results: results
+                        results: data.map(item => ({
+                            id: item.id,
+                            text: item.model_name
+                        }))
                     };
                 },
                 cache: true
             }
         });
 
-        // Handle adding new model
-        $('#model_id').on('select2:select', function (e) {
-            let data = e.params.data;
-            if (data.is_new) {
-                $.post('{{ route('models.add') }}', {
-                    _token: '{{ csrf_token() }}',
-                    brand_id: $('#brand_id').val(),
-                    model_name: data.text.replace('➕ Add "', '').replace('"', '')
-                }, function (response) {
-                    let newOption = new Option(response.model_name, response.id, true, true);
-                    $('#model_id').append(newOption).trigger('change');
-                });
-            }
-        });
-        // End Model
-    });
+        // Prefill selected model (edit mode)
+        @if(isset($carMake) && $carMake->getVariant->model)
+            let modelId = '{{ $carMake->getVariant->model->id }}';
+            let modelName = '{{ $carMake->getVariant->model->model_name }}';
+
+            let option = new Option(modelName, modelId, true, true);
+            $('#model_id').append(option).trigger('change');
+        @endif
+    // End Model
+});
+
 
     // Start Variant
     $(document).ready(function () {
+        // Start Variant
         $('#variant_id').select2({
-            placeholder: 'Select or Add a Variant',
+            placeholder: 'Select a Variant',
             minimumInputLength: 0,
             ajax: {
                 url: '{{ route('variants.search') }}',
@@ -294,45 +266,29 @@
                         model_id: $('#model_id').val()
                     };
                 },
-                processResults: function (data, params) {
-                    let results = data.map(item => ({
-                        id: item.id,
-                        text: item.variant_name
-                    }));
-
-                    if (results.length === 0 && params.term) {
-                        results.push({
-                            id: 'new_' + params.term,
-                            text: '➕ Add "' + params.term + '"',
-                            is_new: true
-                        });
-                    }
-
+                processResults: function (data) {
                     return {
-                        results: results
+                        results: data.map(item => ({
+                            id: item.id,
+                            text: item.variant_name
+                        }))
                     };
                 },
                 cache: true
             }
         });
 
-        // Handle adding new variant
-        $('#variant_id').on('select2:select', function (e) {
-            let data = e.params.data;
-            if (data.is_new) {
-                $.post('{{ route('variants.add') }}', {
-                    _token: '{{ csrf_token() }}',
-                    brand_id: $('#brand_id').val(),
-                    model_id: $('#model_id').val(),
-                    variant_name: data.text.replace('➕ Add "', '').replace('"', '')
-                }, function (response) {
-                    let newOption = new Option(response.variant_name, response.id, true, true);
-                    $('#variant_id').append(newOption).trigger('change');
-                });
-            }
-        });
+        // Prefill selected variant (edit mode)
+        @if(isset($carMake) && $carMake->getVariant)
+            let variantId = '{{ $carMake->getVariant->id }}';
+            let variantName = '{{ $carMake->getVariant->variant_name }}';
 
-    });
+            let option = new Option(variantName, variantId, true, true);
+            $('#variant_id').append(option).trigger('change');
+        @endif
+    // End Variant
+});
+
 </script>
 
 <script>
@@ -359,5 +315,72 @@
             }
         });
 
+    });
+</script>
+<script>
+    document.getElementById("resetBtn").addEventListener("click", function () {
+        let fields = [
+            "brand_country",
+            "brand_id",
+            "model_id",
+            "start_year",
+            "end_year",
+            "variant_id",
+            "transmission",
+            "drive_train",
+            "fuel_type",
+            "no_of_door",
+            "seat",
+            "consumption",
+            "consumption_value_km_l",
+            "engine_cc",
+            "engine_type",
+            "compression_ratio",
+            "peak_power_kw",
+            "peak_torque_nm",
+            "length_mm",
+            "weight_mm",
+            "height_mm",
+            "wheel_base_mm",
+            "kerb_weight_kg",
+            "fuel_tank_ltr",
+            "brake_front",
+            "brake_rear",
+            "suspension_front",
+            "suspension_back",
+            "steering",
+            "wheel_type_front",
+            "wheel_type_rear",
+            "wheel_type_front_rims",
+            "wheel_type_rear_rims",
+            "features_equipments",
+            "manufacturers_warranty",
+            "cargurus_warranty",
+            "road_tax_amount_rm"
+        ];
+
+        fields.forEach(id => {
+            let el = document.getElementById(id);
+            if (el) {
+                if (el.type === "checkbox" || el.type === "radio") {
+                    el.checked = false;
+                } else if (el.tagName === "SELECT") {
+                    // Reset normal select
+                    el.selectedIndex = 0;
+
+                    // Reset all Select2 (with or without .select2-ajax class)
+                    if ($(el).data('select2')) {
+                        $(el).val(null).trigger("change");
+                    }
+                } else {
+                    el.value = "";
+                }
+            }
+        });
+
+        // Reset file upload preview
+        document.getElementById("brand_logo").value = "";
+        document.getElementById("preview").innerHTML = "";
+        document.getElementById("logoView").innerHTML = "";
     });
 </script>

@@ -3,11 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\CarWarranty;
+use App\Models\CarMakeBrake;
+use App\Models\CarMakeSuspension;
+use App\Models\CarMakeSteering;
+use App\Models\Feature;
 
 class CarBrake extends Model
 {
     protected $table = 'car_brakes';
+
+    protected $primaryKey = 'car_make_id';
+    public $incrementing = false;
+    protected $keyType = 'string';
     protected $fillable = [
         'id',
         'brake_front',
@@ -25,8 +32,46 @@ class CarBrake extends Model
         'updated_at'
     ];
 
-    public function getWarranty()
+    protected $casts = [
+        'features_equipments' => 'array',
+    ];
+
+
+    public function getBrakeFront()
     {
-        return $this->hasOne(CarWarranty::class, 'car_make_id', 'car_make_id');
+        return $this->hasOne(CarMakeBrake::class, 'id', 'brake_front');
     }
+
+    public function getBrakeRear()
+    {
+        return $this->hasOne(CarMakeBrake::class, 'id', 'brake_rear');
+    }
+
+    public function getSuspensionFront()
+    {
+        return $this->hasOne(CarMakeSuspension::class, 'id', 'suspension_front');
+    }
+
+    public function getSuspensionBack()
+    {
+        return $this->hasOne(CarMakeSuspension::class, 'id', 'suspension_back');
+    }
+
+    public function getSteering()
+    {
+        return $this->hasOne(CarMakeSteering::class, 'id', 'steering');
+    }
+
+    public function getFeaturesEquipmentsListAttribute()
+    {
+        // Decode JSON string to array
+        $ids = json_decode($this->features_equipments ?? '[]', true) ?? [];
+
+        // Ensure it's always an array of integers
+        $ids = array_map('intval', $ids);
+
+        return Feature::whereIn('id', $ids)->get(['id', 'feature_name as text']);
+    }
+
+
 }
