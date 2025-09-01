@@ -23,135 +23,259 @@
                 <div class="card-header d-flex align-items-center justify-content-between flex-wrap row-gap-3">
                     <div class="search-set">
                         <div class="search-input">
-                            <!-- <form method="GET" action="{{ route('makes.index') }}">
-                                                        @csrf
-                                                        <div class="row">
-                                                            <div class="col"><input type="text" id="user-search" name="user-search"
-                                                                    class="form-control" placeholder="Search Make" /></div>
-                                                            <div class="col"><button class="btn btn-primary" type="submit">Search</button></div>
-                                                        </div>
-                                                    </form> -->
+
                             <div class="container mt-4">
                                 <div class="row g-3">
 
-                                    <!-- Card 1 -->
-                                    <div class="col-md-3">
-                                        <div class="card h-100 shadow-sm border-0">
-                                            <div class="card-header text-center text-white fw-bold"
-                                                style="background:#c2185b;">
-                                                CARS DISCOUNTS & REBATES
-                                            </div>
-                                            <div class="card-body text-center d-flex" style="background:#ebe4e8;">
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-danger">5</span> <br>BID
-                                                    CARS</p>
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-primary">12</span>
-                                                    CERTIFIED CARS</p>
-                                                <p class="mb-0"><span class="fw-bold fs-3 text-dark">8</span><br>
-                                                    BUY-AS-IT-IS CARS</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                                      <!-- Cars Discounts & Rebates -->
+    <div class="col-md-3 col-sm-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-muted text-center fw-light shadow-sm text-uppercase">
+          CARS DISCOUNTS & REBATES
+        </div>
+        <div class="card-body text-center" style="background-color: #ede6ea">
+          <div class="row">
+            <div class="col">
+              <h2 class="text-danger mb-0">5</h2>
+              <small class="fw-semibold text-uppercase">BID CARS</small>
+            </div>
+            <div class="col">
+              <h2 class="text-primary mb-0">12</h2>
+              <small class="fw-semibold text-uppercase">CERTIFIED CARS</small>
+            </div>
+            <div class="col">
+              <h2 class="text-purple mb-0">8</h2>
+              <small class="fw-semibold text-uppercase">AS-IT-IS CARS</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                                    <!-- Card 2 -->
-                                    <div class="col-md-3">
-                                        <div class="card h-100 shadow-sm border-0">
-                                            <div class="card-header text-center text-white fw-bold"
-                                                style="background:#ef6c00;">
-                                                ADVERTISING CAMPAIGN
-                                            </div>
-                                            <div class="card-body text-center d-flex" style="background:#fde2c1;">
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-warning">0</span>
-                                                    INACTIVE</p>
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-success">25</span> ACTIVE
-                                                </p>
-                                                <p class="mb-0"><span class="fw-bold fs-3 text-danger">3</span> <br>TO
-                                                    START</p>
-                                            </div>
-                                        </div>
-                                    </div>
+    <!-- Advertising Campaign -->
+   <div class="col-md-3 col-sm-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-center fw-bold text-uppercase" style="background-color: #fabf8e">
+          ADVERTISING CAMPAIGN
+        </div>
+        <div class="card-body text-center"  style="background-color:#faf2e1">
+          <div class="row">
+            <div class="col">
+              <h2 class="text-warning  mb-0">10</h2>
+              <small class="fw-semibold text-uppercase">INACTIVE</small>
+            </div>
+            <div class="col">
+              <h2 class="text-danger mb-0">124</h2>
+              <small class="fw-semibold text-uppercase">ACTIVE</small>
+            </div>
+            <div class="col">
+              <h2 class="text-success mb-0">4</h2>
+              <small class="fw-semibold text-uppercase">TO START</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                                    <!-- Card 3 -->
-                                    <div class="col-md-3">
-                                        <div class="card h-100 shadow-sm border-0">
-                                            <div class="card-header text-center text-white fw-bold"
-                                                style="background:#1976d2;">
-                                                DESIGN CAR ASSETS
-                                            </div>
-                                            <div class="card-body text-center d-flex" style="background:#e1effb;">
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-primary">2</span><br> BID
-                                                    CARS</p>
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-info">11</span> CERTIFIED
-                                                    CARS</p>
-                                                <p class="mb-0"><span class="fw-bold fs-3 text-secondary">7</span><br>
-                                                    BUY-AS-IT-IS CARS</p>
-                                            </div>
-                                        </div>
-                                    </div>
+    <!-- Design Car Assets -->
+     <div class="col-md-3 col-sm-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-info text-center fw-bold text-uppercase" style="background-color:#a8cdf0">
+         DESIGN CAR ASSETS
+        </div>
+        <div class="card-body text-center" style="background-color:#d5e3f5">
+          <div class="row">
+            <div class="col">
+              <h2 class="text-primary mb-0">10</h2>
+              <small class="fw-semibold text-uppercase">BID CARS</small>
+            </div>
+            <div class="col">
+              <h2 class="text- mb-0">124</h2>
+              <small class="fw-semibold text-uppercase">CERTIFIED CARS</small>
+            </div>
+            <div class="col">
+              <h2 class="text-primary  mb-0">4</h2>
+              <small class="fw-semibold text-uppercase">AS-IT-IS CARS</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Customers Enrollment -->
+    <div class="col-md-3 col-sm-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-center fw-bold text-uppercase" style="background-color#a9ebd4">
+          CUSTOMERS ENROLLMENT
+        </div>
+        <div class="card-body text-center"style="background-color:#dff5ed">
+          <div class="row">
+            <div class="col">
+              <h2 class="text-success mb-0">10</h2>
+              <small class="fw-semibold text-uppercase">IN PROGRESS</small>
+            </div>
+            <div class="col">
+              <h2 class="text-dark mb-0">124</h2>
+              <small class="fw-semibold text-uppercase">SUCCESS</small>
+            </div>
+            <div class="col">
+              <h2 class="text-danger mb-0">4</h2>
+              <small class="fw-semibold text-uppercase">DROP-OFF</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-                                    <!-- Card 4 -->
-                                    <div class="col-md-3">
-                                        <div class="card h-100 shadow-sm border-0">
-                                            <div class="card-header text-center text-white fw-bold"
-                                                style="background:#388e3c;">
-                                                CUSTOMERS ENROLMENT
-                                            </div>
-                                            <div class="card-body text-center d-flex" style="background:#d6f4df;">
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-info">10</span><br> IN
-                                                    PROGRESS</p>
-                                                <p class="mb-2"><span class="fw-bold fs-3 text-success">124</span>
-                                                    SUCCESS</p>
-                                                <p class="mb-0"><span class="fw-bold fs-3 text-danger">4</span><br>
-                                                    DROP-OFF</p>
-                                            </div>
-                                        </div>
-                                    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h5>ADVERTISING & PROMOTION / OVERVIEW</h5><br>
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
 
-                                    <th>Car ID</th>
-                                    <th>Car Category</th>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                    <th>Mileage</th>
-                                    <th>Transmission</th>
-                                    <th>Location</th>
-                                    <th>Price</th>
-                                    <th>Loan Description</th>
+                                    <th>Ad Placement</th>
+                                    <th>Ad Format</th>
+                                    <th>Ad Topic</th>
+                                    <th>Banner Type</th>
+
                                     <th>Promotion Type</th>
-                                    <th>Discount</th>
-                                    <th>Custom Images & Videos</th>
+                                    <th>Status</th>
                                     <th>Action</th>
+
                                     <th class="no-sort"></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>12345
-                                    <td>
-                                    <td>C000001</td>
-                                    <td></td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
-                                    <td>C000001</td>
+                                    <td>Home - Main Banner</td>
+                                    <td>Multiple</td>
+                                    <td>Multiple</td>
+                                    <td>Carousel (4)</td>
+                                    <td>Best Deal In Town!, Promo 2, Promo 3, Promo 4</td>
+                                      <td><span class="badge bg-success">Activated</span></td>
+                                     <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                                    </tr>
+
+                                    </tr>
+
+                                <tr>
+                                    <td>Home - Side Search - Mini Banner</td>
+                                    <td>Single</td>
+                                    <td>Car - Bid</td>
+                                    <td>Single</td>
+                                    <td>Fantastic Bidding Frenzy!</td>
+                                     <td><span class="badge bg-success">Activated</span></td>
+                                     <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                                    </tr>
 
 
-                                </tr>
-                            </tbody>
+          <tr>
+          <td>Bid - Main Banner</td>
+          <td>Multiple</td>
+          <td>Multiple</td>
+          <td>Carousel (8)</td>
+          <td>Fantastic Bidding Frenzy! (8 Cars)</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+         <tr>
+          <td>Buy - Main Banner</td>
+          <td>Multiple</td>
+          <td>Multiple</td>
+          <td>Carousel (4)</td>
+          <td>Local Cars Specials! (4 Cars)</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+         <tr>
+          <td>Buy - Product page - Banner</td>
+          <td>Single</td>
+          <td>Loan</td>
+          <td>Single</td>
+          <td>CARGURU Value Savings!</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Buy - Book Car - Mini Side Banner</td>
+          <td>Single</td>
+          <td>Warranty</td>
+          <td>Single</td>
+          <td>FREE Extended Warranty</td>
+          <td><span class="badge bg-secondary">NA</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Buy - Test Drive - Mini Side Banner</td>
+          <td>Single</td>
+          <td>Multiple</td>
+          <td>Single</td>
+          <td>CARGURU Branding</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Buy - Get Loan - Mini Side Banner</td>
+          <td>Single</td>
+          <td>Loan</td>
+          <td>Single</td>
+          <td>CARGURU Service</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Sell - Main Banner</td>
+          <td>Multiple</td>
+          <td>Multiple</td>
+          <td>Carousel (4)</td>
+          <td>Don’t Lose Out!, Promo 2, Promo 3, Promo 4</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Sell - Mini Side Banner</td>
+          <td>Single</td>
+          <td>Inspection</td>
+          <td>Single</td>
+          <td>CARGURU Service</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Sell - Product page - Banner</td>
+          <td>Single</td>
+          <td>Product</td>
+          <td>Single</td>
+          <td>FREE Battery</td>
+          <td><span class="badge bg-success">Activated</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>Services - Main Banner</td>
+          <td>Single</td>
+          <td>Warranty</td>
+          <td>Single</td>
+          <td>CARGURU Service</td>
+          <td><span class="badge bg-secondary">NA</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        <tr>
+          <td>About - Main Banner</td>
+          <td>Single</td>
+          <td>Inspection</td>
+          <td>Single</td>
+          <td>CARGURU Service</td>
+          <td><span class="badge bg-secondary">NA</span></td>
+          <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+        </tr>
+        </tbody>
                         </table>
                     </div>
                 </div>
@@ -163,6 +287,7 @@
             <p>Designed &amp; Developed by <a href="javascript:void(0);" class="text-primary">Dreams</a></p>
         </div>
     </div>
+     </div>
 @endsection
 
 <style>
@@ -174,19 +299,22 @@
         background: #fcedf5 !important;
     }
 
-    .table tbody tr td:nth-child(8) {
-        background: #f7edd2 !important;
-    }
-
-    .table tbody tr td:nth-child(10) {
+    .table tbody tr td:nth-child(3) {
         background: #fcedf5 !important;
     }
 
-    .table tbody tr td:nth-child(11) {
-        background: #fcedf5 !important;
+    .table tbody tr td:nth-child(4) {
+        background:#fcedf5 !important;
     }
 
-    .table tbody tr td:nth-child(12) {
-        background: #f7edd2 !important;
+    .table tbody tr td:nth-child(6) {
+        background: #ffeebf !important;
     }
+
+
 </style>
+
+
+
+
+
