@@ -1,20 +1,22 @@
 <?php $page = 'create-cardetails'; ?>
 @extends('layouts.app', ['activePage' => 'table', 'title' => 'Create Car Details - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
+
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">Create Car Details</h4>
-                        <h6>Create Details</h6>
+                        {{-- <h4 class="fw-bold">Create Car Details</h4>
+                        <h6>Create Details</h6> --}}
                     </div>
                 </div>
-                <div class="page-btn mt-0">
+                {{-- <div class="page-btn mt-0">
                     <a href="{{route('carmakes.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
                             class="me-2"></i>Back</a>
-                </div>
+                </div> --}}
             </div>
+
 
             @if(session('success'))
                 <div class="alert alert-success" role="alert">
@@ -32,26 +34,62 @@
                     </ul>
                 </div>
             @endif
+             <!-- Top Bar -->
+             <form method="post" enctype="multipart/form-data">
+                  <!-- Title -->
+  <h5 class="fw-bold mb-4">ADVERTISING & PROMOTION BANNERS</h5>
+  <div class="d-flex justify-content-end gap-2 mb-3">
+
+    <button type="reset" form="bannerForm" class="btn btn-outline-secondary btn-sm">Clear All</button>
+    <button type="submit" form="bannerForm" class="btn btn-outline-primary btn-sm">Preview</button>
+    <button type="submit" form="bannerForm" class="btn btn-primary btn-sm">Save</button>
+    <button type="button" class="btn btn-outline-danger btn-sm">Close ✕</button>
+  </div>
 
             <!-- Banner Header -->
             <div class="container-fluid bg-light py-2">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h6 class="fw-bold mb-0">ADVERTISING & PROMOTION BANNERS</h6>
+                    {{-- <h6 class="fw-bold mb-0">ADVERTISING & PROMOTION BANNERS</h6> --}}
+<div class="container-fluid">
+{{--
+  <!-- Title -->
+  <h5 class="fw-bold mb-4">ADVERTISING & PROMOTION BANNERS</h5> --}}
+
+  <!-- Ad Placement & Topic Row -->
+  <form method="post" enctype="multipart/form-data">
+    <div class="row g-3 mb-4">
+      <!-- Ad Placement -->
+      <div class="col-md-6">
+        <label class="form-label">Ad Placement</label>
+        <div class="input-group">
+          <select name="ad_placement" class="form-select">
+            <option value="">Select Ad Placement</option>
+            <option value="home">Home</option>
+            <option value="sidebar">Sidebar</option>
+            <option value="footer">Footer</option>
+          </select>
+          <button class="btn btn-outline-secondary" type="button">+</button>
+        </div>
+      </div>
+
+      <!-- Ad Topic -->
+      <div class="col-md-6">
+        <label class="form-label">Ad Topic</label>
+        <div class="input-group">
+          <input type="text" name="ad_topic" class="form-control" placeholder="Enter Ad Topic">
+          <button class="btn btn-outline-secondary" type="button">+</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>
+
                     <div class="d-flex gap-2">
+
                         <button class="btn btn-outline-dark btn-sm">
-                            <i class="bi bi-image"></i> +New
-                        </button>
-                        <div class="dropdown">
-                            <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                                Banner Category
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Category 1</a></li>
-                                <li><a class="dropdown-item" href="#">Category 2</a></li>
-                            </ul>
-                        </div>
-                        <button class="btn btn-outline-secondary btn-sm">
-                            <i class="bi bi-funnel"></i> Filters
+
+                            <i class="bi bi-image"></i> Filters
                         </button>
                     </div>
                 </div>

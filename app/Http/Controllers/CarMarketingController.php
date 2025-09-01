@@ -16,7 +16,7 @@ class CarMarketingController extends Controller
     {
         try {
             $data = CarMake::with('getEngine', 'getCarInfo.getCarDetailCategory', 'getVariant.model.brand', 'getTransmission')->paginate(20);
-            return view('cars.marketing.index', compact('data'));
+            return view('marketing.promotion.index', compact('data'));
         } catch (Exception $e) {
             Log::error('Error::CAR_MARKAETING_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
