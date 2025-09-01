@@ -16,8 +16,12 @@ class CarMakeFuelTypeController extends Controller
      */
     public function index(Request $request)
     {
-        $data = CarMakeFuelType::paginate(20);
-        return view('dynamic.dropdown.fuelType.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 20);;
+        try {
+            $data = CarMakeFuelType::paginate(20);
+            return view('dynamic.dropdown.fuelType.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 20);
+        } catch (Exception $e) {
+            Log::error('ERROR::INDEX_CAR_MAKE_FUEL_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
     }
 
     /**
@@ -25,7 +29,7 @@ class CarMakeFuelTypeController extends Controller
      */
     public function create()
     {
-         try {
+        try {
             return view('dynamic.dropdown.fuelType.create');
         } catch (Exception $e) {
             Log::error('ERROR::CREATE_CAR_MAKE_FUEL_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
@@ -56,9 +60,9 @@ class CarMakeFuelTypeController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-{
-    //
-}
+    {
+        //
+    }
 
 
     /**
@@ -67,13 +71,13 @@ class CarMakeFuelTypeController extends Controller
     public function edit(string $id)
     {
         try {
-        $fuel_type = CarMakeFuelType::findOrFail($id);
+            $fuel_type = CarMakeFuelType::findOrFail($id);
 
-        return view('dynamic.dropdown.fuelType.edit', compact('fuel_type'));
-    } catch (Exception $e) {
-        Log::error('ERROR::EDIT_CAR_MAKE_FUEL_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
-        return redirect()->route('fuel_type.index')->with('error', 'Fuel Type not found.');
-    }
+            return view('dynamic.dropdown.fuelType.edit', compact('fuel_type'));
+        } catch (Exception $e) {
+            Log::error('ERROR::EDIT_CAR_MAKE_FUEL_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            return redirect()->route('fuel_type.index')->with('error', 'Fuel Type not found.');
+        }
     }
 
     /**
@@ -103,16 +107,16 @@ class CarMakeFuelTypeController extends Controller
     public function destroy(string $id)
     {
 
-    try {
-        CarMakeFuelType::find($id)->delete();
+        try {
+            CarMakeFuelType::find($id)->delete();
 
-        return redirect()->route('fuel_type.index')
-            ->with('success', 'Fuel Type deleted successfully.');
-    } catch (Exception $e) {
-        Log::error('ERROR::DELETE_CAR_MAKE_FUEL_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            return redirect()->route('fuel_type.index')
+                ->with('success', 'Fuel Type deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('ERROR::DELETE_CAR_MAKE_FUEL_TYPE ' . $e->getMessage() . ' Line No: ' . $e->getLine());
 
-        return redirect()->route('fuel_type.index')->with('error', 'Failed to delete Fuel Type.');
-    }
+            return redirect()->route('fuel_type.index')->with('error', 'Failed to delete Fuel Type.');
+        }
     }
 
 

@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('cargurus_warranty');
             $table->string('road_tax_amount_rm');
             $table->string('road_tax_year');
-            $table->string('car_brake_id');
+            $table->string('car_make_id')->unique();
             $table->timestamps();
         });
     }

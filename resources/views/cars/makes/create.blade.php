@@ -6,7 +6,7 @@
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">Create Car Make</h4>
+                        <h4 class="fw-bold">CAR MASTER DATA / CAR MAKE</h4>
                         <h6>Create Make</h6>
                     </div>
                 </div>
@@ -141,6 +141,35 @@
                     }
                 });
             }
+        });
+
+        // Reset Button
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            let fields = @json(\App\Constants\commonConstant::CAR_MAKE_RESET_FIELDS);
+
+            fields.forEach(id => {
+                let el = document.getElementById(id);
+                if (el) {
+                    if (el.type === "checkbox" || el.type === "radio") {
+                        el.checked = false;
+                    } else if (el.tagName === "SELECT") {
+                        // Reset normal select
+                        el.selectedIndex = 0;
+
+                        // Reset all Select2 (with or without .select2-ajax class)
+                        if ($(el).data('select2')) {
+                            $(el).val(null).trigger("change");
+                        }
+                    } else {
+                        el.value = "";
+                    }
+                }
+            });
+
+            // Reset file upload preview
+            document.getElementById("brand_logo").value = "";
+            document.getElementById("preview").innerHTML = "";
+            document.getElementById("logoView").innerHTML = "";
         });
     </script>
 @endpush

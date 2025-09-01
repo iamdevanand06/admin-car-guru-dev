@@ -11,8 +11,9 @@
                 </div>
                 <div class="page-btn">
                     @can('make-create')
-                        <a href="{{ route('makes.create') }}" class="btn btn-primary"><i class="ti ti-circle-plus me-1"></i>Add
-                            Make</a>
+                        <a href="{{ route('carmakes.create') }}" class="btn btn-primary"><i
+                                class="ti ti-circle-plus me-1"></i>Add
+                            Car Make</a>
                     @endcan
                 </div>
             </div>

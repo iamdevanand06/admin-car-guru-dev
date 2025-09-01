@@ -10,7 +10,7 @@ class commonConstant
     const CAR_MAKE_DROPDOWN_MODEL = [
         'transmission' => ['model' => 'App\Models\CarMakeTransmission'],
         'fuel_type' => ['model' => 'App\Models\CarMakeFuelType'],
-        'drive_train' => ['model' => 'App\Models\CarMakeDriveTrains'],
+        'drive_train' => ['model' => 'App\Models\CarMakeDriveTrain'],
         'start_year' => ['model' => 'App\Models\CarMakeMadeYear'],
         'end_year' => ['model' => 'App\Models\CarMakeMadeYear'],
         'seat' => ['model' => 'App\Models\CarMakeSeat'],
@@ -76,7 +76,7 @@ class commonConstant
             'url' => '#',
             'icon' => '',
             'submenu' => [
-                ['title' => 'Car Make', 'model' => '', 'url' => 'carmakes/create', 'icon' => ''],
+                ['title' => 'Car Make', 'model' => '', 'url' => 'carmakes', 'icon' => ''],
             ],
         ],
 
@@ -112,5 +112,50 @@ class commonConstant
                 ['title' => 'Roles', 'model' => '', 'url' => 'roles', 'icon' => ''],
             ]
         ],
+    ];
+
+    const CAR_MAKE_RELATIONSHIP_INDEX = ['getEngine', 'getVariant', 'getStartYear', 'getTransmission', 'getDriveTrain', 'getFuelType'];
+    const CAR_MAKE_RELATIONSHIP_SHOW = ['getCountry', 'getEngine', 'getDiamension', 'getBrake', 'getWarranty', 'getEngine', 'getVariant', 'getTransmission', 'getDriveTrain', 'getFuelType', 'getStartYear', 'getEndYear', 'getSeat'];
+
+    const CAR_DETAIL_RELATIONSHIP_INDEX = [''];
+
+    const CAR_MAKE_RESET_FIELDS = [
+        "brand_country",
+        "brand_id",
+        "model_id",
+        "start_year",
+        "end_year",
+        "variant_id",
+        "transmission",
+        "drive_train",
+        "fuel_type",
+        "no_of_door",
+        "seat",
+        "consumption",
+        "consumption_value_km_l",
+        "engine_cc",
+        "engine_type",
+        "compression_ratio",
+        "peak_power_kw",
+        "peak_torque_nm",
+        "length_mm",
+        "weight_mm",
+        "height_mm",
+        "wheel_base_mm",
+        "kerb_weight_kg",
+        "fuel_tank_ltr",
+        "brake_front",
+        "brake_rear",
+        "suspension_front",
+        "suspension_back",
+        "steering",
+        "wheel_type_front",
+        "wheel_type_rear",
+        "wheel_type_front_rims",
+        "wheel_type_rear_rims",
+        "features_equipments",
+        "manufacturers_warranty",
+        "cargurus_warranty",
+        "road_tax_amount_rm"
     ];
 }
