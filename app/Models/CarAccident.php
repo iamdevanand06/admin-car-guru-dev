@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\CarDetailUsage;
+use App\Models\CarMakeManufacturersWarranty;
+use App\Models\CarMakeCarGurusWarranty;
 
 class CarAccident extends Model
 {
     protected $fillable = [
         'id',
-        'car_info_id',
+        'car_detail_id',
         'owner',
         'usage',
         'car_accident',
@@ -25,4 +28,19 @@ class CarAccident extends Model
         'picture_of_keys',
         'others'
     ];
+
+    public function getUsage()
+    {
+        return $this->hasOne(CarDetailUsage::class, 'id', 'usage');
+    }
+
+    public function getManufacturersWarranty()
+    {
+        return $this->hasOne(CarMakeManufacturersWarranty::class, 'id', 'manufacturers_warranty');
+    }
+
+    public function getcargurus_warranty()
+    {
+        return $this->hasOne(CarMakeCarGurusWarranty::class, 'id', 'cargurus_warranty');
+    }
 }

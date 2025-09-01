@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('models', ModelController::class);
     Route::resource('variants', VariantController::class);
     Route::resource('carmakes', CarMakeController::class);
+    // Get MMV Fuel Type 
+    Route::get('/get-fuel-type', [CarMakeController::class, 'getFuelType'])->name('getFuelType');
+
     // Make Dropdown
     Route::get('/list-brand/search', [MakeController::class, 'getBrands'])->name('brands.search');
     Route::post('/add-brand', [MakeController::class, 'postBrands'])->name('brands.add');
@@ -106,9 +109,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('car-details', CarDetailController::class);
     // Car Detail Category Dropdown
-    Route::get('/list-carcategory/search', [CarDetailCategoryController::class, 'getCarCategory'])->name('category.search');
-    Route::post('/add-carcategory', [CarDetailCategoryController::class, 'postCarCategory'])->name('category.add');
-    // Car Detail Category Dropdown
+    Route::get('/list-carcategory/search', [CarDetailCategoryController::class, 'getCarCategory'])->name('categoryDetail-search');
+    // Route::post('/add-carcategory', [CarDetailCategoryController::class, 'postCarCategory'])->name('category.add');
+    Route::get('/generate-code/{prefix}', [CarDetailCategoryController::class, 'generateCode']);
+    // Car Detail Register Type Dropdown
     Route::get('/list-registrationType/search', [CarDetailRegistrationTypeController::class, 'getRegistrationType'])->name('registrationType.search');
     Route::post('/add-registrationType', [CarDetailRegistrationTypeController::class, 'postRegistrationType'])->name('registrationType.add');
     // Car Detail Usage Dropdown
@@ -123,7 +127,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('dynamic/dropdown/engine_type', CarMakeEngineTypeController::class);
     Route::resource('dynamic/dropdown/brake', CarMakeBrakeController::class);
     Route::resource('dynamic/dropdown/steering', CarMakeSteeringController::class);
-    Route::resource('dynamic/dropdown/cargurus_warranty', CarMakeCarGurusWarrantyController::class); 
+    Route::resource('dynamic/dropdown/cargurus_warranty', CarMakeCarGurusWarrantyController::class);
     Route::resource('dynamic/dropdown/usage', CarDetailUsageController::class);
     Route::resource('dynamic/dropdown/registration_type', CarDetailRegistrationTypeController::class);
     Route::resource('dynamic/dropdown/make_seat', CarMakeSeatController::class);

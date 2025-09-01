@@ -1,13 +1,13 @@
-<?php $page = 'Edit-carmake'; ?>
-@extends('layouts.app', ['activePage' => 'table', 'title' => 'Modify Car Makes - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
+<?php $page = 'create-cardetails'; ?>
+@extends('layouts.app', ['activePage' => 'table', 'title' => 'View / Modify Car Details - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="add-item d-flex">
                     <div class="page-title">
-                        <h4 class="fw-bold">CAR MASTER DATA / CAR MAKE</h4>
-                        <h6>Modify Make</h6>
+                        <h4 class="fw-bold">View / Modify Car Details</h4>
+                        <h6>View / Modify Details</h6>
                     </div>
                 </div>
                 <ul class="table-top-head">
@@ -17,7 +17,7 @@
                     </li>
                 </ul>
                 <div class="page-btn mt-0">
-                    <a href="{{route('carmakes.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
+                    <a href="{{route('car-details.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
                             class="me-2"></i>Back</a>
                 </div>
             </div>
@@ -36,7 +36,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="POST" action="{{ route('carmakes.update', $carMake->id) }}" class="add-role-form"
+            <form method="POST" action="{{ route('car-details.update', $carDetail->id) }}" class="add-role-form"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -46,15 +46,12 @@
                             <div id="SpacingOne" class="accordion-collapse collapse show"
                                 aria-labelledby="headingSpacingOne">
                                 <div class="accordion-body border-top">
-                                    @include('cars.makes.edit.mmv')
-                                    @include('cars.makes.edit.enigne')
-                                    @include('cars.makes.edit.dimension')
-                                    @include('cars.makes.edit.brakes')
-                                    @include('cars.makes.edit.warranty')
+                                    @include('cars.details.edit.info')
+                                    @include('cars.details.edit.enigne')
                                     <div class="col-lg-12">
                                         <div class="d-flex align-items-center justify-content-end mb-4">
                                             <button type="button" class="btn btn-secondary me-2"
-                                                href="{{ route('carmakes.index') }}">Cancel</button>
+                                                href="{{ route('car-details.index') }}">Cancel</button>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
@@ -64,8 +61,8 @@
                     </div>
                 </div>
             </form>
+            @include('layouts.partials.footer-moden')
         </div>
-        @include('layouts.partials.footer-moden')
     </div>
 @endsection
 
@@ -101,6 +98,14 @@
                             };
                         },
                         processResults: function (data) {
+                            if (field_id == 'car_info_category') {
+                                return {
+                                    results: data.map(item => ({
+                                        id: item.key,
+                                        text: item.name
+                                    }))
+                                };
+                            }
                             return {
                                 results: data.map(item => ({
                                     id: item.id,
@@ -124,12 +129,44 @@
                     let option = new Option(selectedText, selectedId, true, true);
                     $('#' + field_id).append(option).trigger('change');
                 }
+
+                let initialized = false;
+
+                // On first load, mark as initialized AFTER select2 sets prefilled value
+                $('#car_info_category').one('select2:select', function () {
+                    initialized = true;
+                });
+
+                // On subsequent selections, run logic
+                $('#car_info_category').on('select2:select', function (e) {
+                    if (!initialized) return; // ignore first auto-trigger
+                    let prefix = e.params.data.id;
+                    if (!prefix) return;
+
+                    if (prefix != selectedId) {
+                        // New category → generate new code
+                        fetch(`/generate-code/${prefix}`)
+                            .then(r => r.json())
+                            .then(data => {
+                                if (data.code) {
+                                    $('#car_detail_id').val(data.code);
+                                }
+                            });
+                    } else {
+                        // Same as original → restore prefilled code
+                        $('#car_detail_id').val('{{ $carDetail->car_detail_id ?? "" }}');
+                    }
+                });
+
+
             }
+
+
         });
 
         // Reset Button
         document.getElementById("resetBtn").addEventListener("click", function () {
-            let fields = @json(\App\Constants\commonConstant::CAR_MAKE_RESET_FIELDS);
+            let fields = @json(\App\Constants\commonConstant::CAR_DETAIL_RESET_FIELDS);
 
             fields.forEach(id => {
                 let el = document.getElementById(id);
@@ -158,7 +195,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            let fields = @json(\App\Constants\commonConstant::CAR_MAKE_RESET_FIELDS);
+            let fields = @json(\App\Constants\commonConstant::CAR_DETAIL_RESET_FIELDS);
 
             // Disable everything by default
             fields.forEach(id => {

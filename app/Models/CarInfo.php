@@ -5,15 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\CarDetailCategory;
+use App\Models\CarAccident;
+use App\Models\CarDetailRegistrationType;
+use App\Models\CarMakeExteriorColor;
+use App\Models\CarMakeInteriorColor;
 
 class CarInfo extends Model
 {
     protected $fillable = [
         'id',
-        'car_id',
+        'car_detail_id',
         'car_info_category',
         'car_info_price',
         'car_info_location',
+        'brand_id',
+        'model_id',
+        'variant_id',
+        'car_info_fuel_type',
         'car_info_registration_type',
         'car_info_registration_number',
         'car_info_registration_date',
@@ -26,8 +34,36 @@ class CarInfo extends Model
         'mileage',
     ];
 
+    public function getCarDetailAccident()
+    {
+        return $this->hasOne(CarAccident::class, 'car_detail_id', 'car_detail_id');
+    }
+
     public function getCarDetailCategory()
     {
-        return $this->hasOne(CarDetailCategory::class, 'id', 'car_info_category');
+        return $this->hasOne(CarDetailCategory::class, 'key', 'car_info_category');
+    }
+    public function getVariant()
+    {
+        return $this->hasOne(Variant::class, 'id', 'variant_id');
+    }
+    public function getCountry()
+    {
+        return $this->hasOne(Country::class, 'id', 'car_info_location');
+    }
+
+    public function getRegistrationType()
+    {
+        return $this->hasOne(CarDetailRegistrationType::class, 'id', 'car_info_registration_type');
+    }
+
+    public function getExteriorColor()
+    {
+        return $this->hasOne(CarMakeExteriorColor::class, 'color', 'car_info_exterior_color');
+    }
+
+    public function getInteriorColor()
+    {
+        return $this->hasOne(CarMakeInteriorColor::class, 'color', 'interior_color');
     }
 }

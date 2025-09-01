@@ -7,7 +7,7 @@
                 <div class="add-item d-flex">
                     <div class="page-title">
                         <h4 class="fw-bold">Create Detail Category</h4>
-                        <h6>Create  Detail Category</h6>
+                        <h6>Create Detail Category</h6>
                     </div>
                 </div>
                 <ul class="table-top-head">
@@ -49,6 +49,12 @@
                                 aria-labelledby="headingSpacingOne">
                                 <div class="accordion-body border-top">
                                     <div class="row">
+                                        <div class="col-sm-6 col-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Key<span class="text-danger ms-1">*</span></label>
+                                                <input type="text" name="key" id="key" class="form-control">
+                                            </div>
+                                        </div>
                                         <div class="col-sm-6 col-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Name<span

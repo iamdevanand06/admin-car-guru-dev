@@ -38,6 +38,13 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-12">
                                             <div class="mb-3">
+                                                <label class="form-label">Key<span class="text-danger ms-1">*</span></label>
+                                                <input type="text" name="key" id="key" class="form-control"
+                                                    value="{{ $detail_category->key }}">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-12">
+                                            <div class="mb-3">
                                                 <label class="form-label">Name<span
                                                         class="text-danger ms-1">*</span></label>
                                                 <input type="text" name="name" id="name" class="form-control"

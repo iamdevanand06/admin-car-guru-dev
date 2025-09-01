@@ -7,6 +7,7 @@ use App\Traits\commonTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use App\Helpers\CodeGenerator;
 
 class CarDetailCategoryController extends Controller
 {
@@ -15,7 +16,8 @@ class CarDetailCategoryController extends Controller
      * Display a listing of the resource.
      */
     public function index(Request $request)
-    {try {
+    {
+        try {
             $data = CarDetailCategory::orderBy('id', 'DESC')->paginate(10);
             return view('dynamic.dropdown.DetailCategory.index', compact('data'))
                 ->with('i', (request()->input('page', 1) - 1) * 10);
@@ -44,6 +46,7 @@ class CarDetailCategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'key' => 'required',
             'status' => 'required|boolean',
         ]);
 
@@ -71,13 +74,13 @@ class CarDetailCategoryController extends Controller
     public function edit(string $id)
     {
         try {
-        $detail_category = CarDetailCategory::findOrFail($id);
+            $detail_category = CarDetailCategory::findOrFail($id);
 
-        return view('dynamic.dropdown.DetailCategory.create', compact('detail_category'));
-    } catch (Exception $e) {
-        Log::error('ERROR::EDIT_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
-        return redirect()->route('detail_category.index')->with('error', 'detail Category not found.');
-    }
+            return view('dynamic.dropdown.DetailCategory.edit', compact('detail_category'));
+        } catch (Exception $e) {
+            Log::error('ERROR::EDIT_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            return redirect()->route('detail_category.index')->with('error', 'detail Category not found.');
+        }
     }
 
     /**
@@ -87,15 +90,16 @@ class CarDetailCategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'key' => 'required',
             'status' => 'required|boolean',
         ]);
 
         try {
             $input = $request->all();
-            $transmission = CarMakeTransmission::find($id);
-            $transmission->update($input);
+            $category = CarDetailCategory::find($id);
+            $category->update($input);
 
-            return redirect()->route('detail_category.index')->with('success', 'DetailCategory Updated successfully');
+            return redirect()->route('detail_category.index')->with('success', 'Detail Category Updated successfully');
         } catch (Exception $e) {
             Log::error('ERROR::UPDATE_CAR_DETAIL_CATEGORY ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -107,21 +111,21 @@ class CarDetailCategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-        CarDetailCategory::find($id)->delete();
+            CarDetailCategory::find($id)->delete();
 
-        return redirect()->route('detail_category.index')
-            ->with('success', 'Fuel Type deleted successfully.');
-    } catch (Exception $e) {
-        Log::error('ERROR::DELETE_CAR_DETAIL_CATEGORY' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            return redirect()->route('detail_category.index')
+                ->with('success', 'Category deleted successfully.');
+        } catch (Exception $e) {
+            Log::error('ERROR::DELETE_CAR_DETAIL_CATEGORY' . $e->getMessage() . ' Line No: ' . $e->getLine());
 
-        return redirect()->route('detail_category.index')->with('error', 'Failed to delete Detail Category.');
-    }
+            return redirect()->route('detail_category.index')->with('error', 'Failed to delete Detail Category.');
+        }
     }
 
     public function getCarCategory(Request $request)
     {
         try {
-            return $this->getDropdownOptions($request->field_id, $request->q);
+            return $this->getDropdownOptions($request->field_id, $request->q, 'key');
         } catch (Exception $e) {
             Log::error('Error::CAR_DETAIL_CATEGORY_SEARCH_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -134,6 +138,15 @@ class CarDetailCategoryController extends Controller
             return $this->postDropdownOptions($request->field_id, $request->name);
         } catch (Exception $e) {
             Log::error('Error::CAR_DETAIL_CATEGORY_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
+    }
+    public function generateCode($prefix)
+    {
+        try {
+            $code = CodeGenerator::generate($prefix);
+            return response()->json(['code' => $code]);
+        } catch (Exception $e) {
+            Log::error('Error::CAR_DETAIL_CATEGORY_SEARCH_GENERATE_CODE, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
     }
 }

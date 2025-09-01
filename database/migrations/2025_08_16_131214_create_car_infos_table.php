@@ -12,10 +12,14 @@ return new class extends Migration {
     {
         Schema::create('car_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('car_id')->unique();
+            $table->string('car_detail_id')->unique();
             $table->string('car_info_category');
             $table->integer('car_info_price');
             $table->string('car_info_location');
+            $table->string('brand_id');
+            $table->string('model_id');
+            $table->string('variant_id');
+            $table->string('car_info_fuel_type');
             $table->string('car_info_registration_type');
             $table->string('car_info_registration_number');
             $table->string('car_info_registration_date');

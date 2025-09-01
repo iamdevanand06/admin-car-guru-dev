@@ -69,7 +69,7 @@ class CarMakeInteriorColorController extends Controller
     public function getInteriorColor(Request $request)
     {
         try {
-            return $this->getDropdownOptions($request->field_id, $request->q);
+            return $this->getDropdownOptions($request->field_id, $request->q, 'color');
         } catch (Exception $e) {
             Log::error('Error::CAR_MAKE_INTERIOR_COLOR_SEARCH_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }

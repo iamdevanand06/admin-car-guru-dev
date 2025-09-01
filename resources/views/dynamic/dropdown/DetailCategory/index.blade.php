@@ -10,9 +10,9 @@
                     </div>
                 </div>
                 <div class="page-btn">
-                        <a href="{{ route('detail_category.create') }}" class="btn btn-primary"><i
-                                class="ti ti-circle-plus me-1"></i>Add
-                            Detail Category</a>
+                    <a href="{{ route('detail_category.create') }}" class="btn btn-primary"><i
+                            class="ti ti-circle-plus me-1"></i>Add
+                        Detail Category</a>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>No</th>
-                                    <th>ID</th>
+                                    <th>Key</th>
                                     <th>Name</th>
                                     <th>Status</th>
                                     <th>Action</th>
@@ -50,7 +50,7 @@
                                 @forelse ($data as $key => $detail_category)
                                     <tr>
                                         <td>{{ ++$i }}</td>
-                                        <td>{{ $detail_category->id }}</td>
+                                        <td>{{ $detail_category->key }}</td>
                                         <td>
                                             <div class=" d-flex align-items-center">
                                                 <a href="javascript:void(0);">{{ $detail_category->name }}</a>
@@ -83,8 +83,8 @@
                                     </tr>
                                 @empty
                                     <tr>
-<td >
-                                        No More Data</td>
+                                        <td>
+                                            No More Data</td>
                                     </tr>
                                 @endforelse
                             </tbody>

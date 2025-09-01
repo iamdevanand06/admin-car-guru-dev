@@ -17,7 +17,7 @@
                     </li>
                 </ul>
                 <div class="page-btn mt-0">
-                    <a href="{{route('carmakes.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
+                    <a href="{{route('car-details.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
                             class="me-2"></i>Back</a>
                 </div>
             </div>
@@ -45,12 +45,12 @@
                             <div id="SpacingOne" class="accordion-collapse collapse show"
                                 aria-labelledby="headingSpacingOne">
                                 <div class="accordion-body border-top">
-                                    @include('cars.details.info')
-                                    @include('cars.details.enigne')
+                                    @include('cars.details.create.info')
+                                    @include('cars.details.create.enigne')
                                     <div class="col-lg-12">
                                         <div class="d-flex align-items-center justify-content-end mb-4">
                                             <button type="button" class="btn btn-secondary me-2"
-                                                href="{{ route('carmakes.index') }}">Cancel</button>
+                                                href="{{ route('car-details.index') }}">Cancel</button>
                                             <button type="submit" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
@@ -139,6 +139,35 @@
                     }
                 });
             }
+
+        });
+        // Reset Button
+        document.getElementById("resetBtn").addEventListener("click", function () {
+            let fields = @json(\App\Constants\commonConstant::CAR_DETAIL_RESET_FIELDS);
+
+            fields.forEach(id => {
+                let el = document.getElementById(id);
+                if (el) {
+                    if (el.type === "checkbox" || el.type === "radio") {
+                        el.checked = false;
+                    } else if (el.tagName === "SELECT") {
+                        // Reset normal select
+                        el.selectedIndex = 0;
+
+                        // Reset all Select2 (with or without .select2-ajax class)
+                        if ($(el).data('select2')) {
+                            $(el).val(null).trigger("change");
+                        }
+                    } else {
+                        el.value = "";
+                    }
+                }
+            });
+
+            // Reset file upload preview
+            document.getElementById("brand_logo").value = "";
+            document.getElementById("preview").innerHTML = "";
+            document.getElementById("logoView").innerHTML = "";
         });
     </script>
 @endpush

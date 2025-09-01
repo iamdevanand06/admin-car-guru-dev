@@ -9,7 +9,7 @@ use Exception;
 trait commonTrait
 {
 
-    public function getDropdownOptions($field_id, $search)
+    public function getDropdownOptions($field_id, $search, $key = '')
     {
         try {
             $model = $this->getModelTable($field_id);
@@ -20,10 +20,12 @@ trait commonTrait
 
             $query = $model[0]::query()->where('status', '1')->orderBy('name', 'asc');
 
+            $key_field = $key != '' ? $key : 'id';
+
             if (!empty($search)) {
                 $query->where('name', 'like', "%$search%");
             }
-            $data = $query->orderBy('name', 'asc')->get(['id', 'name']);
+            $data = $query->orderBy('name', 'asc')->get([$key_field, 'name']);
 
             return response()->json($data);
         } catch (Exception $e) {
