@@ -64,14 +64,24 @@ class CarBrake extends Model
 
     public function getFeaturesEquipmentsListAttribute()
     {
-        // Decode JSON string to array
-        $ids = json_decode($this->features_equipments ?? '[]', true) ?? [];
+        $ids = $this->features_equipments;
 
-        // Ensure it's always an array of integers
-        $ids = array_map('intval', $ids);
+        // Normalize to array
+        if (is_string($ids)) {
+            $ids = json_decode($ids, true) ?: [];
+        }
 
-        return Feature::whereIn('id', $ids)->get(['id', 'feature_name as text']);
+        if (!is_array($ids)) {
+            $ids = [];
+        }
+
+        // Ensure integers
+        $features_ids = array_map('intval', $ids);
+
+        return Feature::whereIn('id', $features_ids)
+            ->get(['id', 'feature_name as text']);
     }
+
 
 
 }

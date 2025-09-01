@@ -25,8 +25,8 @@ class CarMakeController extends Controller
     public function index(Request $request)
     {
         try {
-            $data = CarMake::with(commonConstant::CAR_MAKE_RELATIONSHIP_INDEX)->paginate(20);
-            return view('cars.makes.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 20);
+            $data = CarMake::with(commonConstant::CAR_MAKE_RELATIONSHIP_INDEX)->orderBy('id', 'desc')->paginate(5);
+            return view('cars.makes.index', compact('data'))->with('i', ($request->input('page', 1) - 1) * 5);
         } catch (Exception $e) {
             Log::error('Error::GET_CAR_MAKE_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -385,7 +385,19 @@ class CarMakeController extends Controller
                 'text' => $feature->feature_name
             ]);
         } catch (Exception $e) {
-            Log::error('Error::FEATURE_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+            Log::error(message: 'Error::FEATURE_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
+        }
+    }
+
+    public function getFuelType(Request $request)
+    {
+        try {
+            $fuel_type_id = CarMake::with('getFuelType')->where('brand_country', $request->brand_country)->where('brand_id', $request->make)->where('model_id', $request->model)->where('variant_id', $request->variant)->first();
+            return [
+                'fuel_type' => $fuel_type_id->getFuelType->name,
+            ];
+        } catch (Exception $e) {
+            Log::error(message: 'Error::GET_FUEL_TYPE_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
     }
 }

@@ -34,13 +34,13 @@
                     <div class="search-set">
                         <div class="search-input">
                             <!-- <form method="GET" action="{{ route('carmakes.index') }}">
-                                                                        @csrf
-                                                                        <div class="row">
-                                                                            <div class="col"><input type="text" id="user-search" name="user-search"
-                                                                                    class="form-control" placeholder="Search Make" /></div>
-                                                                            <div class="col"><button class="btn btn-primary" type="submit">Search</button></div>
-                                                                        </div>
-                                                                    </form> -->
+                                                                            @csrf
+                                                                            <div class="row">
+                                                                                <div class="col"><input type="text" id="user-search" name="user-search"
+                                                                                        class="form-control" placeholder="Search Make" /></div>
+                                                                                <div class="col"><button class="btn btn-primary" type="submit">Search</button></div>
+                                                                            </div>
+                                                                        </form> -->
                         </div>
                     </div>
                     <div class="page-btn">
@@ -88,11 +88,11 @@
                                         <td class="action-table-data">
                                             <div class="edit-delete-action">
                                                 <a class="btn me-2 p-2 mb-0" href="{{ route('carmakes.edit', $carMake->id) }}">
-                                                    Modify
+                                                    <i class="fa-regular fa-eye"></i>
                                                 </a>
-                                                <a class="me-2 p-2 mb-0" href="{{ route('carmakes.show', $carMake->id) }}">
-                                                    <i class="fa-solid fa-magnifying-glass"></i>
-                                                </a>
+                                                <!-- <a class="me-2 p-2 mb-0" href="{{ route('carmakes.show', $carMake->id) }}">
+                                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                                        </a> -->
                                             </div>
                                         </td>
                                     </tr>

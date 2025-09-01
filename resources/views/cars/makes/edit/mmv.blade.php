@@ -1,8 +1,9 @@
 <div class="row">
-    <div class="col-11">
+    <div class="col-10">
     </div>
-    <div class="col-1 justify-content-end">
+    <div class="col-2 justify-content-end">
         <button type="button" id="resetBtn" class="btn bg-warning text-black">Reset</button>
+        <button type="button" id="disableBtn" class="btn bg-warning text-black">Modify</button>
     </div>
 </div>
 <hr />
@@ -315,72 +316,5 @@
             }
         });
 
-    });
-</script>
-<script>
-    document.getElementById("resetBtn").addEventListener("click", function () {
-        let fields = [
-            "brand_country",
-            "brand_id",
-            "model_id",
-            "start_year",
-            "end_year",
-            "variant_id",
-            "transmission",
-            "drive_train",
-            "fuel_type",
-            "no_of_door",
-            "seat",
-            "consumption",
-            "consumption_value_km_l",
-            "engine_cc",
-            "engine_type",
-            "compression_ratio",
-            "peak_power_kw",
-            "peak_torque_nm",
-            "length_mm",
-            "weight_mm",
-            "height_mm",
-            "wheel_base_mm",
-            "kerb_weight_kg",
-            "fuel_tank_ltr",
-            "brake_front",
-            "brake_rear",
-            "suspension_front",
-            "suspension_back",
-            "steering",
-            "wheel_type_front",
-            "wheel_type_rear",
-            "wheel_type_front_rims",
-            "wheel_type_rear_rims",
-            "features_equipments",
-            "manufacturers_warranty",
-            "cargurus_warranty",
-            "road_tax_amount_rm"
-        ];
-
-        fields.forEach(id => {
-            let el = document.getElementById(id);
-            if (el) {
-                if (el.type === "checkbox" || el.type === "radio") {
-                    el.checked = false;
-                } else if (el.tagName === "SELECT") {
-                    // Reset normal select
-                    el.selectedIndex = 0;
-
-                    // Reset all Select2 (with or without .select2-ajax class)
-                    if ($(el).data('select2')) {
-                        $(el).val(null).trigger("change");
-                    }
-                } else {
-                    el.value = "";
-                }
-            }
-        });
-
-        // Reset file upload preview
-        document.getElementById("brand_logo").value = "";
-        document.getElementById("preview").innerHTML = "";
-        document.getElementById("logoView").innerHTML = "";
     });
 </script>

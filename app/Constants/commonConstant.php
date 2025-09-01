@@ -97,7 +97,7 @@ class commonConstant
             'url' => '#',
             'icon' => '',
             'submenu' => [
-                ['title' => 'Car Details', 'model' => '', 'url' => 'car-details/create', 'icon' => ''],
+                ['title' => 'Car Details', 'model' => '', 'url' => 'car-details', 'icon' => ''],
             ]
         ],
         ['title' => 'SALES', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
@@ -117,7 +117,9 @@ class commonConstant
     const CAR_MAKE_RELATIONSHIP_INDEX = ['getEngine', 'getVariant', 'getStartYear', 'getTransmission', 'getDriveTrain', 'getFuelType'];
     const CAR_MAKE_RELATIONSHIP_SHOW = ['getCountry', 'getEngine', 'getDiamension', 'getBrake', 'getWarranty', 'getEngine', 'getVariant', 'getTransmission', 'getDriveTrain', 'getFuelType', 'getStartYear', 'getEndYear', 'getSeat'];
 
-    const CAR_DETAIL_RELATIONSHIP_INDEX = [''];
+    const CAR_DETAIL_RELATIONSHIP_INDEX = ['getCarDetailAccident', 'getCarDetailCategory', 'getVariant'];
+
+    const CAR_DETAIL_RELATIONSHIP_SHOW = ['getCarDetailAccident', 'getRegistrationType', 'getCarDetailCategory', 'getVariant'];
 
     const CAR_MAKE_RESET_FIELDS = [
         "brand_country",
@@ -157,5 +159,41 @@ class commonConstant
         "manufacturers_warranty",
         "cargurus_warranty",
         "road_tax_amount_rm"
+    ];
+
+    const CAR_DETAIL_RESET_FIELDS = [
+        'car_detail_id',
+        'car_info_category',
+        'car_info_price',
+        'car_info_location',
+        'brand_id',
+        'model_id',
+        'variant_id',
+        'car_info_fuel_type',
+        'car_info_registration_type',
+        'car_info_registration_number',
+        'car_info_registration_date',
+        'car_info_car_make_year',
+        'car_info_exterior_color',
+        'interior_color',
+        'number_of_keys',
+        'engine_number',
+        'chassis_number',
+        'mileage',
+        'owner',
+        'usage',
+        'car_accident',
+        'flood_car',
+        'manufacturers_warranty',
+        'cargurus_warranty',
+        'road_tax_amount',
+        'road_tax_year',
+        'inspector_feedback_comment',
+        'carguru_spotlight_header_copy',
+        'carguru_spotlight_body_copy',
+        'voc_document',
+        'roadtax_document',
+        'picture_of_keys',
+        'others'
     ];
 }
