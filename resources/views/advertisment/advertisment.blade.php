@@ -1,21 +1,8 @@
 <?php $page = 'create-cardetails'; ?>
 @extends('layouts.app', ['activePage' => 'table', 'title' => 'Create Car Details - Admin Panel - CarGuru', 'navName' => 'Table List', 'activeButton' => 'laravel'])
 @section('content')
-
     <div class="page-wrapper">
         <div class="content">
-            <div class="page-header">
-                <div class="add-item d-flex">
-                    <div class="page-title">
-                        {{-- <h4 class="fw-bold">Create Car Details</h4>
-                        <h6>Create Details</h6> --}}
-                    </div>
-                </div>
-                {{-- <div class="page-btn mt-0">
-                    <a href="{{route('carmakes.index')}}" class="btn btn-secondary"><i data-feather="arrow-left"
-                            class="me-2"></i>Back</a>
-                </div> --}}
-            </div>
 
 
             @if(session('success'))
@@ -34,66 +21,68 @@
                     </ul>
                 </div>
             @endif
-             <!-- Top Bar -->
-             <form method="post" enctype="multipart/form-data">
-                  <!-- Title -->
-  <h5 class="fw-bold mb-4">ADVERTISING & PROMOTION BANNERS</h5>
-  <div class="d-flex justify-content-end gap-2 mb-3">
-
-    <button type="reset" form="bannerForm" class="btn btn-outline-secondary btn-sm">Clear All</button>
-    <button type="submit" form="bannerForm" class="btn btn-outline-primary btn-sm">Preview</button>
-    <button type="submit" form="bannerForm" class="btn btn-primary btn-sm">Save</button>
-    <button type="button" class="btn btn-outline-danger btn-sm">Close ✕</button>
-  </div>
 
             <!-- Banner Header -->
             <div class="container-fluid bg-light py-2">
                 <div class="d-flex justify-content-between align-items-center">
-                    {{-- <h6 class="fw-bold mb-0">ADVERTISING & PROMOTION BANNERS</h6> --}}
-<div class="container-fluid">
-{{--
-  <!-- Title -->
-  <h5 class="fw-bold mb-4">ADVERTISING & PROMOTION BANNERS</h5> --}}
+                    <h6 class="fw-bold mb-0">ADVERTISING & PROMOTION BANNERS</h6>
+                    <div class="d-flex justify-content-start gap-2 mt-0 fs-6">
+                                    <button class="btn btn-light p-2 h-25">Clear All</button>
+                                    <button class="btn btn-light p-2 h-25"><P></P>review</button>
+                                    <button class="btn btn-light p-2 h-25">Save</button>
+                                    <button type="button" class="btn btn-light d-flex align-items-center" data-bs-dismiss="modal" aria-label="Close">
+  Close
+  <span class="ms-1" aria-hidden="true">&times;</span>
+</button>
+                                    <input type="hidden" id="status" name="status" value="1">
+                                </div>
+                                   </div>
+            </div>
 
-  <!-- Ad Placement & Topic Row -->
-  <form method="post" enctype="multipart/form-data">
-    <div class="row g-3 mb-4">
-      <!-- Ad Placement -->
-      <div class="col-md-6">
-        <label class="form-label">Ad Placement</label>
-        <div class="input-group">
-          <select name="ad_placement" class="form-select">
-            <option value="">Select Ad Placement</option>
-            <option value="home">Home</option>
-            <option value="sidebar">Sidebar</option>
-            <option value="footer">Footer</option>
-          </select>
-          <button class="btn btn-outline-secondary" type="button">+</button>
-        </div>
-      </div>
-
-      <!-- Ad Topic -->
-      <div class="col-md-6">
-        <label class="form-label">Ad Topic</label>
-        <div class="input-group">
-          <input type="text" name="ad_topic" class="form-control" placeholder="Enter Ad Topic">
-          <button class="btn btn-outline-secondary" type="button">+</button>
-        </div>
-      </div>
+<div class="container mt-3">
+  <div class="row g-3">
+    <!-- Ad Placement -->
+    <div class="col-md-5">
+      <label for="adPlacement" class="form-label">Ad Placement</label>
+      <select id="adPlacement" class="form-select">
+        <option selected>Select Ad Placement</option>
+        <option value="1">Header</option>
+        <option value="2">Sidebar</option>
+        <option value="3">Footer</option>
+      </select>
     </div>
-  </form>
 
+    <!-- Ad Topic -->
+    <div class="col-md-5">
+      <label for="adTopic" class="form-label">Ad Topic</label>
+      <select id="adTopic" class="form-select">
+        <option selected>Enter Ad Topic</option>
+        <option value="1">Cars</option>
+        <option value="2">Real Estate</option>
+        <option value="3">Technology</option>
+      </select>
+    </div>
+  </div>
 </div>
 
-                    <div class="d-flex gap-2">
+<div class="container mt-3">
+  <div class="row align-items-center">
+    <!-- Left text -->
+    <div class="col">
+      <h6 class="mb-0 fw-bold">HOME - MAIN BANNER</h6>
+    </div>
 
-                        <button class="btn btn-outline-dark btn-sm">
+    <!-- Right button -->
+    <div class="col-auto">
+     <!-- New Button with Icon -->
+<button class="btn btn-outline-dark btn-sm d-flex align-items-center">
+  <i class="bi bi-plus me-1"></i> New
+  <i class="bi bi-image ms-2"></i>
+</button>
 
-                            <i class="bi bi-image"></i> Filters
-                        </button>
-                    </div>
-                </div>
-            </div>
+    </div>
+  </div>
+</div>
 
             <!-- Card Section -->
             <div class="mt-0">
@@ -120,12 +109,11 @@
                                     <button class="btn btn-light p-2 h-25">Delete</button>
                                     <button class="btn btn-light p-2 h-25">Archive</button>
                                     <button class="btn btn-light p-2 h-25">Preview</button>
-                                    <button id="saveBanner" type="submit" class="btn btn-light p-2 h-25">Save</button>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="flexSwitchCheckChecked" checked>
-                                        <label class="form-check-label" for="flexSwitchCheckChecked"></label>
-                                    </div>
+
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheck">
+  <label class="form-check-label rounded-5" for="flexSwitchCheck" id="switchLabel">Deactivated</label>
+</div>
+
                                     <input type="hidden" id="status" name="status" value="1">
                                 </div>
                             </div>
@@ -135,7 +123,7 @@
                         <div class="container mt-5">
                             <div class="row g-5">
                                 <!-- Web Version -->
-                                <div class="col-md-8 mt-5 ps-3">
+                                <div class="col-md-8 mt-5 ps-5">
                                     <label for="webUpload" class="w-100">
                                         <div id="webBox"
                                             class="d-flex flex-column justify-content-center align-items-center  position-relative"
@@ -377,4 +365,18 @@
                     t.querySelector('.label').textContent = !on ? "Activated" : "Deactivated";
                 });
             </script>
+
+<script>
+  const switchCheck = document.getElementById("flexSwitchCheck");
+  const switchLabel = document.getElementById("switchLabel");
+
+  switchCheck.addEventListener("change", function () {
+    if (this.checked) {
+      switchLabel.textContent = "Activated";
+    } else {
+      switchLabel.textContent = "Deactivated";
+    }
+  });
+</script>
+
 @endsection
