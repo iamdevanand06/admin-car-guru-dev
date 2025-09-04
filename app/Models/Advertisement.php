@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\AdPlacement;
+use App\Models\AdTopic;
 
 class Advertisement extends Model
 {
@@ -18,6 +20,18 @@ class Advertisement extends Model
         'banner_web',
         'banner_mob',
         'location',
-        'status'
+        'status',
+        'ad_placement',
+        'ad_topic'
     ];
+
+    public function getAdPlacement()
+    {
+        return $this->hasOne(AdPlacement::class, 'id', 'ad_placement');
+    }
+
+    public function getAdTopic()
+    {
+        return $this->hasOne(AdTopic::class, 'id', 'ad_topic');
+    }
 }

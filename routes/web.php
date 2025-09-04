@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdPlacementController;
+use App\Http\Controllers\AdTopicController;
 use App\Http\Controllers\AdvertismentController;
 use App\Http\Controllers\CarDetailCategoryController;
 use App\Http\Controllers\CarDetailController;
@@ -23,6 +25,7 @@ use App\Http\Controllers\CarMakeTransmissionController;
 use App\Http\Controllers\CarMarketingController;
 use App\Http\Controllers\MakeController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\PromosDiscountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
@@ -119,7 +122,19 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/list-Usage/search', [CarDetailUsageController::class, 'getUsage'])->name('usage.search');
     Route::post('/add-Usage', [CarDetailUsageController::class, 'postUsage'])->name('usage.add');
 
-    Route::resource('car-marketing', CarMarketingController::class);
+    Route::resource('marketing/advertising-promotion', AdvertismentController::class);
+    // Car Ad Placement Dropdown
+    Route::get('/list-adplacement/search', [AdPlacementController::class, 'getAdPlacement'])->name('Adplacement.search');
+    Route::post('/add-adplacement', [AdPlacementController::class, 'postAdplacement'])->name('Adplacement.add');
+    // Car Ad Topic Dropdown
+    Route::get('/list-getadTopic/search', [AdTopicController::class, 'getAdTopic'])->name('getAdTopic.search');
+    Route::post('/add-getadTopic', [AdTopicController::class, 'postAdTopic'])->name('getAdTopic.add');
+    Route::get('get-ads-banner', [AdvertismentController::class, 'getBanner'])->name('advertisment.getSet');
+    Route::get('get-ads-id', [AdvertismentController::class, 'getBannerById'])->name('getBannerById');
+
+    Route::resource('marketing/promo_discounts', PromosDiscountController::class);
+
+
     Route::resource('dynamic/dropdown/transmission', CarMakeTransmissionController::class);
     Route::resource('dynamic/dropdown/fuel_type', CarMakeFuelTypeController::class);
     Route::resource('dynamic/dropdown/drive_train', CarMakeDriveTrainController::class);
@@ -138,7 +153,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 
-    Route::resource('advertisment', AdvertismentController::class);
+    Route::resource('advertising-promotion', AdvertismentController::class);
 
     Route::get('/promotion', function () {
         return view('marketing.promotion.index');

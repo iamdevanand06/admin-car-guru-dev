@@ -9,7 +9,7 @@ use Exception;
 trait commonTrait
 {
 
-    public function getDropdownOptions($field_id, $search, $key = '')
+    public function getDropdownOptions($field_id, $search, $key = '', $searchBy = '')
     {
         try {
             $model = $this->getModelTable($field_id);
@@ -20,12 +20,16 @@ trait commonTrait
 
             $query = $model[0]::query()->where('status', '1')->orderBy('name', 'asc');
 
+            if ($field_id == 'ad_topic') {
+                $query = $query->where('ad_placement_id', $searchBy);
+            }
+
             $key_field = $key != '' ? $key : 'id';
 
             if (!empty($search)) {
                 $query->where('name', 'like', "%$search%");
             }
-            $data = $query->orderBy('name', 'asc')->get([$key_field, 'name']);
+            $data = $query->get([$key_field, 'name']);
 
             return response()->json($data);
         } catch (Exception $e) {
@@ -33,14 +37,18 @@ trait commonTrait
         }
     }
 
-    public function postDropdownOptions($field_id, $name)
+    public function postDropdownOptions($field_id, $name, $extra = '')
     {
         try {
             $model = $this->getModelTable($field_id);
             if (!$model) {
                 return response()->json([]);
             }
-            $data = $model[0]::create(['name' => $name, 'status' => '1']);
+            $input = ['name' => $name, 'status' => '1'];
+            if ($field_id == 'ad_topic') {
+                $input['ad_placement_id'] = $extra;
+            }
+            $data = $model[0]::create($input);
             return response()->json($data);
         } catch (Exception $e) {
             Log::error('ERROR::POST_DROPDOWN_OPTION_SEARCH_ADD_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());

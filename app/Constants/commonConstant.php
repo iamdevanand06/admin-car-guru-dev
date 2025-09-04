@@ -30,6 +30,8 @@ class commonConstant
         'car_registration_type' => ['model' => 'App\Models\CarDetailRegistrationType'],
         'car_info_exterior_color' => ['model' => 'App\Models\CarMakeExteriorColor'],
         'usage' => ['model' => 'App\Models\CarDetailUsage'],
+        'ad_placement' => ['model' => 'App\Models\AdPlacement'],
+        'ad_topic' => ['model' => 'App\Models\AdTopic'],
     ];
 
     const COUNTRY_DETAILS_PATH = 'app/public/files/countries_array_completed.json';
@@ -68,6 +70,17 @@ class commonConstant
                         ['title' => 'Registration Type', 'model' => '', 'url' => 'dynamic/dropdown/registration_type', 'icon' => ''],
                     ],
                 ],
+                // [
+                //     'title' => 'Car Brand Management',
+                //     'model' => '',
+                //     'url' => '#',
+                //     'icon' => '',
+                //     'submenu' => [
+                //         ['title' => 'Brand', 'model' => '', 'url' => 'makes', 'icon' => ''],
+                //         ['title' => 'Model', 'model' => '', 'url' => 'models', 'icon' => ''],
+                //         ['title' => 'Variant', 'model' => '', 'url' => 'variants', 'icon' => ''],
+                //     ]
+                // ]
             ],
         ],
         [
@@ -86,8 +99,9 @@ class commonConstant
             'url' => '#',
             'icon' => '',
             'submenu' => [
-                ['title' => 'Marketing', 'model' => '', 'url' => 'car-marketing/', 'icon' => ''],
-            ]
+                ['title' => 'Advertising & Promotion', 'model' => '', 'url' => 'marketing/advertising-promotion/', 'icon' => ''],
+                ['title' => 'Promos & Discounts', 'model' => '', 'url' => 'marketing/promo_discounts/', 'icon' => ''],
+            ],
         ],
         ['title' => 'HUMAN CAPITAL', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
         ['title' => 'FINANCE', 'model' => '', 'url' => '#', 'icon' => '', 'submenu' => []],
@@ -195,5 +209,15 @@ class commonConstant
         'roadtax_document',
         'picture_of_keys',
         'others'
+    ];
+
+    const MARKETING_ADVERTISMENT_PROMOTION_FIELDS = [
+        'set',
+        'banner_web',
+        'banner_mob',
+        'banner_url',
+        'status',
+        'ad_placement',
+        'ad_topic'
     ];
 }

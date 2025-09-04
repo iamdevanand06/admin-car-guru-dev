@@ -41,7 +41,6 @@ class ModelController extends Controller
             } else {
                 $data = Models::with('brand')->paginate(20);
             }
-
             return view('mmv.models.index', compact('data'))
                 ->with('i', ($request->input('page', 1) - 1) * 5);
         } catch (Exception $e) {

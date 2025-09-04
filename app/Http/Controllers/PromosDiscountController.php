@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Exception;
+use App\Models\PromoDiscount;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use App\Models\CarMake;
 
-class CarMarketingController extends Controller
+class PromosDiscountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        try {
-            $data = CarMake::with('getEngine', 'getCarInfo.getCarDetailCategory', 'getVariant.model.brand', 'getTransmission')->paginate(20);
-            return view('cars.marketing.index', compact('data'));
+ try {
+           
+            return view('marketing.promo_discounts.index');
         } catch (Exception $e) {
             Log::error('Error::CAR_MARKAETING_DATA, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -27,7 +25,14 @@ class CarMarketingController extends Controller
      */
     public function create()
     {
-        //
+              try {
+            return view('marketing.promo_discounts.create');
+            
+        } 
+        catch (Exception $e) {
+            Log::error('Error::CAR_MAKE_SUSPENSION_INDEX, Message: ' . $e->getMessage());
+            return back()->with('error', 'Something went wrong while fetching suspensions.');
+        }
     }
 
     /**
@@ -41,7 +46,7 @@ class CarMarketingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(PromoDiscount $promoDiscount)
     {
         //
     }
@@ -49,7 +54,7 @@ class CarMarketingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(PromoDiscount $promoDiscount)
     {
         //
     }
@@ -57,7 +62,7 @@ class CarMarketingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, PromoDiscount $promoDiscount)
     {
         //
     }
@@ -65,7 +70,7 @@ class CarMarketingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(PromoDiscount $promoDiscount)
     {
         //
     }

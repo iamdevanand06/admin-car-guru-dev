@@ -151,6 +151,24 @@
 </div>
 <script>
     $(document).ready(function () {
+        // Fetch Data
+        $.ajax({
+            url: '{{ route('brand.logo') }}',
+            type: 'GET',
+            data: { id: brand_id },
+            success: function (response) {
+                if (response.logo) {
+                    $('.upload-box').hide();
+                    $('#logoView').show().html(
+                        `<img src="/storage/${response.logo}" width="100" height="100" alt="Brand Logo">`
+                    );
+                } else {
+                    $('.upload-box').show();
+                    $('#logoView').hide();
+                }
+            }
+        });
+
         // Start Brand
         $('#brand_id').select2({
             placeholder: 'Select a Brand',
