@@ -23,6 +23,7 @@ use App\Http\Controllers\CarMakeMadeYearController;
 use App\Http\Controllers\CarMakeSeatController;
 use App\Http\Controllers\CarMakeTransmissionController;
 use App\Http\Controllers\CarMarketingController;
+use App\Http\Controllers\InspectionCertificateController;
 use App\Http\Controllers\MakeController;
 use App\Http\Controllers\ModelController;
 use App\Http\Controllers\PromosDiscountController;
@@ -154,6 +155,8 @@ Route::group(['middleware' => ['auth']], function () {
 
 
     Route::resource('advertising-promotion', AdvertismentController::class);
+
+    Route::resource('inspections', InspectionCertificateController::class);
 
     Route::get('/promotion', function () {
         return view('marketing.promotion.index');

@@ -24,7 +24,7 @@ class CarDetailController extends Controller
         try {
             $data = CarInfo::with(commonConstant::CAR_DETAIL_RELATIONSHIP_INDEX)->paginate(20);
             // dd($data);
-            return view('cars.details.index', compact('data'))
+            return view('operations.details.index', compact('data'))
                 ->with('i', ($request->input('page', 1) - 1) * 20);
         } catch (Exception $e) {
             Log::error('Error::CREATE_CAR_DETAIL_INDEX, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
@@ -38,7 +38,7 @@ class CarDetailController extends Controller
     {
         try {
             $countries = Country::where('status', commonConstant::ACTIVE)->get();
-            return view('cars.details.create', compact('countries'));
+            return view('operations.details.create', compact('countries'));
         } catch (Exception $e) {
             Log::error('Error::CREATE_CAR_DETAIL_, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
@@ -156,7 +156,7 @@ class CarDetailController extends Controller
             $carDetail = CarInfo::with(commonConstant::CAR_DETAIL_RELATIONSHIP_SHOW)->findOrFail($id);
             $countries = Country::where('status', commonConstant::ACTIVE)->get();
             $carAccident = CarAccident::where('car_detail_id', $carDetail->car_detail_id)->first();
-            return view('cars.details.edit', compact('carDetail', 'carAccident', 'countries'));
+            return view('operations.details.edit', compact('carDetail', 'carAccident', 'countries'));
         } catch (Exception $e) {
             Log::error('Error::EDIT_CAR_DETAIL, Message: ' . $e->getMessage() . ' Line No: ' . $e->getLine());
         }
